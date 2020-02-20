@@ -285,6 +285,7 @@ class QuizletWindow(QWidget):
 
             progress += 1
             self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
+            mw.app.processEvents()
         mw.col.reset()
         mw.reset()
 
