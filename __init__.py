@@ -27,10 +27,16 @@
 #               - get original quality images instead of mobile version
 #
 #               Update 09/12/2018
-#               - converted to Anki 2.1 (by kelciour)
+#               - updated to Anki 2.1 (by kelciour)
 #
 #               Update 04/02/2020
 #               - download a set without API key since it's no longer working (by kelciour)
+#
+#               Update 19/02/2020
+#               - download private or password-protected sets using cookies (by kelciour)
+#
+#               Update 25/02/2020
+#               - make it work again by adding the User-Agent header (by kelciour)
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
@@ -47,6 +53,10 @@ import requests
 import shutil
 
 requests.packages.urllib3.disable_warnings()
+
+headers = {
+  "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
+}
 
 # add custom model if needed
 def addCustomModel(name, col):
@@ -294,7 +304,7 @@ class QuizletWindow(QWidget):
         file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
         url = url.replace('_m', '')
-        r = requests.get(url, stream=True, verify=False)
+        r = requests.get(url, stream=True, verify=False, headers=headers)
         if r.status_code == 200:
             with open(file_name, 'wb') as f:
                 r.raw.decode_content = True
@@ -317,9 +327,27 @@ class QuizletDownloader(QThread):
         self.errorMessage = None
 
     def run(self):
-        try: # can we parse this url and get valid json?
-            r = requests.get(self.url, verify=False)
+        try:
+            config = mw.addonManager.getConfig(__name__)
+
+            cookies = {}
+            if config["qlts"]:
+                cookies = { "qlts": config["qlts"] }
+            elif config["cookies"]:
+                from http.cookies import SimpleCookie
+                C = SimpleCookie()
+                C.load(config["cookies"])
+                cookies = { key: morsel.value for key, morsel in C.items() }
+
+            r = requests.get(self.url, verify=False, headers=headers, cookies=cookies)
             r.raise_for_status()
+
+            regex = re.escape('window.Quizlet["setPasswordData"]')
+
+            if re.search(regex, r.text):
+                self.error = True
+                self.errorCode = 403
+                return
 
             regex = re.escape('window.Quizlet["cardsModeData"] = ')
             regex += r'(.+?)'
