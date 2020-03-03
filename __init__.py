@@ -127,12 +127,30 @@ class QuizletWindow(QWidget):
         self.label_url = QLabel("Quizlet URL:")
         self.text_url = QLineEdit("",self)
         self.text_url.setMinimumWidth(300)
-
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
 
+
+        self.box_start_phrase = QHBoxLayout()
+        self.value_start_phrase = QLineEdit("",self)
+        self.value_start_phrase.setMinimumWidth(300)
+        self.value_start_phrase.setPlaceholderText('Start from this phrase. Can be empty')
+        self.label_start_phrase = QLabel("Start Phrase:")
+        self.box_start_phrase.addWidget(self.label_start_phrase)
+        self.box_start_phrase.addWidget(self.value_start_phrase)
+
+        self.box_stop_phrase = QHBoxLayout()
+        self.value_stop_phrase = QLineEdit("",self)
+        self.value_stop_phrase.setMinimumWidth(300)
+        self.value_stop_phrase.setPlaceholderText('Stop after this phrase. Can be empty')
+        self.label_stop_phrase = QLabel("Stop Phrase:")
+        self.box_stop_phrase.addWidget(self.label_stop_phrase)
+        self.box_stop_phrase.addWidget(self.value_stop_phrase)
+
         # add layouts to left
         self.box_left.addLayout(self.box_name)
+        self.box_left.addLayout(self.box_start_phrase)
+        self.box_left.addLayout(self.box_stop_phrase)
 
         # right side
         self.box_right = QVBoxLayout()
@@ -262,40 +280,53 @@ class QuizletWindow(QWidget):
         mw.col.models.current()["did"] = deck["id"]
         mw.col.models.save(model)
         txt = '<img src="{0}">'
+        startProcess = False
+        stopProcess = False
+        startPhrase = self.value_start_phrase.text()
+        stopPhrase = self.value_stop_phrase.text()
+
         for term in terms:
-            note = mw.col.newNote()
-            note["FrontText"] = term["word"].replace('\n','<br>')
-            note["BackText"] = term["definition"].replace('\n','<br>')
-            note["FrontText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["FrontText"])
-            note["BackText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["BackText"])
+            if not startPhrase or startPhrase == term["word"] or startPhrase == term["definition"]:
+                startProcess = True
 
-            if term["word_audio"]:
-                file_name = self.fileDownloader("https://quizlet.com/{0}".format(term["word_audio"]), str(term["id"]) + "-front.mp3")
-                note["FrontAudio"] = "[sound:" + file_name +"]"
+            if not stopProcess and startProcess:
+                note = mw.col.newNote()
+                note["FrontText"] = term["word"].replace('\n','<br>')
+                note["BackText"] = term["definition"].replace('\n','<br>')
+                note["FrontText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["FrontText"])
+                note["BackText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["BackText"])
 
-            if term["def_audio"]:
-                file_name = self.fileDownloader("https://quizlet.com/{0}".format(term["def_audio"]), str(term["id"]) + "-back.mp3")
-                note["BackAudio"] = "[sound:" + file_name +"]"
+                if term["word_audio"]:
+                    file_name = self.fileDownloader("https://quizlet.com/{0}".format(term["word_audio"]), str(term["id"]) + "-front.mp3")
+                    note["FrontAudio"] = "[sound:" + file_name +"]"
 
-            if term["photo"]:
-                photo_urls = {
-                  "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
-                  "2": "https://o.quizlet.com/i/{1}.jpg",
-                  "3": "https://o.quizlet.com/{1}.{2}"
-                }
-                img_tkns = term["photo"].split(',')
-                img_type = img_tkns[0]
-                img_url = photo_urls[img_type].format(*img_tkns)
-                # file_name = self.fileDownloader(term["image"]["url"])
-                file_name = self.fileDownloader(img_url)
-                note["Image"] += txt.format(file_name)
+                if term["def_audio"]:
+                    file_name = self.fileDownloader("https://quizlet.com/{0}".format(term["def_audio"]), str(term["id"]) + "-back.mp3")
+                    note["BackAudio"] = "[sound:" + file_name +"]"
 
+                if term["photo"]:
+                    photo_urls = {
+                    "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
+                    "2": "https://o.quizlet.com/i/{1}.jpg",
+                    "3": "https://o.quizlet.com/{1}.{2}"
+                    }
+                    img_tkns = term["photo"].split(',')
+                    img_type = img_tkns[0]
+                    img_url = photo_urls[img_type].format(*img_tkns)
+                    # file_name = self.fileDownloader(term["image"]["url"])
+                    file_name = self.fileDownloader(img_url)
+                    note["Image"] += txt.format(file_name)
+
+                    mw.app.processEvents()
+                mw.col.addNote(note)
+
+                progress += 1
+                self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
                 mw.app.processEvents()
-            mw.col.addNote(note)
 
-            progress += 1
-            self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
-            mw.app.processEvents()
+            if stopPhrase == term["word"] or stopPhrase == term["definition"]:
+                stopProcess = True
+
         mw.col.reset()
         mw.reset()
 
