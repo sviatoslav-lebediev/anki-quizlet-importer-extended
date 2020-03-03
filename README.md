@@ -14,6 +14,8 @@ Note type name is `Basic Quizlet Extended`;
 
 Supports start and stop phrases. It allows you to download a part of the quizlet collection.
 
+![Preview](https://github.com/sviatoslav-lebediev/anki-quizlet-importer-extended/blob/master/preview.jpg)
+
 ### This addon creates two types of cards: Normal and Reverse
 
 **Normal Template has**:
