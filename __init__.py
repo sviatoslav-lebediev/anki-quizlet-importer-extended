@@ -297,11 +297,11 @@ class QuizletWindow(QWidget):
                 note["BackText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["BackText"])
 
                 if term["word_audio"]:
-                    file_name = self.fileDownloader("https://quizlet.com/{0}".format(term["word_audio"]), str(term["id"]) + "-front.mp3")
+                    file_name = self.fileDownloader(self.getAudioUrl(term["word_audio"]), str(term["id"]) + "-front.mp3")
                     note["FrontAudio"] = "[sound:" + file_name +"]"
 
                 if term["def_audio"]:
-                    file_name = self.fileDownloader("https://quizlet.com/{0}".format(term["def_audio"]), str(term["id"]) + "-back.mp3")
+                    file_name = self.fileDownloader(self.getAudioUrl(term["def_audio"]), str(term["id"]) + "-back.mp3")
                     note["BackAudio"] = "[sound:" + file_name +"]"
 
                 if term["photo"]:
@@ -329,6 +329,9 @@ class QuizletWindow(QWidget):
 
         mw.col.reset()
         mw.reset()
+
+    def getAudioUrl (self, word_audio):
+        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
 
     # download the images
     def fileDownloader(self, url, suffix=''):
