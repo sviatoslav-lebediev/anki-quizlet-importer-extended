@@ -37,6 +37,12 @@
 #
 #               Update 25/02/2020
 #               - make it work again by adding the User-Agent header (by kelciour)
+#
+#               Update 14/04/2020
+#               - try to get title from HTML a bit differently (by kelciour)
+#
+#               Update 29/04/2020
+#               - suggest to disable VPN if a set is blocked by a captcha (by kelciour)
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
@@ -240,7 +246,10 @@ class QuizletWindow(QWidget):
         # error fetching data
         if self.thread.error:
             if self.thread.errorCode == 403:
-                self.label_results.setText("Sorry, this is a private deck :(")
+                if self.thread.errorCaptcha:
+                    self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")
+                else:
+                    self.label_results.setText("Sorry, this is a private deck :(")
             elif self.thread.errorCode == 404:
                 self.label_results.setText("Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
             else:
@@ -357,6 +366,7 @@ class QuizletDownloader(QThread):
 
         self.error = False
         self.errorCode = None
+        self.errorCaptcha = False
         self.errorReason = None
         self.errorMessage = None
 
@@ -390,12 +400,20 @@ class QuizletDownloader(QThread):
             data = re.search(regex, r.text).group(1).strip()
             self.results = json.loads(data)
 
-            title = re.search(r'<title>(.*?) \| Quizlet</title>', r.text).group(1).strip()
+            title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
+            m = re.search(r'<title>(.*?)</title>', r.text, flags=re.DOTALL)
+            if m:
+                title = m.group(1)
+                title = re.sub(r' \| Quizlet$', '', title)
+                title = re.sub(r'\s+', ' ', title)
+                title = title.strip()
             self.results['title'] = title
         except requests.HTTPError as e:
             self.error = True
             self.errorCode = e.response.status_code
             self.errorMessage = e.response.text
+            if "CF-Chl-Bypass" in e.response.headers:
+                self.errorCaptcha = True
         except ValueError as e:
             self.error = True
             self.errorReason = ("Invalid json: {0}".format(e))
