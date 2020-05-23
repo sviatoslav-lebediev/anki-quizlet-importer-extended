@@ -232,8 +232,8 @@ class QuizletWindow(QWidget):
         deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
 
         # stop previous thread first
-        if not self.thread == None:
-            self.thread.terminate()
+        # if not self.thread == None:
+        #     self.thread.terminate()
 
         # download the data!
         self.thread = QuizletDownloader(self, deck_url)
@@ -253,9 +253,10 @@ class QuizletWindow(QWidget):
             elif self.thread.errorCode == 404:
                 self.label_results.setText("Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
             else:
-                self.label_results.setText("Error {0}".format(self.thread.errorCode))
-                errorMessage = json.loads(self.thread.errorMessage)
-                showText(json.dumps(errorMessage, indent=4))
+                self.label_results.setText("Unknown Error")
+                # errorMessage = json.loads(self.thread.errorMessage)
+                # showText(json.dumps(errorMessage, indent=4))
+                showText(self.thread.errorMessage)
         else: # everything went through, let's roll!
             deck = self.thread.results
             # self.label_results.setText(("Importing deck {0} by {1}...".format(deck["title"], deck["created_by"])))
@@ -264,14 +265,28 @@ class QuizletWindow(QWidget):
             # self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards by <i>{2}</i>)".format(deck["title"], deck["term_count"], deck["created_by"])))
             self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
 
-        self.thread.terminate()
+        # self.thread.terminate()
         self.thread = None
 
     def createDeck(self, result):
-
         # create new deck and custom model
-        name = result['title']
-        terms = result['terms']
+        if "set" in result:
+            name = result['set']['title']
+        elif "studyable" in result:
+            name = result['studyable']['title']
+        else:
+            name = result['title']
+
+        if "termIdToTermsMap" in result:
+            terms = []
+            for c in sorted(result['termIdToTermsMap'].values(), key=lambda v: v["rank"]):
+                terms.append({
+                    'word': c['word'],
+                    'definition': c['definition'],
+                    '_imageUrl': c["_imageUrl"] or ''
+                })
+        else:
+            terms = result['terms']
         progress = 0
 
         result['term_count'] = len(terms)
@@ -305,15 +320,15 @@ class QuizletWindow(QWidget):
                 note["FrontText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["FrontText"])
                 note["BackText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["BackText"])
 
-                if term["word_audio"]:
-                    file_name = self.fileDownloader(self.getAudioUrl(term["word_audio"]), str(term["id"]) + "-front.mp3")
+                if term["_wordAudioUrl"]:
+                    file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]), str(term["id"]) + "-front.mp3")
                     note["FrontAudio"] = "[sound:" + file_name +"]"
 
-                if term["def_audio"]:
-                    file_name = self.fileDownloader(self.getAudioUrl(term["def_audio"]), str(term["id"]) + "-back.mp3")
+                if term["_definitionAudioUrl"]:
+                    file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]), str(term["id"]) + "-back.mp3")
                     note["BackAudio"] = "[sound:" + file_name +"]"
 
-                if term["photo"]:
+                if "photo" in term and term["photo"]:
                     photo_urls = {
                     "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
                     "2": "https://o.quizlet.com/i/{1}.jpg",
@@ -321,9 +336,11 @@ class QuizletWindow(QWidget):
                     }
                     img_tkns = term["photo"].split(',')
                     img_type = img_tkns[0]
-                    img_url = photo_urls[img_type].format(*img_tkns)
+                    term["_imageUrl"] = photo_urls[img_type].format(*img_tkns)
+
+                if '_imageUrl' in term and term["_imageUrl"]:
                     # file_name = self.fileDownloader(term["image"]["url"])
-                    file_name = self.fileDownloader(img_url)
+                    file_name = self.fileDownloader(term["_imageUrl"])
                     note["Image"] += txt.format(file_name)
 
                     mw.app.processEvents()
@@ -344,9 +361,9 @@ class QuizletWindow(QWidget):
 
     # download the images
     def fileDownloader(self, url, suffix=''):
+        url = url.replace('_m', '')
         file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
-        url = url.replace('_m', '')
         r = requests.get(url, stream=True, verify=False, headers=headers)
         if r.status_code == 200:
             with open(file_name, 'wb') as f:
@@ -371,6 +388,7 @@ class QuizletDownloader(QThread):
         self.errorMessage = None
 
     def run(self):
+        r = None
         try:
             config = mw.addonManager.getConfig(__name__)
 
@@ -393,18 +411,32 @@ class QuizletDownloader(QThread):
                 self.errorCode = 403
                 return
 
-            regex = re.escape('window.Quizlet["cardsModeData"] = ')
+            regex = re.escape('window.Quizlet["setPageData"] = ')
             regex += r'(.+?)'
-            regex += re.escape('; QLoad("Quizlet.cardsModeData");')
+            regex += re.escape('; QLoad("Quizlet.setPageData");')
+            m = re.search(regex, r.text)
 
-            data = re.search(regex, r.text).group(1).strip()
+            if not m:
+                regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                regex += r'(.+?)'
+                regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                m = re.search(regex, r.text)
+
+            if not m:
+                regex = re.escape('window.Quizlet["cardsModeData"] = ')
+                regex += r'(.+?)'
+                regex += re.escape('; QLoad("Quizlet.cardsModeData");')
+                m = re.search(regex, r.text)
+
+            data = m.group(1).strip()
             self.results = json.loads(data)
 
             title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
-            m = re.search(r'<title>(.*?)</title>', r.text, flags=re.DOTALL)
+            m = re.search(r'<title>(.+?)</title>', r.text)
             if m:
                 title = m.group(1)
                 title = re.sub(r' \| Quizlet$', '', title)
+                title = re.sub(r'^Flashcards ', '', title)
                 title = re.sub(r'\s+', ' ', title)
                 title = title.strip()
             self.results['title'] = title
@@ -416,8 +448,10 @@ class QuizletDownloader(QThread):
                 self.errorCaptcha = True
         except ValueError as e:
             self.error = True
-            self.errorReason = ("Invalid json: {0}".format(e))
-            showText(_("Invalid json: ") + repr(e))
+            self.errorMessage = "Invalid json: {0}".format(e)
+        except Exception as e:
+            self.error = True
+            self.errorMessage = "{}\n-----------------\n{}".format(e, r.text)
         # yep, we got it
 
 # plugin was called from Anki
