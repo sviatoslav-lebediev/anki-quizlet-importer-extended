@@ -26,23 +26,34 @@
 #               Update 01/31/2018
 #               - get original quality images instead of mobile version
 #
+# Changlog (by kelciour):
 #               Update 09/12/2018
-#               - updated to Anki 2.1 (by kelciour)
+#               - updated to Anki 2.1
 #
 #               Update 04/02/2020
-#               - download a set without API key since it's no longer working (by kelciour)
+#               - download a set without API key since it's no longer working
 #
 #               Update 19/02/2020
-#               - download private or password-protected sets using cookies (by kelciour)
+#               - download private or password-protected sets using cookies
 #
 #               Update 25/02/2020
-#               - make it work again by adding the User-Agent header (by kelciour)
+#               - make it work again by adding the User-Agent header
 #
 #               Update 14/04/2020
-#               - try to get title from HTML a bit differently (by kelciour)
+#               - try to get title from HTML a bit differently
 #
 #               Update 29/04/2020
-#               - suggest to disable VPN if a set is blocked by a captcha (by kelciour)
+#               - suggest to disable VPN if a set is blocked by a captcha
+#
+#               Update 04/05/2020
+#               - remove Flashcards from the name of the deck
+#               - rename and create a new Basic Quizlet note type if some fields doesn't exist
+#
+#               Update 17/05/2020
+#               - use setPageData and assistantModeData as a possible source for flashcards data
+#
+#               Update 22/07/2020
+#               - fix for Anki 2.1.28
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
@@ -54,6 +65,7 @@ import sys, math, time, urllib.parse, json, re
 from aqt import mw
 from aqt.qt import *
 from aqt.utils import showText
+from anki.utils import checksum
 
 import requests
 import shutil
@@ -69,33 +81,33 @@ def addCustomModel(name, col):
 
     # create custom model for imported deck
     mm = col.models
-    existing = mm.byName("Basic Quizlet Extended")
+    existing = mm.byName("Basic Quizlet")
     if existing:
-        return existing
-    m = mm.new("Basic Quizlet Extended")
+        fields = mm.fieldNames(existing)
+        if "Front" in fields and "Back" in fields:
+            return existing
+        else:
+            existing['name'] += "-" + checksum(str(time.time()))[:5]
+            mm.save(existing)
+    m = mm.new("Basic Quizlet")
 
     # add fields
-    mm.addField(m, mm.newField("FrontText"))
-    mm.addField(m, mm.newField("FrontAudio"))
-    mm.addField(m, mm.newField("BackText"))
-    mm.addField(m, mm.newField("BackAudio"))
-    mm.addField(m, mm.newField("Image"))
+    mm.addField(m, mm.newField("Front"))
+    mm.addField(m, mm.newField("Back"))
     mm.addField(m, mm.newField("Add Reverse"))
 
     # add cards
     t = mm.newTemplate("Normal")
 
-
     # front
-    t['qfmt'] = "{{FrontText}}\n<br><br>\n{{FrontAudio}}"
-    t['afmt'] = "{{FrontText}}\n<hr id=answer>\n{{BackText}}\n<br><br>\n{{Image}}\n<br><br>\n{{BackAudio}}"
+    t['qfmt'] = "{{Front}}"
+    t['afmt'] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}"
     mm.addTemplate(m, t)
-
 
     # back
     t = mm.newTemplate("Reverse")
-    t['qfmt'] = "{{#Add Reverse}}{{BackText}}\n<br><br>\n{{BackAudio}}{{/Add Reverse}}"
-    t['afmt'] = "{{BackText}}\n<hr id=answer>\n{{FrontText}}\n<br><br>\n{{FrontAudio}}\n{{Image}}"
+    t['qfmt'] = "{{#Add Reverse}}{{Back}}{{/Add Reverse}}"
+    t['afmt'] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Front}}"
     mm.addTemplate(m, t)
 
     mm.add(m)
@@ -133,30 +145,12 @@ class QuizletWindow(QWidget):
         self.label_url = QLabel("Quizlet URL:")
         self.text_url = QLineEdit("",self)
         self.text_url.setMinimumWidth(300)
+
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
 
-
-        self.box_start_phrase = QHBoxLayout()
-        self.value_start_phrase = QLineEdit("",self)
-        self.value_start_phrase.setMinimumWidth(300)
-        self.value_start_phrase.setPlaceholderText('Start from this phrase. Can be empty')
-        self.label_start_phrase = QLabel("Start Phrase:")
-        self.box_start_phrase.addWidget(self.label_start_phrase)
-        self.box_start_phrase.addWidget(self.value_start_phrase)
-
-        self.box_stop_phrase = QHBoxLayout()
-        self.value_stop_phrase = QLineEdit("",self)
-        self.value_stop_phrase.setMinimumWidth(300)
-        self.value_stop_phrase.setPlaceholderText('Stop after this phrase. Can be empty')
-        self.label_stop_phrase = QLabel("Stop Phrase:")
-        self.box_stop_phrase.addWidget(self.label_stop_phrase)
-        self.box_stop_phrase.addWidget(self.value_stop_phrase)
-
         # add layouts to left
         self.box_left.addLayout(self.box_name)
-        self.box_left.addLayout(self.box_start_phrase)
-        self.box_left.addLayout(self.box_stop_phrase)
 
         # right side
         self.box_right = QVBoxLayout()
@@ -232,7 +226,7 @@ class QuizletWindow(QWidget):
         deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
 
         # stop previous thread first
-        # if not self.thread == None:
+        # if self.thread is not None:
         #     self.thread.terminate()
 
         # download the data!
@@ -287,7 +281,6 @@ class QuizletWindow(QWidget):
                 })
         else:
             terms = result['terms']
-        progress = 0
 
         result['term_count'] = len(terms)
 
@@ -302,66 +295,37 @@ class QuizletWindow(QWidget):
         mw.col.models.setCurrent(model)
         model["did"] = deck["id"]
         mw.col.models.save(model)
-        txt = '<img src="{0}">'
-        startProcess = False
-        stopProcess = False
-        startPhrase = self.value_start_phrase.text()
-        stopPhrase = self.value_stop_phrase.text()
-
+        txt = '<div><img src="{0}"></div>'
         for term in terms:
-            if not startPhrase or startPhrase == term["word"] or startPhrase == term["definition"]:
-                startProcess = True
-
-            if not stopProcess and startProcess:
-                note = mw.col.newNote()
-                note["FrontText"] = term["word"].replace('\n','<br>')
-                note["BackText"] = term["definition"].replace('\n','<br>')
-                note["FrontText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["FrontText"])
-                note["BackText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["BackText"])
-
-                if term["_wordAudioUrl"]:
-                    file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]), str(term["id"]) + "-front.mp3")
-                    note["FrontAudio"] = "[sound:" + file_name +"]"
-
-                if term["_definitionAudioUrl"]:
-                    file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]), str(term["id"]) + "-back.mp3")
-                    note["BackAudio"] = "[sound:" + file_name +"]"
-
-                if "photo" in term and term["photo"]:
-                    photo_urls = {
-                    "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
-                    "2": "https://o.quizlet.com/i/{1}.jpg",
-                    "3": "https://o.quizlet.com/{1}.{2}"
-                    }
-                    img_tkns = term["photo"].split(',')
-                    img_type = img_tkns[0]
-                    term["_imageUrl"] = photo_urls[img_type].format(*img_tkns)
-
-                if '_imageUrl' in term and term["_imageUrl"]:
-                    # file_name = self.fileDownloader(term["image"]["url"])
-                    file_name = self.fileDownloader(term["_imageUrl"])
-                    note["Image"] += txt.format(file_name)
-
-                    mw.app.processEvents()
-                mw.col.addNote(note)
-
-                progress += 1
-                self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
+            note = mw.col.newNote()
+            note["Front"] = term["word"].replace('\n','<br>')
+            note["Back"] = term["definition"].replace('\n','<br>')
+            note["Front"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["Front"])
+            note["Back"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["Back"])
+            if "photo" in term and term["photo"]:
+                photo_urls = {
+                  "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
+                  "2": "https://o.quizlet.com/i/{1}.jpg",
+                  "3": "https://o.quizlet.com/{1}.{2}"
+                }
+                img_tkns = term["photo"].split(',')
+                img_type = img_tkns[0]
+                term["_imageUrl"] = photo_urls[img_type].format(*img_tkns)
+            if '_imageUrl' in term and term["_imageUrl"]:
+                # file_name = self.fileDownloader(term["image"]["url"])
+                file_name = self.fileDownloader(term["_imageUrl"])
+                if note["Back"]:
+                    note["Back"] += "<div><br></div>"
+                note["Back"] += txt.format(file_name)
                 mw.app.processEvents()
-
-            if stopPhrase == term["word"] or stopPhrase == term["definition"]:
-                stopProcess = True
-
+            mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
 
-    def getAudioUrl (self, word_audio):
-        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
-
     # download the images
-    def fileDownloader(self, url, suffix=''):
+    def fileDownloader(self, url):
         url = url.replace('_m', '')
-        file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
+        file_name = "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
         r = requests.get(url, stream=True, verify=False, headers=headers)
         if r.status_code == 200:
