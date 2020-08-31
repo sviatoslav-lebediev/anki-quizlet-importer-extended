@@ -54,6 +54,9 @@
 #
 #               Update 22/07/2020
 #               - fix for Anki 2.1.28
+#
+#               Update 30/08/2020
+#               - add Return shortcut and rich text highlight
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
@@ -158,6 +161,7 @@ class QuizletWindow(QWidget):
         # code (import set) button
         self.box_code = QHBoxLayout()
         self.button_code = QPushButton("Import Deck", self)
+        self.button_code.setShortcut(QKeySequence("Return"))
         self.box_code.addStretch(1)
         self.box_code.addWidget(self.button_code)
         self.button_code.clicked.connect(self.onCode)
@@ -277,7 +281,9 @@ class QuizletWindow(QWidget):
                 terms.append({
                     'word': c['word'],
                     'definition': c['definition'],
-                    '_imageUrl': c["_imageUrl"] or ''
+                    '_imageUrl': c["_imageUrl"] or '',
+                    'wordRichText': c.get('wordRichText', ''),
+                    'definitionRichText': c.get('definitionRichText', ''),
                 })
         else:
             terms = result['terms']
@@ -295,13 +301,38 @@ class QuizletWindow(QWidget):
         mw.col.models.setCurrent(model)
         model["did"] = deck["id"]
         mw.col.models.save(model)
-        txt = '<div><img src="{0}"></div>'
+
+        def getText(d, text=''):
+            if d is None:
+                return text
+            if d['type'] == 'text':
+                text = d['text']
+                if 'marks' in d:
+                    for m in d['marks']:
+                        if m['type'] in ['b', 'i', 'u']:
+                            text = '<{0}>{1}</{0}>'.format(m['type'], text)
+                        if 'attrs' in m:
+                            attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
+                            text = '<span {}>{}</span>'.format(attrs, text)
+                return text
+            text = ''.join([getText(c) for c in d['content']])
+            if d['type'] == 'paragraph':
+                text = '<div>{}</div>'.format(text)
+            return text
+
+        def ankify(text):
+            text = text.replace('\n','<br>')
+            text = text.replace('class="bgY"', 'style="background-color:#fff4e5;"')
+            text = text.replace('class="bgB"', 'style="background-color:#cde7fa;"')
+            text = text.replace('class="bgP"', 'style="background-color:#fde8ff;"')
+            return text
+
         for term in terms:
             note = mw.col.newNote()
-            note["Front"] = term["word"].replace('\n','<br>')
-            note["Back"] = term["definition"].replace('\n','<br>')
-            note["Front"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["Front"])
-            note["Back"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["Back"])
+            note["Front"] = getText(term['wordRichText'], term['word'])
+            note["Back"] = getText(term['definitionRichText'], term['definition'])
+            note["Front"] = ankify(note["Front"])
+            note["Back"] = ankify(note["Back"])
             if "photo" in term and term["photo"]:
                 photo_urls = {
                   "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
@@ -316,7 +347,7 @@ class QuizletWindow(QWidget):
                 file_name = self.fileDownloader(term["_imageUrl"])
                 if note["Back"]:
                     note["Back"] += "<div><br></div>"
-                note["Back"] += txt.format(file_name)
+                note["Back"] += '<div><img src="{0}"></div>'.format(file_name)
                 mw.app.processEvents()
             mw.col.addNote(note)
         mw.col.reset()

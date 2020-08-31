@@ -283,7 +283,9 @@ class QuizletWindow(QWidget):
                 terms.append({
                     'word': c['word'],
                     'definition': c['definition'],
-                    '_imageUrl': c["_imageUrl"] or ''
+                    '_imageUrl': c["_imageUrl"] or '',
+                    'wordRichText': c.get('wordRichText', ''),
+                    'definitionRichText': c.get('definitionRichText', ''),
                 })
         else:
             terms = result['terms']
@@ -302,7 +304,32 @@ class QuizletWindow(QWidget):
         mw.col.models.setCurrent(model)
         model["did"] = deck["id"]
         mw.col.models.save(model)
-        txt = '<img src="{0}">'
+
+        def getText(d, text=''):
+            if d is None:
+                return text
+            if d['type'] == 'text':
+                text = d['text']
+                if 'marks' in d:
+                    for m in d['marks']:
+                        if m['type'] in ['b', 'i', 'u']:
+                            text = '<{0}>{1}</{0}>'.format(m['type'], text)
+                        if 'attrs' in m:
+                            attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
+                            text = '<span {}>{}</span>'.format(attrs, text)
+                return text
+            text = ''.join([getText(c) for c in d['content']])
+            if d['type'] == 'paragraph':
+                text = '<div>{}</div>'.format(text)
+            return text
+
+        def ankify(text):
+            text = text.replace('\n','<br>')
+            text = text.replace('class="bgY"', 'style="background-color:#fff4e5;"')
+            text = text.replace('class="bgB"', 'style="background-color:#cde7fa;"')
+            text = text.replace('class="bgP"', 'style="background-color:#fde8ff;"')
+            return text
+
         startProcess = False
         stopProcess = False
         startPhrase = self.value_start_phrase.text()
@@ -314,10 +341,10 @@ class QuizletWindow(QWidget):
 
             if not stopProcess and startProcess:
                 note = mw.col.newNote()
-                note["FrontText"] = term["word"].replace('\n','<br>')
-                note["BackText"] = term["definition"].replace('\n','<br>')
-                note["FrontText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["FrontText"])
-                note["BackText"] = re.sub(r'\*(.+?)\*', r'<b>\1</b>', note["BackText"])
+                note["FrontText"] = getText(term['wordRichText'], term['word'])
+                note["BackText"] = getText(term['definitionRichText'], term['definition'])
+                note["FrontText"] = ankify(note["FrontText"])
+                note["BackText"] = ankify(note["BackText"])
 
                 if term["_wordAudioUrl"]:
                     file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]), str(term["id"]) + "-front.mp3")
@@ -340,7 +367,7 @@ class QuizletWindow(QWidget):
                 if '_imageUrl' in term and term["_imageUrl"]:
                     # file_name = self.fileDownloader(term["image"]["url"])
                     file_name = self.fileDownloader(term["_imageUrl"])
-                    note["Image"] += txt.format(file_name)
+                    note["Image"] += '<div><img src="{0}"></div>'.format(file_name)
 
                     mw.app.processEvents()
                 mw.col.addNote(note)
