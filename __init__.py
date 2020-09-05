@@ -163,6 +163,14 @@ class QuizletWindow(QWidget):
         self.box_name.addWidget(self.text_url)
 
 
+        self.box_download_audio = QHBoxLayout()
+        self.value_download_audio = QCheckBox("",self)
+        self.value_download_audio.toggle();
+        self.value_download_audio.setMinimumWidth(300)
+        self.label_download_audio = QLabel("Download audio:")
+        self.box_download_audio.addWidget(self.label_download_audio)
+        self.box_download_audio.addWidget(self.value_download_audio)
+
         self.box_start_phrase = QHBoxLayout()
         self.value_start_phrase = QLineEdit("",self)
         self.value_start_phrase.setMinimumWidth(300)
@@ -181,6 +189,7 @@ class QuizletWindow(QWidget):
 
         # add layouts to left
         self.box_left.addLayout(self.box_name)
+        self.box_left.addLayout(self.box_download_audio)
         self.box_left.addLayout(self.box_start_phrase)
         self.box_left.addLayout(self.box_stop_phrase)
 
@@ -324,6 +333,7 @@ class QuizletWindow(QWidget):
         stopProcess = False
         startPhrase = self.value_start_phrase.text()
         stopPhrase = self.value_stop_phrase.text()
+        downloadAudio = self.value_download_audio.isChecked()
 
         for item in items:
             if not startPhrase or startPhrase == item["term"] or startPhrase == item["definition"]:
@@ -336,11 +346,11 @@ class QuizletWindow(QWidget):
                 note["FrontText"] = ankify(note["FrontText"])
                 note["BackText"] = ankify(note["BackText"])
 
-                if item.get('termAudio'):
+                if item.get('termAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(item['termAudio']), str(item["id"]) + "-front.mp3")
                     note["FrontAudio"] = "[sound:" + file_name +"]"
 
-                if item.get('definitionAudio'):
+                if item.get('definitionAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(item["definitionAudio"]), str(item["id"]) + "-back.mp3")
                     note["BackAudio"] = "[sound:" + file_name +"]"
 
