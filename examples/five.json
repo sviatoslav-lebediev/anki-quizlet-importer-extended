@@ -1,0 +1,3808 @@
+{
+    "acceptsPartialAnswer": null,
+    "advancedAudioSettings": { "wordEnabled": true, "definitionEnabled": true, "slowWordEnabled": false, "slowDefinitionEnabled": false },
+    "allAccents": ["\u00e1", "\u00e9", "\u00ed", "\u00f3"],
+    "answerWithSetting": null,
+    "audioEnabledSetting": false,
+    "definitionAccents": [],
+    "editableStudiableItemIds": [],
+    "funnelUUID": "",
+    "hasCompletedOnboarding": false,
+    "hasNonImageOnlyDefinitions": true,
+    "isEmbedding": false,
+    "isEligibleForSmartGrading": false,
+    "isSetEligibleForSmartGrading": false,
+    "learnAllPath": "/81925348/learn",
+    "learnSelectedOnlyPath": "/81925348/learn/starred",
+    "levenshteinPlusTestVariant": null,
+    "levenshteinPlusSetting": false,
+    "modePath": "/81925348/flashcards",
+    "starredModePath": "/81925348/flashcards/starred",
+    "personId": "-6449589318483891228",
+    "promptWithSetting": { "definition": false, "location": false, "term": false },
+    "questionTypesSetting": null,
+    "sponsoredRewardAdvertiser": null,
+    "selectedOnly": false,
+    "sessions": { "unstarred": null, "starred": null },
+    "setList": [
+        {
+            "id": 81925348,
+            "timestamp": 1430867659,
+            "lastModified": 1457952860,
+            "publishedTimestamp": 1430869534,
+            "creatorId": 1419976,
+            "wordLang": "es",
+            "defLang": "en",
+            "title": "Creencias e ideologias vocabulario",
+            "passwordUse": false,
+            "passwordEdit": false,
+            "accessType": 2,
+            "accessCodePrefix": null,
+            "description": "",
+            "numTerms": 90,
+            "hasImages": false,
+            "parentId": 0,
+            "creationSource": 1,
+            "privacyLockStatus": 0,
+            "hasDiagrams": false,
+            "_webUrl": "https://quizlet.com/81925348/creencias-e-ideologias-vocabulario-flash-cards/",
+            "_thumbnailUrl": null,
+            "price": null,
+            "mcqCount": 0,
+            "purchasableType": 0
+        }
+    ],
+    "shouldShowAd": true,
+    "shouldShowSmartGradingUpsell": false,
+    "selectedTerms": [],
+    "smartGradingSetting": null,
+    "studiableData": {
+        "studiableItems": [
+            {
+                "id": 2533939667,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867699,
+                "lastModified": 1430867699
+            },
+            {
+                "id": 2533941492,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867717,
+                "lastModified": 1430867717
+            },
+            {
+                "id": 2533942973,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867734,
+                "lastModified": 1430867734
+            },
+            {
+                "id": 2533944669,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867749,
+                "lastModified": 1430867749
+            },
+            {
+                "id": 2533944670,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867765,
+                "lastModified": 1430867765
+            },
+            {
+                "id": 2533946213,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867764,
+                "lastModified": 1430867764
+            },
+            {
+                "id": 2533947253,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867776,
+                "lastModified": 1430867776
+            },
+            {
+                "id": 2533947254,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867776,
+                "lastModified": 1430867776
+            },
+            {
+                "id": 2533951063,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867815,
+                "lastModified": 1430867815
+            },
+            {
+                "id": 2533951064,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867815,
+                "lastModified": 1430867815
+            },
+            {
+                "id": 2533952359,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867828,
+                "lastModified": 1430867828
+            },
+            {
+                "id": 2533952360,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867828,
+                "lastModified": 1430867828
+            },
+            {
+                "id": 2533952361,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867842,
+                "lastModified": 1430867842
+            },
+            {
+                "id": 2533953749,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867842,
+                "lastModified": 1430867842
+            },
+            {
+                "id": 2533953750,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867854,
+                "lastModified": 1430867854
+            },
+            {
+                "id": 2533954987,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867866,
+                "lastModified": 1430867866
+            },
+            {
+                "id": 2533956408,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867881,
+                "lastModified": 1430867881
+            },
+            {
+                "id": 2533957494,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867881,
+                "lastModified": 1430867881
+            },
+            {
+                "id": 2533958676,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867895,
+                "lastModified": 1430867895
+            },
+            {
+                "id": 2533958677,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867895,
+                "lastModified": 1430867895
+            },
+            {
+                "id": 2533958678,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867907,
+                "lastModified": 1430867907
+            },
+            {
+                "id": 2533959704,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867906,
+                "lastModified": 1430867906
+            },
+            {
+                "id": 2533959705,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867918,
+                "lastModified": 1430867918
+            },
+            {
+                "id": 2533960573,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867918,
+                "lastModified": 1430867918
+            },
+            {
+                "id": 2533960574,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867930,
+                "lastModified": 1430867930
+            },
+            {
+                "id": 2533961496,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867942,
+                "lastModified": 1430867942
+            },
+            {
+                "id": 2533962462,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867941,
+                "lastModified": 1430867941
+            },
+            {
+                "id": 2533962463,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867943,
+                "lastModified": 1430867943
+            },
+            {
+                "id": 2533963915,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430867957,
+                "lastModified": 1430867957
+            },
+            {
+                "id": 2534001214,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868341,
+                "lastModified": 1430868341
+            },
+            {
+                "id": 2534005622,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868365,
+                "lastModified": 1430868365
+            },
+            {
+                "id": 2534005623,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868365,
+                "lastModified": 1430868365
+            },
+            {
+                "id": 2534005624,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868377,
+                "lastModified": 1430868377
+            },
+            {
+                "id": 2534006629,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868393,
+                "lastModified": 1430868393
+            },
+            {
+                "id": 2534007952,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868392,
+                "lastModified": 1430868392
+            },
+            {
+                "id": 2534007953,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868411,
+                "lastModified": 1430868411
+            },
+            {
+                "id": 2534009556,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868410,
+                "lastModified": 1430868410
+            },
+            {
+                "id": 2534009624,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868428,
+                "lastModified": 1430868428
+            },
+            {
+                "id": 2534011149,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868427,
+                "lastModified": 1430868427
+            },
+            {
+                "id": 2534011150,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868428,
+                "lastModified": 1430868428
+            },
+            {
+                "id": 2534012343,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868440,
+                "lastModified": 1430868440
+            },
+            {
+                "id": 2534012344,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868452,
+                "lastModified": 1430868452
+            },
+            {
+                "id": 2534013396,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868451,
+                "lastModified": 1430868451
+            },
+            {
+                "id": 2534013397,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868464,
+                "lastModified": 1430868464
+            },
+            {
+                "id": 2534014506,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868463,
+                "lastModified": 1430868463
+            },
+            {
+                "id": 2534015713,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868478,
+                "lastModified": 1430868478
+            },
+            {
+                "id": 2534015714,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868478,
+                "lastModified": 1430868478
+            },
+            {
+                "id": 2534017592,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868492,
+                "lastModified": 1430868492
+            },
+            {
+                "id": 2534019508,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868520,
+                "lastModified": 1430868520
+            },
+            {
+                "id": 2534021108,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430868521,
+                "lastModified": 1430868521
+            },
+            {
+                "id": 2534022924,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869142,
+                "lastModified": 1430869142
+            },
+            {
+                "id": 2534087081,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869153,
+                "lastModified": 1430869153
+            },
+            {
+                "id": 2534088280,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869153,
+                "lastModified": 1430869153
+            },
+            {
+                "id": 2534088598,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869183,
+                "lastModified": 1430869183
+            },
+            {
+                "id": 2534092779,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869199,
+                "lastModified": 1430869199
+            },
+            {
+                "id": 2534092780,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869214,
+                "lastModified": 1430869214
+            },
+            {
+                "id": 2534094162,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869227,
+                "lastModified": 1430869227
+            },
+            {
+                "id": 2534095416,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869226,
+                "lastModified": 1430869226
+            },
+            {
+                "id": 2534096886,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869241,
+                "lastModified": 1430869241
+            },
+            {
+                "id": 2534096887,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869242,
+                "lastModified": 1430869242
+            },
+            {
+                "id": 2534098065,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869254,
+                "lastModified": 1430869254
+            },
+            {
+                "id": 2534098066,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869254,
+                "lastModified": 1430869254
+            },
+            {
+                "id": 2534098108,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869268,
+                "lastModified": 1430869268
+            },
+            {
+                "id": 2534100811,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869282,
+                "lastModified": 1430869282
+            },
+            {
+                "id": 2534102790,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869282,
+                "lastModified": 1430869282
+            },
+            {
+                "id": 2534102884,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869296,
+                "lastModified": 1430869296
+            },
+            {
+                "id": 2534104437,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869295,
+                "lastModified": 1430869295
+            },
+            {
+                "id": 2534104438,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869308,
+                "lastModified": 1430869308
+            },
+            {
+                "id": 2534105496,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869307,
+                "lastModified": 1430869307
+            },
+            {
+                "id": 2534106462,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869319,
+                "lastModified": 1430869319
+            },
+            {
+                "id": 2534106463,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869380,
+                "lastModified": 1430869380
+            },
+            {
+                "id": 2534113396,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869379,
+                "lastModified": 1430869379
+            },
+            {
+                "id": 2534113464,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869393,
+                "lastModified": 1430869393
+            },
+            {
+                "id": 2534114526,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869392,
+                "lastModified": 1430869392
+            },
+            {
+                "id": 2534114527,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869392,
+                "lastModified": 1430869392
+            },
+            {
+                "id": 2534114528,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869405,
+                "lastModified": 1430869405
+            },
+            {
+                "id": 2534115657,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869404,
+                "lastModified": 1430869404
+            },
+            {
+                "id": 2534115658,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869404,
+                "lastModified": 1430869404
+            },
+            {
+                "id": 2534115733,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869420,
+                "lastModified": 1430869420
+            },
+            {
+                "id": 2534117070,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869431,
+                "lastModified": 1430869431
+            },
+            {
+                "id": 2534118225,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869431,
+                "lastModified": 1430869431
+            },
+            {
+                "id": 2534118226,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869443,
+                "lastModified": 1430869443
+            },
+            {
+                "id": 2534119365,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869442,
+                "lastModified": 1430869442
+            },
+            {
+                "id": 2534119366,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869457,
+                "lastModified": 1430869457
+            },
+            {
+                "id": 2534120628,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869469,
+                "lastModified": 1430869469
+            },
+            {
+                "id": 2534124840,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869501,
+                "lastModified": 1430869501
+            },
+            {
+                "id": 2534126321,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869516,
+                "lastModified": 1430869516
+            },
+            {
+                "id": 2534126322,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869516,
+                "lastModified": 1430869516
+            },
+            {
+                "id": 2534127643,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869530,
+                "lastModified": 1430869530
+            },
+            {
+                "id": 2534127644,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 81925348,
+                "studiableContainerType": 1,
+                "timestamp": 1430869530,
+                "lastModified": 1430869530
+            }
+        ],
+        "studiableCardSides": [
+            { "id": 7601819001, "studiableItemId": 2533939667, "label": "word", "timestamp": 1430867699, "lastModified": 1430867699 },
+            { "id": 7601819002, "studiableItemId": 2533939667, "label": "definition", "timestamp": 1430867699, "lastModified": 1430867699 },
+            { "id": 7601824476, "studiableItemId": 2533941492, "label": "word", "timestamp": 1430867717, "lastModified": 1430867717 },
+            { "id": 7601824477, "studiableItemId": 2533941492, "label": "definition", "timestamp": 1430867717, "lastModified": 1430867717 },
+            { "id": 7601828919, "studiableItemId": 2533942973, "label": "word", "timestamp": 1430867734, "lastModified": 1430867734 },
+            { "id": 7601828920, "studiableItemId": 2533942973, "label": "definition", "timestamp": 1430867734, "lastModified": 1430867734 },
+            { "id": 7601834007, "studiableItemId": 2533944669, "label": "word", "timestamp": 1430867749, "lastModified": 1430867749 },
+            { "id": 7601834008, "studiableItemId": 2533944669, "label": "definition", "timestamp": 1430867749, "lastModified": 1430867749 },
+            { "id": 7601834010, "studiableItemId": 2533944670, "label": "word", "timestamp": 1430867765, "lastModified": 1430867765 },
+            { "id": 7601834011, "studiableItemId": 2533944670, "label": "definition", "timestamp": 1430867765, "lastModified": 1430867765 },
+            { "id": 7601838639, "studiableItemId": 2533946213, "label": "word", "timestamp": 1430867764, "lastModified": 1430867764 },
+            { "id": 7601838640, "studiableItemId": 2533946213, "label": "definition", "timestamp": 1430867764, "lastModified": 1430867764 },
+            { "id": 7601841759, "studiableItemId": 2533947253, "label": "word", "timestamp": 1430867776, "lastModified": 1430867776 },
+            { "id": 7601841760, "studiableItemId": 2533947253, "label": "definition", "timestamp": 1430867776, "lastModified": 1430867776 },
+            { "id": 7601841762, "studiableItemId": 2533947254, "label": "word", "timestamp": 1430867776, "lastModified": 1430867776 },
+            { "id": 7601841763, "studiableItemId": 2533947254, "label": "definition", "timestamp": 1430867776, "lastModified": 1430867776 },
+            { "id": 7601853189, "studiableItemId": 2533951063, "label": "word", "timestamp": 1430867815, "lastModified": 1430867815 },
+            { "id": 7601853190, "studiableItemId": 2533951063, "label": "definition", "timestamp": 1430867815, "lastModified": 1430867815 },
+            { "id": 7601853192, "studiableItemId": 2533951064, "label": "word", "timestamp": 1430867815, "lastModified": 1430867815 },
+            { "id": 7601853193, "studiableItemId": 2533951064, "label": "definition", "timestamp": 1430867815, "lastModified": 1430867815 },
+            { "id": 7601857077, "studiableItemId": 2533952359, "label": "word", "timestamp": 1430867828, "lastModified": 1430867828 },
+            { "id": 7601857078, "studiableItemId": 2533952359, "label": "definition", "timestamp": 1430867828, "lastModified": 1430867828 },
+            { "id": 7601857080, "studiableItemId": 2533952360, "label": "word", "timestamp": 1430867828, "lastModified": 1430867828 },
+            { "id": 7601857081, "studiableItemId": 2533952360, "label": "definition", "timestamp": 1430867828, "lastModified": 1430867828 },
+            { "id": 7601857083, "studiableItemId": 2533952361, "label": "word", "timestamp": 1430867842, "lastModified": 1430867842 },
+            { "id": 7601857084, "studiableItemId": 2533952361, "label": "definition", "timestamp": 1430867842, "lastModified": 1430867842 },
+            { "id": 7601861247, "studiableItemId": 2533953749, "label": "word", "timestamp": 1430867842, "lastModified": 1430867842 },
+            { "id": 7601861248, "studiableItemId": 2533953749, "label": "definition", "timestamp": 1430867842, "lastModified": 1430867842 },
+            { "id": 7601861250, "studiableItemId": 2533953750, "label": "word", "timestamp": 1430867854, "lastModified": 1430867854 },
+            { "id": 7601861251, "studiableItemId": 2533953750, "label": "definition", "timestamp": 1430867854, "lastModified": 1430867854 },
+            { "id": 7601864961, "studiableItemId": 2533954987, "label": "word", "timestamp": 1430867866, "lastModified": 1430867866 },
+            { "id": 7601864962, "studiableItemId": 2533954987, "label": "definition", "timestamp": 1430867866, "lastModified": 1430867866 },
+            { "id": 7601869224, "studiableItemId": 2533956408, "label": "word", "timestamp": 1430867881, "lastModified": 1430867881 },
+            { "id": 7601869225, "studiableItemId": 2533956408, "label": "definition", "timestamp": 1430867881, "lastModified": 1430867881 },
+            { "id": 7601872482, "studiableItemId": 2533957494, "label": "word", "timestamp": 1430867881, "lastModified": 1430867881 },
+            { "id": 7601872483, "studiableItemId": 2533957494, "label": "definition", "timestamp": 1430867881, "lastModified": 1430867881 },
+            { "id": 7601876028, "studiableItemId": 2533958676, "label": "word", "timestamp": 1430867895, "lastModified": 1430867895 },
+            { "id": 7601876029, "studiableItemId": 2533958676, "label": "definition", "timestamp": 1430867895, "lastModified": 1430867895 },
+            { "id": 7601876031, "studiableItemId": 2533958677, "label": "word", "timestamp": 1430867895, "lastModified": 1430867895 },
+            { "id": 7601876032, "studiableItemId": 2533958677, "label": "definition", "timestamp": 1430867895, "lastModified": 1430867895 },
+            { "id": 7601876034, "studiableItemId": 2533958678, "label": "word", "timestamp": 1430867907, "lastModified": 1430867907 },
+            { "id": 7601876035, "studiableItemId": 2533958678, "label": "definition", "timestamp": 1430867907, "lastModified": 1430867907 },
+            { "id": 7601879112, "studiableItemId": 2533959704, "label": "word", "timestamp": 1430867906, "lastModified": 1430867906 },
+            { "id": 7601879113, "studiableItemId": 2533959704, "label": "definition", "timestamp": 1430867906, "lastModified": 1430867906 },
+            { "id": 7601879115, "studiableItemId": 2533959705, "label": "word", "timestamp": 1430867918, "lastModified": 1430867918 },
+            { "id": 7601879116, "studiableItemId": 2533959705, "label": "definition", "timestamp": 1430867918, "lastModified": 1430867918 },
+            { "id": 7601881719, "studiableItemId": 2533960573, "label": "word", "timestamp": 1430867918, "lastModified": 1430867918 },
+            { "id": 7601881720, "studiableItemId": 2533960573, "label": "definition", "timestamp": 1430867918, "lastModified": 1430867918 },
+            { "id": 7601881722, "studiableItemId": 2533960574, "label": "word", "timestamp": 1430867930, "lastModified": 1430867930 },
+            { "id": 7601881723, "studiableItemId": 2533960574, "label": "definition", "timestamp": 1430867930, "lastModified": 1430867930 },
+            { "id": 7601884488, "studiableItemId": 2533961496, "label": "word", "timestamp": 1430867942, "lastModified": 1430867942 },
+            { "id": 7601884489, "studiableItemId": 2533961496, "label": "definition", "timestamp": 1430867942, "lastModified": 1430867942 },
+            { "id": 7601887386, "studiableItemId": 2533962462, "label": "word", "timestamp": 1430867941, "lastModified": 1430867941 },
+            { "id": 7601887387, "studiableItemId": 2533962462, "label": "definition", "timestamp": 1430867941, "lastModified": 1430867941 },
+            { "id": 7601887389, "studiableItemId": 2533962463, "label": "word", "timestamp": 1430867943, "lastModified": 1430867943 },
+            { "id": 7601887390, "studiableItemId": 2533962463, "label": "definition", "timestamp": 1430867943, "lastModified": 1430867943 },
+            { "id": 7601891745, "studiableItemId": 2533963915, "label": "word", "timestamp": 1430867957, "lastModified": 1430867957 },
+            { "id": 7601891746, "studiableItemId": 2533963915, "label": "definition", "timestamp": 1430867957, "lastModified": 1430867957 },
+            { "id": 7602003642, "studiableItemId": 2534001214, "label": "word", "timestamp": 1430868341, "lastModified": 1430868341 },
+            { "id": 7602003643, "studiableItemId": 2534001214, "label": "definition", "timestamp": 1430868341, "lastModified": 1430868341 },
+            { "id": 7602016866, "studiableItemId": 2534005622, "label": "word", "timestamp": 1430868365, "lastModified": 1430868365 },
+            { "id": 7602016867, "studiableItemId": 2534005622, "label": "definition", "timestamp": 1430868365, "lastModified": 1430868365 },
+            { "id": 7602016869, "studiableItemId": 2534005623, "label": "word", "timestamp": 1430868365, "lastModified": 1430868365 },
+            { "id": 7602016870, "studiableItemId": 2534005623, "label": "definition", "timestamp": 1430868365, "lastModified": 1430868365 },
+            { "id": 7602016872, "studiableItemId": 2534005624, "label": "word", "timestamp": 1430868377, "lastModified": 1430868377 },
+            { "id": 7602016873, "studiableItemId": 2534005624, "label": "definition", "timestamp": 1430868377, "lastModified": 1430868377 },
+            { "id": 7602019887, "studiableItemId": 2534006629, "label": "word", "timestamp": 1430868393, "lastModified": 1430868393 },
+            { "id": 7602019888, "studiableItemId": 2534006629, "label": "definition", "timestamp": 1430868393, "lastModified": 1430868393 },
+            { "id": 7602023856, "studiableItemId": 2534007952, "label": "word", "timestamp": 1430868392, "lastModified": 1430868392 },
+            { "id": 7602023857, "studiableItemId": 2534007952, "label": "definition", "timestamp": 1430868392, "lastModified": 1430868392 },
+            { "id": 7602023859, "studiableItemId": 2534007953, "label": "word", "timestamp": 1430868411, "lastModified": 1430868411 },
+            { "id": 7602023860, "studiableItemId": 2534007953, "label": "definition", "timestamp": 1430868411, "lastModified": 1430868411 },
+            { "id": 7602028668, "studiableItemId": 2534009556, "label": "word", "timestamp": 1430868410, "lastModified": 1430868410 },
+            { "id": 7602028669, "studiableItemId": 2534009556, "label": "definition", "timestamp": 1430868410, "lastModified": 1430868410 },
+            { "id": 7602028872, "studiableItemId": 2534009624, "label": "word", "timestamp": 1430868428, "lastModified": 1430868428 },
+            { "id": 7602028873, "studiableItemId": 2534009624, "label": "definition", "timestamp": 1430868428, "lastModified": 1430868428 },
+            { "id": 7602033447, "studiableItemId": 2534011149, "label": "word", "timestamp": 1430868427, "lastModified": 1430868427 },
+            { "id": 7602033448, "studiableItemId": 2534011149, "label": "definition", "timestamp": 1430868427, "lastModified": 1430868427 },
+            { "id": 7602033450, "studiableItemId": 2534011150, "label": "word", "timestamp": 1430868428, "lastModified": 1430868428 },
+            { "id": 7602033451, "studiableItemId": 2534011150, "label": "definition", "timestamp": 1430868428, "lastModified": 1430868428 },
+            { "id": 7602037029, "studiableItemId": 2534012343, "label": "word", "timestamp": 1430868440, "lastModified": 1430868440 },
+            { "id": 7602037030, "studiableItemId": 2534012343, "label": "definition", "timestamp": 1430868440, "lastModified": 1430868440 },
+            { "id": 7602037032, "studiableItemId": 2534012344, "label": "word", "timestamp": 1430868452, "lastModified": 1430868452 },
+            { "id": 7602037033, "studiableItemId": 2534012344, "label": "definition", "timestamp": 1430868452, "lastModified": 1430868452 },
+            { "id": 7602040188, "studiableItemId": 2534013396, "label": "word", "timestamp": 1430868451, "lastModified": 1430868451 },
+            { "id": 7602040189, "studiableItemId": 2534013396, "label": "definition", "timestamp": 1430868451, "lastModified": 1430868451 },
+            { "id": 7602040191, "studiableItemId": 2534013397, "label": "word", "timestamp": 1430868464, "lastModified": 1430868464 },
+            { "id": 7602040192, "studiableItemId": 2534013397, "label": "definition", "timestamp": 1430868464, "lastModified": 1430868464 },
+            { "id": 7602043518, "studiableItemId": 2534014506, "label": "word", "timestamp": 1430868463, "lastModified": 1430868463 },
+            { "id": 7602043519, "studiableItemId": 2534014506, "label": "definition", "timestamp": 1430868463, "lastModified": 1430868463 },
+            { "id": 7602047139, "studiableItemId": 2534015713, "label": "word", "timestamp": 1430868478, "lastModified": 1430868478 },
+            { "id": 7602047140, "studiableItemId": 2534015713, "label": "definition", "timestamp": 1430868478, "lastModified": 1430868478 },
+            { "id": 7602047142, "studiableItemId": 2534015714, "label": "word", "timestamp": 1430868478, "lastModified": 1430868478 },
+            { "id": 7602047143, "studiableItemId": 2534015714, "label": "definition", "timestamp": 1430868478, "lastModified": 1430868478 },
+            { "id": 7602052776, "studiableItemId": 2534017592, "label": "word", "timestamp": 1430868492, "lastModified": 1430868492 },
+            { "id": 7602052777, "studiableItemId": 2534017592, "label": "definition", "timestamp": 1430868492, "lastModified": 1430868492 },
+            { "id": 7602058524, "studiableItemId": 2534019508, "label": "word", "timestamp": 1430868520, "lastModified": 1430868520 },
+            { "id": 7602058525, "studiableItemId": 2534019508, "label": "definition", "timestamp": 1430868520, "lastModified": 1430868520 },
+            { "id": 7602063324, "studiableItemId": 2534021108, "label": "word", "timestamp": 1430868521, "lastModified": 1430868521 },
+            { "id": 7602063325, "studiableItemId": 2534021108, "label": "definition", "timestamp": 1430868521, "lastModified": 1430868521 },
+            { "id": 7602068772, "studiableItemId": 2534022924, "label": "word", "timestamp": 1430869142, "lastModified": 1430869142 },
+            { "id": 7602068773, "studiableItemId": 2534022924, "label": "definition", "timestamp": 1430869142, "lastModified": 1430869142 },
+            { "id": 7602261243, "studiableItemId": 2534087081, "label": "word", "timestamp": 1430869153, "lastModified": 1430869153 },
+            { "id": 7602261244, "studiableItemId": 2534087081, "label": "definition", "timestamp": 1430869153, "lastModified": 1430869153 },
+            { "id": 7602264840, "studiableItemId": 2534088280, "label": "word", "timestamp": 1430869153, "lastModified": 1430869153 },
+            { "id": 7602264841, "studiableItemId": 2534088280, "label": "definition", "timestamp": 1430869153, "lastModified": 1430869153 },
+            { "id": 7602265794, "studiableItemId": 2534088598, "label": "word", "timestamp": 1430869183, "lastModified": 1430869183 },
+            { "id": 7602265795, "studiableItemId": 2534088598, "label": "definition", "timestamp": 1430869183, "lastModified": 1430869183 },
+            { "id": 7602278337, "studiableItemId": 2534092779, "label": "word", "timestamp": 1430869199, "lastModified": 1430869199 },
+            { "id": 7602278338, "studiableItemId": 2534092779, "label": "definition", "timestamp": 1430869199, "lastModified": 1430869199 },
+            { "id": 7602278340, "studiableItemId": 2534092780, "label": "word", "timestamp": 1430869214, "lastModified": 1430869214 },
+            { "id": 7602278341, "studiableItemId": 2534092780, "label": "definition", "timestamp": 1430869214, "lastModified": 1430869214 },
+            { "id": 7602282486, "studiableItemId": 2534094162, "label": "word", "timestamp": 1430869227, "lastModified": 1430869227 },
+            { "id": 7602282487, "studiableItemId": 2534094162, "label": "definition", "timestamp": 1430869227, "lastModified": 1430869227 },
+            { "id": 7602286248, "studiableItemId": 2534095416, "label": "word", "timestamp": 1430869226, "lastModified": 1430869226 },
+            { "id": 7602286249, "studiableItemId": 2534095416, "label": "definition", "timestamp": 1430869226, "lastModified": 1430869226 },
+            { "id": 7602290658, "studiableItemId": 2534096886, "label": "word", "timestamp": 1430869241, "lastModified": 1430869241 },
+            { "id": 7602290659, "studiableItemId": 2534096886, "label": "definition", "timestamp": 1430869241, "lastModified": 1430869241 },
+            { "id": 7602290661, "studiableItemId": 2534096887, "label": "word", "timestamp": 1430869242, "lastModified": 1430869242 },
+            { "id": 7602290662, "studiableItemId": 2534096887, "label": "definition", "timestamp": 1430869242, "lastModified": 1430869242 },
+            { "id": 7602294195, "studiableItemId": 2534098065, "label": "word", "timestamp": 1430869254, "lastModified": 1430869254 },
+            { "id": 7602294196, "studiableItemId": 2534098065, "label": "definition", "timestamp": 1430869254, "lastModified": 1430869254 },
+            { "id": 7602294198, "studiableItemId": 2534098066, "label": "word", "timestamp": 1430869254, "lastModified": 1430869254 },
+            { "id": 7602294199, "studiableItemId": 2534098066, "label": "definition", "timestamp": 1430869254, "lastModified": 1430869254 },
+            { "id": 7602294324, "studiableItemId": 2534098108, "label": "word", "timestamp": 1430869268, "lastModified": 1430869268 },
+            { "id": 7602294325, "studiableItemId": 2534098108, "label": "definition", "timestamp": 1430869268, "lastModified": 1430869268 },
+            { "id": 7602302433, "studiableItemId": 2534100811, "label": "word", "timestamp": 1430869282, "lastModified": 1430869282 },
+            { "id": 7602302434, "studiableItemId": 2534100811, "label": "definition", "timestamp": 1430869282, "lastModified": 1430869282 },
+            { "id": 7602308370, "studiableItemId": 2534102790, "label": "word", "timestamp": 1430869282, "lastModified": 1430869282 },
+            { "id": 7602308371, "studiableItemId": 2534102790, "label": "definition", "timestamp": 1430869282, "lastModified": 1430869282 },
+            { "id": 7602308652, "studiableItemId": 2534102884, "label": "word", "timestamp": 1430869296, "lastModified": 1430869296 },
+            { "id": 7602308653, "studiableItemId": 2534102884, "label": "definition", "timestamp": 1430869296, "lastModified": 1430869296 },
+            { "id": 7602313311, "studiableItemId": 2534104437, "label": "word", "timestamp": 1430869295, "lastModified": 1430869295 },
+            { "id": 7602313312, "studiableItemId": 2534104437, "label": "definition", "timestamp": 1430869295, "lastModified": 1430869295 },
+            { "id": 7602313314, "studiableItemId": 2534104438, "label": "word", "timestamp": 1430869308, "lastModified": 1430869308 },
+            { "id": 7602313315, "studiableItemId": 2534104438, "label": "definition", "timestamp": 1430869308, "lastModified": 1430869308 },
+            { "id": 7602316488, "studiableItemId": 2534105496, "label": "word", "timestamp": 1430869307, "lastModified": 1430869307 },
+            { "id": 7602316489, "studiableItemId": 2534105496, "label": "definition", "timestamp": 1430869307, "lastModified": 1430869307 },
+            { "id": 7602319386, "studiableItemId": 2534106462, "label": "word", "timestamp": 1430869319, "lastModified": 1430869319 },
+            { "id": 7602319387, "studiableItemId": 2534106462, "label": "definition", "timestamp": 1430869319, "lastModified": 1430869319 },
+            { "id": 7602319389, "studiableItemId": 2534106463, "label": "word", "timestamp": 1430869380, "lastModified": 1430869380 },
+            { "id": 7602319390, "studiableItemId": 2534106463, "label": "definition", "timestamp": 1430869380, "lastModified": 1430869380 },
+            { "id": 7602340188, "studiableItemId": 2534113396, "label": "word", "timestamp": 1430869379, "lastModified": 1430869379 },
+            { "id": 7602340189, "studiableItemId": 2534113396, "label": "definition", "timestamp": 1430869379, "lastModified": 1430869379 },
+            { "id": 7602340392, "studiableItemId": 2534113464, "label": "word", "timestamp": 1430869393, "lastModified": 1430869393 },
+            { "id": 7602340393, "studiableItemId": 2534113464, "label": "definition", "timestamp": 1430869393, "lastModified": 1430869393 },
+            { "id": 7602343578, "studiableItemId": 2534114526, "label": "word", "timestamp": 1430869392, "lastModified": 1430869392 },
+            { "id": 7602343579, "studiableItemId": 2534114526, "label": "definition", "timestamp": 1430869392, "lastModified": 1430869392 },
+            { "id": 7602343581, "studiableItemId": 2534114527, "label": "word", "timestamp": 1430869392, "lastModified": 1430869392 },
+            { "id": 7602343582, "studiableItemId": 2534114527, "label": "definition", "timestamp": 1430869392, "lastModified": 1430869392 },
+            { "id": 7602343584, "studiableItemId": 2534114528, "label": "word", "timestamp": 1430869405, "lastModified": 1430869405 },
+            { "id": 7602343585, "studiableItemId": 2534114528, "label": "definition", "timestamp": 1430869405, "lastModified": 1430869405 },
+            { "id": 7602346971, "studiableItemId": 2534115657, "label": "word", "timestamp": 1430869404, "lastModified": 1430869404 },
+            { "id": 7602346972, "studiableItemId": 2534115657, "label": "definition", "timestamp": 1430869404, "lastModified": 1430869404 },
+            { "id": 7602346974, "studiableItemId": 2534115658, "label": "word", "timestamp": 1430869404, "lastModified": 1430869404 },
+            { "id": 7602346975, "studiableItemId": 2534115658, "label": "definition", "timestamp": 1430869404, "lastModified": 1430869404 },
+            { "id": 7602347199, "studiableItemId": 2534115733, "label": "word", "timestamp": 1430869420, "lastModified": 1430869420 },
+            { "id": 7602347200, "studiableItemId": 2534115733, "label": "definition", "timestamp": 1430869420, "lastModified": 1430869420 },
+            { "id": 7602351210, "studiableItemId": 2534117070, "label": "word", "timestamp": 1430869431, "lastModified": 1430869431 },
+            { "id": 7602351211, "studiableItemId": 2534117070, "label": "definition", "timestamp": 1430869431, "lastModified": 1430869431 },
+            { "id": 7602354675, "studiableItemId": 2534118225, "label": "word", "timestamp": 1430869431, "lastModified": 1430869431 },
+            { "id": 7602354676, "studiableItemId": 2534118225, "label": "definition", "timestamp": 1430869431, "lastModified": 1430869431 },
+            { "id": 7602354678, "studiableItemId": 2534118226, "label": "word", "timestamp": 1430869443, "lastModified": 1430869443 },
+            { "id": 7602354679, "studiableItemId": 2534118226, "label": "definition", "timestamp": 1430869443, "lastModified": 1430869443 },
+            { "id": 7602358095, "studiableItemId": 2534119365, "label": "word", "timestamp": 1430869442, "lastModified": 1430869442 },
+            { "id": 7602358096, "studiableItemId": 2534119365, "label": "definition", "timestamp": 1430869442, "lastModified": 1430869442 },
+            { "id": 7602358098, "studiableItemId": 2534119366, "label": "word", "timestamp": 1430869457, "lastModified": 1430869457 },
+            { "id": 7602358099, "studiableItemId": 2534119366, "label": "definition", "timestamp": 1430869457, "lastModified": 1430869457 },
+            { "id": 7602361884, "studiableItemId": 2534120628, "label": "word", "timestamp": 1430869469, "lastModified": 1430869469 },
+            { "id": 7602361885, "studiableItemId": 2534120628, "label": "definition", "timestamp": 1430869469, "lastModified": 1430869469 },
+            { "id": 7602374520, "studiableItemId": 2534124840, "label": "word", "timestamp": 1430869501, "lastModified": 1430869501 },
+            { "id": 7602374521, "studiableItemId": 2534124840, "label": "definition", "timestamp": 1430869501, "lastModified": 1430869501 },
+            { "id": 7602378963, "studiableItemId": 2534126321, "label": "word", "timestamp": 1430869516, "lastModified": 1430869516 },
+            { "id": 7602378964, "studiableItemId": 2534126321, "label": "definition", "timestamp": 1430869516, "lastModified": 1430869516 },
+            { "id": 7602378966, "studiableItemId": 2534126322, "label": "word", "timestamp": 1430869516, "lastModified": 1430869516 },
+            { "id": 7602378967, "studiableItemId": 2534126322, "label": "definition", "timestamp": 1430869516, "lastModified": 1430869516 },
+            { "id": 7602382929, "studiableItemId": 2534127643, "label": "word", "timestamp": 1430869530, "lastModified": 1430869530 },
+            { "id": 7602382930, "studiableItemId": 2534127643, "label": "definition", "timestamp": 1430869530, "lastModified": 1430869530 },
+            { "id": 7602382932, "studiableItemId": 2534127644, "label": "word", "timestamp": 1430869530, "lastModified": 1430869530 },
+            { "id": 7602382933, "studiableItemId": 2534127644, "label": "definition", "timestamp": 1430869530, "lastModified": 1430869530 }
+        ],
+        "studiableMediaConnections": [
+            {
+                "id": 15203638002,
+                "timestamp": 1430867699,
+                "lastModified": 1430867699,
+                "connectionModelId": 7601819001,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "los derechos humanos",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bG9zIGRlcmVjaG9zIGh1bWFub3M&s=c.BtZH19",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bG9zIGRlcmVjaG9zIGh1bWFub3M&s=c.BtZH19&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203638004,
+                "timestamp": 1430867699,
+                "lastModified": 1430867699,
+                "connectionModelId": 7601819002,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "human rights",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=aHVtYW4gcmlnaHRz&s=B6Um5EsV",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=aHVtYW4gcmlnaHRz&s=B6Um5EsV&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203648952,
+                "timestamp": 1430867717,
+                "lastModified": 1430867717,
+                "connectionModelId": 7601824476,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la desobediencia civil",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZGVzb2JlZGllbmNpYSBjaXZpbA&s=ExZL0SSG",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZGVzb2JlZGllbmNpYSBjaXZpbA&s=ExZL0SSG&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203648954,
+                "timestamp": 1430867717,
+                "lastModified": 1430867717,
+                "connectionModelId": 7601824477,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "civil disobedience",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Y2l2aWwgZGlzb2JlZGllbmNl&s=ObmyttAv",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Y2l2aWwgZGlzb2JlZGllbmNl&s=ObmyttAv&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203657838,
+                "timestamp": 1430867734,
+                "lastModified": 1430867734,
+                "connectionModelId": 7601828919,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la (des)igualdad",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgKGRlcylpZ3VhbGRhZA&s=vTB-Q.F2",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgKGRlcylpZ3VhbGRhZA&s=vTB-Q.F2&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203657840,
+                "timestamp": 1430867734,
+                "lastModified": 1430867734,
+                "connectionModelId": 7601828920,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(in)equality",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=KGluKWVxdWFsaXR5&s=k3bW.m1v",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=KGluKWVxdWFsaXR5&s=k3bW.m1v&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203668014,
+                "timestamp": 1430867749,
+                "lastModified": 1430867749,
+                "connectionModelId": 7601834007,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la juez(a)",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEganVleihhKQ&s=1zu.nHEL",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEganVleihhKQ&s=1zu.nHEL&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203668016,
+                "timestamp": 1430867749,
+                "lastModified": 1430867749,
+                "connectionModelId": 7601834008,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "judge",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=anVkZ2U&s=cyOLp5tG",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=anVkZ2U&s=cyOLp5tG&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203668020,
+                "timestamp": 1430867765,
+                "lastModified": 1430867765,
+                "connectionModelId": 7601834010,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la (in)justicia",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgKGluKWp1c3RpY2lh&s=ET-4vuUn",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgKGluKWp1c3RpY2lh&s=ET-4vuUn&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203668022,
+                "timestamp": 1430867765,
+                "lastModified": 1430867765,
+                "connectionModelId": 7601834011,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(in)justice",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=KGluKWp1c3RpY2U&s=LB97RojN",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=KGluKWp1c3RpY2U&s=LB97RojN&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203677278,
+                "timestamp": 1430867764,
+                "lastModified": 1430867764,
+                "connectionModelId": 7601838639,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la libertad",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgbGliZXJ0YWQ&s=dHQjJzUt",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgbGliZXJ0YWQ&s=dHQjJzUt&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203677280,
+                "timestamp": 1430867764,
+                "lastModified": 1430867764,
+                "connectionModelId": 7601838640,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "freedom",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZnJlZWRvbQ&s=RAmVHAnQ",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZnJlZWRvbQ&s=RAmVHAnQ&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203683518,
+                "timestamp": 1430867776,
+                "lastModified": 1430867776,
+                "connectionModelId": 7601841759,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la lucha",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgbHVjaGE&s=5iXEmwUj",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgbHVjaGE&s=5iXEmwUj&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203683520,
+                "timestamp": 1430867776,
+                "lastModified": 1430867776,
+                "connectionModelId": 7601841760,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "struggle, fight",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=c3RydWdnbGUsIGZpZ2h0&s=WTN9bPD3",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=c3RydWdnbGUsIGZpZ2h0&s=WTN9bPD3&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203683524,
+                "timestamp": 1430867776,
+                "lastModified": 1430867776,
+                "connectionModelId": 7601841762,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el tribunal",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgdHJpYnVuYWw&s=B-HvOaHi",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgdHJpYnVuYWw&s=B-HvOaHi&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203683526,
+                "timestamp": 1430867776,
+                "lastModified": 1430867776,
+                "connectionModelId": 7601841763,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "court",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Y291cnQ&s=dwFiB-.W",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Y291cnQ&s=dwFiB-.W&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203706378,
+                "timestamp": 1430867815,
+                "lastModified": 1430867815,
+                "connectionModelId": 7601853189,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "abusar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=YWJ1c2Fy&s=EwNPZsWm",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=YWJ1c2Fy&s=EwNPZsWm&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203706380,
+                "timestamp": 1430867815,
+                "lastModified": 1430867815,
+                "connectionModelId": 7601853190,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to abuse",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gYWJ1c2U&s=DV9z6mg7",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gYWJ1c2U&s=DV9z6mg7&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203706384,
+                "timestamp": 1430867815,
+                "lastModified": 1430867815,
+                "connectionModelId": 7601853192,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "aprobar una ley",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=YXByb2JhciB1bmEgbGV5&s=sM.6z97A",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=YXByb2JhciB1bmEgbGV5&s=sM.6z97A&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203706386,
+                "timestamp": 1430867815,
+                "lastModified": 1430867815,
+                "connectionModelId": 7601853193,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to pass a law",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gcGFzcyBhIGxhdw&s=8Mbzbl.j",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gcGFzcyBhIGxhdw&s=8Mbzbl.j&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203714154,
+                "timestamp": 1430867828,
+                "lastModified": 1430867828,
+                "connectionModelId": 7601857077,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "convocar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=Y29udm9jYXI&s=xLEGKyT1",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=Y29udm9jYXI&s=xLEGKyT1&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203714156,
+                "timestamp": 1430867828,
+                "lastModified": 1430867828,
+                "connectionModelId": 7601857078,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to summon",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gc3VtbW9u&s=iIUFTbpw",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gc3VtbW9u&s=iIUFTbpw&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203714160,
+                "timestamp": 1430867828,
+                "lastModified": 1430867828,
+                "connectionModelId": 7601857080,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "defender",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVmZW5kZXI&s=dhd9qSZ1",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVmZW5kZXI&s=dhd9qSZ1&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203714162,
+                "timestamp": 1430867828,
+                "lastModified": 1430867828,
+                "connectionModelId": 7601857081,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to defend",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZGVmZW5k&s=1t5c1upi",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZGVmZW5k&s=1t5c1upi&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203714166,
+                "timestamp": 1430867842,
+                "lastModified": 1430867842,
+                "connectionModelId": 7601857083,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "derogar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVyb2dhcg&s=M2mWwa5s",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVyb2dhcg&s=M2mWwa5s&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203714168,
+                "timestamp": 1430867842,
+                "lastModified": 1430867842,
+                "connectionModelId": 7601857084,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to abolish",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gYWJvbGlzaA&s=O8ORBFoi",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gYWJvbGlzaA&s=O8ORBFoi&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203722494,
+                "timestamp": 1430867842,
+                "lastModified": 1430867842,
+                "connectionModelId": 7601861247,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "encarcelar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZW5jYXJjZWxhcg&s=zLVi64GI",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZW5jYXJjZWxhcg&s=zLVi64GI&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203722496,
+                "timestamp": 1430867842,
+                "lastModified": 1430867842,
+                "connectionModelId": 7601861248,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to imprison",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gaW1wcmlzb24&s=szs2dT7z",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gaW1wcmlzb24&s=szs2dT7z&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203722500,
+                "timestamp": 1430867854,
+                "lastModified": 1430867854,
+                "connectionModelId": 7601861250,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "juzgar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=anV6Z2Fy&s=B5wsg8Kb",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=anV6Z2Fy&s=B5wsg8Kb&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203722502,
+                "timestamp": 1430867854,
+                "lastModified": 1430867854,
+                "connectionModelId": 7601861251,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to judge",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8ganVkZ2U&s=X5xNLPIW",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8ganVkZ2U&s=X5xNLPIW&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203729922,
+                "timestamp": 1430867866,
+                "lastModified": 1430867866,
+                "connectionModelId": 7601864961,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "analfabeto/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=YW5hbGZhYmV0by9h&s=3hON3-hi",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=YW5hbGZhYmV0by9h&s=3hON3-hi&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203729924,
+                "timestamp": 1430867866,
+                "lastModified": 1430867866,
+                "connectionModelId": 7601864962,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "illiterate",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=aWxsaXRlcmF0ZQ&s=LWGVMcDt",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=aWxsaXRlcmF0ZQ&s=LWGVMcDt&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203738448,
+                "timestamp": 1430867881,
+                "lastModified": 1430867881,
+                "connectionModelId": 7601869224,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(des)igual",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=KGRlcylpZ3VhbA&s=fDjxvchS",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=KGRlcylpZ3VhbA&s=fDjxvchS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203738450,
+                "timestamp": 1430867881,
+                "lastModified": 1430867881,
+                "connectionModelId": 7601869225,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(un)equal",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=KHVuKWVxdWFs&s=iGEz.Rzt",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=KHVuKWVxdWFs&s=iGEz.Rzt&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203744964,
+                "timestamp": 1430867881,
+                "lastModified": 1430867881,
+                "connectionModelId": 7601872482,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(in)justo/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=KGluKWp1c3RvL2E&s=Sn5uq6FF",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=KGluKWp1c3RvL2E&s=Sn5uq6FF&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203744966,
+                "timestamp": 1430867881,
+                "lastModified": 1430867881,
+                "connectionModelId": 7601872483,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(un)fair",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=KHVuKWZhaXI&s=TXjUFkw2",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=KHVuKWZhaXI&s=TXjUFkw2&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203752056,
+                "timestamp": 1430867895,
+                "lastModified": 1430867895,
+                "connectionModelId": 7601876028,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "oprimido/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=b3ByaW1pZG8vYQ&s=AQqmWFk2",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=b3ByaW1pZG8vYQ&s=AQqmWFk2&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203752058,
+                "timestamp": 1430867895,
+                "lastModified": 1430867895,
+                "connectionModelId": 7601876029,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "oppressed",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=b3BwcmVzc2Vk&s=93dBlBIs",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=b3BwcmVzc2Vk&s=93dBlBIs&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203752062,
+                "timestamp": 1430867895,
+                "lastModified": 1430867895,
+                "connectionModelId": 7601876031,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el abuso",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgYWJ1c28&s=k.6Sfof5",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgYWJ1c28&s=k.6Sfof5&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203752064,
+                "timestamp": 1430867895,
+                "lastModified": 1430867895,
+                "connectionModelId": 7601876032,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "abuse",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=YWJ1c2U&s=m0PGgCPl",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=YWJ1c2U&s=m0PGgCPl&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203752068,
+                "timestamp": 1430867907,
+                "lastModified": 1430867907,
+                "connectionModelId": 7601876034,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la armada",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgYXJtYWRh&s=puRo.kRo",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgYXJtYWRh&s=puRo.kRo&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203752070,
+                "timestamp": 1430867907,
+                "lastModified": 1430867907,
+                "connectionModelId": 7601876035,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "navy",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bmF2eQ&s=EgbmLxZo",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bmF2eQ&s=EgbmLxZo&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203758224,
+                "timestamp": 1430867906,
+                "lastModified": 1430867906,
+                "connectionModelId": 7601879112,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la bandera",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgYmFuZGVyYQ&s=4L2v0UF2",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgYmFuZGVyYQ&s=4L2v0UF2&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203758226,
+                "timestamp": 1430867906,
+                "lastModified": 1430867906,
+                "connectionModelId": 7601879113,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "flag",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZmxhZw&s=TDrEkGcC",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZmxhZw&s=TDrEkGcC&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203758230,
+                "timestamp": 1430867918,
+                "lastModified": 1430867918,
+                "connectionModelId": 7601879115,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la creencia",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgY3JlZW5jaWE&s=b7pCnpVq",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgY3JlZW5jaWE&s=b7pCnpVq&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203758232,
+                "timestamp": 1430867918,
+                "lastModified": 1430867918,
+                "connectionModelId": 7601879116,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "belief",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=YmVsaWVm&s=zfPbLTvS",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=YmVsaWVm&s=zfPbLTvS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203763438,
+                "timestamp": 1430867918,
+                "lastModified": 1430867918,
+                "connectionModelId": 7601881719,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la crueldad",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgY3J1ZWxkYWQ&s=Ca988Kwq",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgY3J1ZWxkYWQ&s=Ca988Kwq&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203763440,
+                "timestamp": 1430867918,
+                "lastModified": 1430867918,
+                "connectionModelId": 7601881720,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "cruelty",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Y3J1ZWx0eQ&s=JWOFlK49",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Y3J1ZWx0eQ&s=JWOFlK49&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203763444,
+                "timestamp": 1430867930,
+                "lastModified": 1430867930,
+                "connectionModelId": 7601881722,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la democracia",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZGVtb2NyYWNpYQ&s=vvKxgrjG",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZGVtb2NyYWNpYQ&s=vvKxgrjG&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203763446,
+                "timestamp": 1430867930,
+                "lastModified": 1430867930,
+                "connectionModelId": 7601881723,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "democracy",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZGVtb2NyYWN5&s=R12nj5vS",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZGVtb2NyYWN5&s=R12nj5vS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203768976,
+                "timestamp": 1430867942,
+                "lastModified": 1430867942,
+                "connectionModelId": 7601884488,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la dictadura",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZGljdGFkdXJh&s=PbwiJ-TW",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZGljdGFkdXJh&s=PbwiJ-TW&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203768978,
+                "timestamp": 1430867942,
+                "lastModified": 1430867942,
+                "connectionModelId": 7601884489,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "dictatorship",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZGljdGF0b3JzaGlw&s=jxlQFDMz",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZGljdGF0b3JzaGlw&s=jxlQFDMz&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203774772,
+                "timestamp": 1430867941,
+                "lastModified": 1430867941,
+                "connectionModelId": 7601887386,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el ej\u00e9rcito",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgZWrDqXJjaXRv&s=nlmieJbn",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgZWrDqXJjaXRv&s=nlmieJbn&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203774774,
+                "timestamp": 1430867941,
+                "lastModified": 1430867941,
+                "connectionModelId": 7601887387,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "army",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=YXJteQ&s=2BZWpV7z",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=YXJteQ&s=2BZWpV7z&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203774778,
+                "timestamp": 1430867943,
+                "lastModified": 1430867943,
+                "connectionModelId": 7601887389,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el gobierno",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgZ29iaWVybm8&s=O2nDTWsx",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgZ29iaWVybm8&s=O2nDTWsx&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203774780,
+                "timestamp": 1430867943,
+                "lastModified": 1430867943,
+                "connectionModelId": 7601887390,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "government",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Z292ZXJubWVudA&s=0Qy15-Oq",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Z292ZXJubWVudA&s=0Qy15-Oq&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203783490,
+                "timestamp": 1430867957,
+                "lastModified": 1430867957,
+                "connectionModelId": 7601891745,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la guerra (civil)",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZ3VlcnJhIChjaXZpbCk&s=qaYu70tz",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZ3VlcnJhIChjaXZpbCk&s=qaYu70tz&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15203783492,
+                "timestamp": 1430867957,
+                "lastModified": 1430867957,
+                "connectionModelId": 7601891746,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(civil) war",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=KGNpdmlsKSB3YXI&s=ukVaQVYs",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=KGNpdmlsKSB3YXI&s=ukVaQVYs&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204007284,
+                "timestamp": 1430868341,
+                "lastModified": 1430868341,
+                "connectionModelId": 7602003642,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el partido pol\u00edtico",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgcGFydGlkbyBwb2zDrXRpY28&s=H9rnZJLN",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgcGFydGlkbyBwb2zDrXRpY28&s=H9rnZJLN&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204007286,
+                "timestamp": 1430868341,
+                "lastModified": 1430868341,
+                "connectionModelId": 7602003643,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "political party",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cG9saXRpY2FsIHBhcnR5&s=Pnt9MtWG",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cG9saXRpY2FsIHBhcnR5&s=Pnt9MtWG&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204033732,
+                "timestamp": 1430868365,
+                "lastModified": 1430868365,
+                "connectionModelId": 7602016866,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la paz",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgcGF6&s=Sp8EaFlL",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgcGF6&s=Sp8EaFlL&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204033734,
+                "timestamp": 1430868365,
+                "lastModified": 1430868365,
+                "connectionModelId": 7602016867,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "peace",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cGVhY2U&s=yuxzx2wh",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cGVhY2U&s=yuxzx2wh&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204033738,
+                "timestamp": 1430868365,
+                "lastModified": 1430868365,
+                "connectionModelId": 7602016869,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el poder",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgcG9kZXI&s=kxZNvVkb",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgcG9kZXI&s=kxZNvVkb&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204033740,
+                "timestamp": 1430868365,
+                "lastModified": 1430868365,
+                "connectionModelId": 7602016870,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "power",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cG93ZXI&s=Z6AARgEx",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cG93ZXI&s=Z6AARgEx&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204033744,
+                "timestamp": 1430868377,
+                "lastModified": 1430868377,
+                "connectionModelId": 7602016872,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la pol\u00edtica",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgcG9sw610aWNh&s=XIOp3vp3",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgcG9sw610aWNh&s=XIOp3vp3&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204033746,
+                "timestamp": 1430868377,
+                "lastModified": 1430868377,
+                "connectionModelId": 7602016873,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "politics",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cG9saXRpY3M&s=pdi9LtN8",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cG9saXRpY3M&s=pdi9LtN8&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204039774,
+                "timestamp": 1430868393,
+                "lastModified": 1430868393,
+                "connectionModelId": 7602019887,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "las relaciones exteriores",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGFzIHJlbGFjaW9uZXMgZXh0ZXJpb3Jlcw&s=JEAyzvxq",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGFzIHJlbGFjaW9uZXMgZXh0ZXJpb3Jlcw&s=JEAyzvxq&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204039776,
+                "timestamp": 1430868393,
+                "lastModified": 1430868393,
+                "connectionModelId": 7602019888,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "foreign relations",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Zm9yZWlnbiByZWxhdGlvbnM&s=c8q8VyLZ",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Zm9yZWlnbiByZWxhdGlvbnM&s=c8q8VyLZ&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204047712,
+                "timestamp": 1430868392,
+                "lastModified": 1430868392,
+                "connectionModelId": 7602023856,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la victoria",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgdmljdG9yaWE&s=R5IZW.Fp",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgdmljdG9yaWE&s=R5IZW.Fp&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204047714,
+                "timestamp": 1430868392,
+                "lastModified": 1430868392,
+                "connectionModelId": 7602023857,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "victory",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dmljdG9yeQ&s=e07xmWdZ",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dmljdG9yeQ&s=e07xmWdZ&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204047718,
+                "timestamp": 1430868411,
+                "lastModified": 1430868411,
+                "connectionModelId": 7602023859,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "dedicarse a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVkaWNhcnNlIGE&s=fuv5C3NH",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVkaWNhcnNlIGE&s=fuv5C3NH&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204047720,
+                "timestamp": 1430868411,
+                "lastModified": 1430868411,
+                "connectionModelId": 7602023860,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to devote oneself to",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZGV2b3RlIG9uZXNlbGYgdG8&s=v2SwU8AM",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZGV2b3RlIG9uZXNlbGYgdG8&s=v2SwU8AM&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204057336,
+                "timestamp": 1430868410,
+                "lastModified": 1430868410,
+                "connectionModelId": 7602028668,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "elegir",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWxlZ2ly&s=7C8Ya0yb",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWxlZ2ly&s=7C8Ya0yb&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204057338,
+                "timestamp": 1430868410,
+                "lastModified": 1430868410,
+                "connectionModelId": 7602028669,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to elect",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZWxlY3Q&s=Qv6zWEQe",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZWxlY3Q&s=Qv6zWEQe&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204057744,
+                "timestamp": 1430868428,
+                "lastModified": 1430868428,
+                "connectionModelId": 7602028872,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "ganar/perder las elecciones",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=Z2FuYXIvcGVyZGVyIGxhcyBlbGVjY2lvbmVz&s=OPawyL4y",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=Z2FuYXIvcGVyZGVyIGxhcyBlbGVjY2lvbmVz&s=OPawyL4y&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204057746,
+                "timestamp": 1430868428,
+                "lastModified": 1430868428,
+                "connectionModelId": 7602028873,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to win/lose elections",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gd2luL2xvc2UgZWxlY3Rpb25z&s=OHX830F3",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gd2luL2xvc2UgZWxlY3Rpb25z&s=OHX830F3&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204066894,
+                "timestamp": 1430868427,
+                "lastModified": 1430868427,
+                "connectionModelId": 7602033447,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "gobernar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=Z29iZXJuYXI&s=4eQoUVYg",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=Z29iZXJuYXI&s=4eQoUVYg&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204066896,
+                "timestamp": 1430868427,
+                "lastModified": 1430868427,
+                "connectionModelId": 7602033448,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to govern",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZ292ZXJu&s=FfYAYQ3r",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZ292ZXJu&s=FfYAYQ3r&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204066900,
+                "timestamp": 1430868428,
+                "lastModified": 1430868428,
+                "connectionModelId": 7602033450,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "influir",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=aW5mbHVpcg&s=rHipxNOU",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=aW5mbHVpcg&s=rHipxNOU&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204066902,
+                "timestamp": 1430868428,
+                "lastModified": 1430868428,
+                "connectionModelId": 7602033451,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to influence",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gaW5mbHVlbmNl&s=SgSWh4o4",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gaW5mbHVlbmNl&s=SgSWh4o4&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204074058,
+                "timestamp": 1430868440,
+                "lastModified": 1430868440,
+                "connectionModelId": 7602037029,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "votar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=dm90YXI&s=ArQlVXW1",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=dm90YXI&s=ArQlVXW1&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204074060,
+                "timestamp": 1430868440,
+                "lastModified": 1430868440,
+                "connectionModelId": 7602037030,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to vote",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gdm90ZQ&s=E.pROuvf",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gdm90ZQ&s=E.pROuvf&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204074064,
+                "timestamp": 1430868452,
+                "lastModified": 1430868452,
+                "connectionModelId": 7602037032,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "conservador(a)",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=Y29uc2VydmFkb3IoYSk&s=IGoxGknG",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=Y29uc2VydmFkb3IoYSk&s=IGoxGknG&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204074066,
+                "timestamp": 1430868452,
+                "lastModified": 1430868452,
+                "connectionModelId": 7602037033,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "conservative",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Y29uc2VydmF0aXZl&s=3REzAcjv",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Y29uc2VydmF0aXZl&s=3REzAcjv&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204080376,
+                "timestamp": 1430868451,
+                "lastModified": 1430868451,
+                "connectionModelId": 7602040188,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "liberal",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGliZXJhbA&s=p-xe-B05",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGliZXJhbA&s=p-xe-B05&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204080378,
+                "timestamp": 1430868451,
+                "lastModified": 1430868451,
+                "connectionModelId": 7602040189,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "liberal",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bGliZXJhbA&s=h1v6kH3S",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bGliZXJhbA&s=h1v6kH3S&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204080382,
+                "timestamp": 1430868464,
+                "lastModified": 1430868464,
+                "connectionModelId": 7602040191,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pac\u00edfico/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=cGFjw61maWNvL2E&s=15y5s527",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=cGFjw61maWNvL2E&s=15y5s527&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204080384,
+                "timestamp": 1430868464,
+                "lastModified": 1430868464,
+                "connectionModelId": 7602040192,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "peaceful",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cGVhY2VmdWw&s=V82T6mPB",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cGVhY2VmdWw&s=V82T6mPB&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204087036,
+                "timestamp": 1430868463,
+                "lastModified": 1430868463,
+                "connectionModelId": 7602043518,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pacifista",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=cGFjaWZpc3Rh&s=6QbsU.yt",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=cGFjaWZpc3Rh&s=6QbsU.yt&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204087038,
+                "timestamp": 1430868463,
+                "lastModified": 1430868463,
+                "connectionModelId": 7602043519,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pacifist",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cGFjaWZpc3Q&s=ea25yt3E",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cGFjaWZpc3Q&s=ea25yt3E&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204094278,
+                "timestamp": 1430868478,
+                "lastModified": 1430868478,
+                "connectionModelId": 7602047139,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la abogado/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgYWJvZ2Fkby9h&s=MsjKEUNO",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgYWJvZ2Fkby9h&s=MsjKEUNO&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204094280,
+                "timestamp": 1430868478,
+                "lastModified": 1430868478,
+                "connectionModelId": 7602047140,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "lawyer",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bGF3eWVy&s=mBUG2vvY",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bGF3eWVy&s=mBUG2vvY&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204094284,
+                "timestamp": 1430868478,
+                "lastModified": 1430868478,
+                "connectionModelId": 7602047142,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la activista",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgYWN0aXZpc3Rh&s=NT8udVDH",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgYWN0aXZpc3Rh&s=NT8udVDH&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204094286,
+                "timestamp": 1430868478,
+                "lastModified": 1430868478,
+                "connectionModelId": 7602047143,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "activist",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=YWN0aXZpc3Q&s=rBCbSryN",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=YWN0aXZpc3Q&s=rBCbSryN&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204105552,
+                "timestamp": 1430868492,
+                "lastModified": 1430868492,
+                "connectionModelId": 7602052776,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la ladr\u00f3n/ladrona",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgbGFkcsOzbi9sYWRyb25h&s=DkxnxXNS",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgbGFkcsOzbi9sYWRyb25h&s=DkxnxXNS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204105554,
+                "timestamp": 1430868492,
+                "lastModified": 1430868492,
+                "connectionModelId": 7602052777,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "thief",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dGhpZWY&s=uhwU8ePU",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dGhpZWY&s=uhwU8ePU&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204117048,
+                "timestamp": 1430868520,
+                "lastModified": 1430868520,
+                "connectionModelId": 7602058524,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la manifestante",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgbWFuaWZlc3RhbnRl&s=ATlBSgNt",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgbWFuaWZlc3RhbnRl&s=ATlBSgNt&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204117050,
+                "timestamp": 1430868520,
+                "lastModified": 1430868520,
+                "connectionModelId": 7602058525,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "demonstrator",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZGVtb25zdHJhdG9y&s=w9EFWQtA",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZGVtb25zdHJhdG9y&s=w9EFWQtA&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204126648,
+                "timestamp": 1430868521,
+                "lastModified": 1430868521,
+                "connectionModelId": 7602063324,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la pol\u00edtico/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgcG9sw610aWNvL2E&s=3FoG3rVP",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgcG9sw610aWNvL2E&s=3FoG3rVP&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204126650,
+                "timestamp": 1430868521,
+                "lastModified": 1430868521,
+                "connectionModelId": 7602063325,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "politician",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cG9saXRpY2lhbg&s=ePEl1r0l",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cG9saXRpY2lhbg&s=ePEl1r0l&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204137544,
+                "timestamp": 1430869142,
+                "lastModified": 1430869142,
+                "connectionModelId": 7602068772,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la v\u00edctima",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgdsOtY3RpbWE&s=Qwv6AWxE",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgdsOtY3RpbWE&s=Qwv6AWxE&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204137546,
+                "timestamp": 1430869142,
+                "lastModified": 1430869142,
+                "connectionModelId": 7602068773,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "victim",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dmljdGlt&s=hHRCfD7V",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dmljdGlt&s=hHRCfD7V&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204522486,
+                "timestamp": 1430869153,
+                "lastModified": 1430869153,
+                "connectionModelId": 7602261243,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la amenaza",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgYW1lbmF6YQ&s=ZEAALJ0L",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgYW1lbmF6YQ&s=ZEAALJ0L&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204522488,
+                "timestamp": 1430869153,
+                "lastModified": 1430869153,
+                "connectionModelId": 7602261244,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "threat",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dGhyZWF0&s=AjvuoMhu",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dGhyZWF0&s=AjvuoMhu&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204529680,
+                "timestamp": 1430869153,
+                "lastModified": 1430869153,
+                "connectionModelId": 7602264840,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el arma",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgYXJtYQ&s=nTISNh8F",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgYXJtYQ&s=nTISNh8F&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204529682,
+                "timestamp": 1430869153,
+                "lastModified": 1430869153,
+                "connectionModelId": 7602264841,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "weapon",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=d2VhcG9u&s=mU7qjLT7",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=d2VhcG9u&s=mU7qjLT7&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204531588,
+                "timestamp": 1430869183,
+                "lastModified": 1430869183,
+                "connectionModelId": 7602265794,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la violencia",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgdmlvbGVuY2lh&s=3wikGNqn",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgdmlvbGVuY2lh&s=3wikGNqn&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204531590,
+                "timestamp": 1430869183,
+                "lastModified": 1430869183,
+                "connectionModelId": 7602265795,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "violence",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dmlvbGVuY2U&s=V0wbdkMX",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dmlvbGVuY2U&s=V0wbdkMX&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204556674,
+                "timestamp": 1430869199,
+                "lastModified": 1430869199,
+                "connectionModelId": 7602278337,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "destrozar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVzdHJvemFy&s=ODaX9JWF",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVzdHJvemFy&s=ODaX9JWF&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204556676,
+                "timestamp": 1430869199,
+                "lastModified": 1430869199,
+                "connectionModelId": 7602278338,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to destroy",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZGVzdHJveQ&s=JHIz9JEH",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZGVzdHJveQ&s=JHIz9JEH&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204556680,
+                "timestamp": 1430869214,
+                "lastModified": 1430869214,
+                "connectionModelId": 7602278340,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pelear",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=cGVsZWFy&s=UZDRo1Jj",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=cGVsZWFy&s=UZDRo1Jj&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204556682,
+                "timestamp": 1430869214,
+                "lastModified": 1430869214,
+                "connectionModelId": 7602278341,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to fight",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZmlnaHQ&s=rZjfcp6z",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZmlnaHQ&s=rZjfcp6z&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204564972,
+                "timestamp": 1430869227,
+                "lastModified": 1430869227,
+                "connectionModelId": 7602282486,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "secuestrar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=c2VjdWVzdHJhcg&s=IBrTG5Px",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=c2VjdWVzdHJhcg&s=IBrTG5Px&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204564974,
+                "timestamp": 1430869227,
+                "lastModified": 1430869227,
+                "connectionModelId": 7602282487,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to kidnap, to hijack",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8ga2lkbmFwLCB0byBoaWphY2s&s=AsH6xIPY",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8ga2lkbmFwLCB0byBoaWphY2s&s=AsH6xIPY&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204572496,
+                "timestamp": 1430869226,
+                "lastModified": 1430869226,
+                "connectionModelId": 7602286248,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la alumno/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgYWx1bW5vL2E&s=S6q3hE4p",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgYWx1bW5vL2E&s=S6q3hE4p&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204572498,
+                "timestamp": 1430869226,
+                "lastModified": 1430869226,
+                "connectionModelId": 7602286249,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pupil, student",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cHVwaWwsIHN0dWRlbnQ&s=jN4t.F14",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cHVwaWwsIHN0dWRlbnQ&s=jN4t.F14&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204581316,
+                "timestamp": 1430869241,
+                "lastModified": 1430869241,
+                "connectionModelId": 7602290658,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la autoridad",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgYXV0b3JpZGFk&s=tCdDZ2dS",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgYXV0b3JpZGFk&s=tCdDZ2dS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204581318,
+                "timestamp": 1430869241,
+                "lastModified": 1430869241,
+                "connectionModelId": 7602290659,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "authority",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=YXV0aG9yaXR5&s=Ht59iamV",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=YXV0aG9yaXR5&s=Ht59iamV&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204581322,
+                "timestamp": 1430869242,
+                "lastModified": 1430869242,
+                "connectionModelId": 7602290661,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la chaval(a)",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgY2hhdmFsKGEp&s=YuHW0Tyd",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgY2hhdmFsKGEp&s=YuHW0Tyd&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204581324,
+                "timestamp": 1430869242,
+                "lastModified": 1430869242,
+                "connectionModelId": 7602290662,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "kid, youngster",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=a2lkLCB5b3VuZ3N0ZXI&s=D6uEBthR",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=a2lkLCB5b3VuZ3N0ZXI&s=D6uEBthR&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204588390,
+                "timestamp": 1430869254,
+                "lastModified": 1430869254,
+                "connectionModelId": 7602294195,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la confianza",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgY29uZmlhbnph&s=5fSCl3g0",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgY29uZmlhbnph&s=5fSCl3g0&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204588392,
+                "timestamp": 1430869254,
+                "lastModified": 1430869254,
+                "connectionModelId": 7602294196,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "trust",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dHJ1c3Q&s=kBsYQpLp",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dHJ1c3Q&s=kBsYQpLp&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204588396,
+                "timestamp": 1430869254,
+                "lastModified": 1430869254,
+                "connectionModelId": 7602294198,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la diversidad",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZGl2ZXJzaWRhZA&s=mLwIxwvS",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZGl2ZXJzaWRhZA&s=mLwIxwvS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204588398,
+                "timestamp": 1430869254,
+                "lastModified": 1430869254,
+                "connectionModelId": 7602294199,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "diversity",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZGl2ZXJzaXR5&s=w8bTV7gI",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZGl2ZXJzaXR5&s=w8bTV7gI&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204588648,
+                "timestamp": 1430869268,
+                "lastModified": 1430869268,
+                "connectionModelId": 7602294324,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la doble moral",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZG9ibGUgbW9yYWw&s=w1p0JYCe",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZG9ibGUgbW9yYWw&s=w1p0JYCe&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204588650,
+                "timestamp": 1430869268,
+                "lastModified": 1430869268,
+                "connectionModelId": 7602294325,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "double standard",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZG91YmxlIHN0YW5kYXJk&s=0USGifSO",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZG91YmxlIHN0YW5kYXJk&s=0USGifSO&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204604866,
+                "timestamp": 1430869282,
+                "lastModified": 1430869282,
+                "connectionModelId": 7602302433,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la hipocres\u00eda",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgaGlwb2NyZXPDrWE&s=iAuWCmpc",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgaGlwb2NyZXPDrWE&s=iAuWCmpc&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204604868,
+                "timestamp": 1430869282,
+                "lastModified": 1430869282,
+                "connectionModelId": 7602302434,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "hypocrisy",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=aHlwb2NyaXN5&s=Nfzc9BHw",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=aHlwb2NyaXN5&s=Nfzc9BHw&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204616740,
+                "timestamp": 1430869282,
+                "lastModified": 1430869282,
+                "connectionModelId": 7602308370,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el instituto",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgaW5zdGl0dXRv&s=VWslwX.Q",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgaW5zdGl0dXRv&s=VWslwX.Q&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204616742,
+                "timestamp": 1430869282,
+                "lastModified": 1430869282,
+                "connectionModelId": 7602308371,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "high school",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=aGlnaCBzY2hvb2w&s=GBuGS-H6",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=aGlnaCBzY2hvb2w&s=GBuGS-H6&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204617304,
+                "timestamp": 1430869296,
+                "lastModified": 1430869296,
+                "connectionModelId": 7602308652,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "confiar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=Y29uZmlhcg&s=zxOf4SYr",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=Y29uZmlhcg&s=zxOf4SYr&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204617306,
+                "timestamp": 1430869296,
+                "lastModified": 1430869296,
+                "connectionModelId": 7602308653,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to trust",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gdHJ1c3Q&s=qp-Ngfyk",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gdHJ1c3Q&s=qp-Ngfyk&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204626622,
+                "timestamp": 1430869295,
+                "lastModified": 1430869295,
+                "connectionModelId": 7602313311,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "disentir",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGlzZW50aXI&s=PIEm2Hd3",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGlzZW50aXI&s=PIEm2Hd3&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204626624,
+                "timestamp": 1430869295,
+                "lastModified": 1430869295,
+                "connectionModelId": 7602313312,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to dissent, to disagree",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZGlzc2VudCwgdG8gZGlzYWdyZWU&s=K-D4hp.k",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZGlzc2VudCwgdG8gZGlzYWdyZWU&s=K-D4hp.k&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204626628,
+                "timestamp": 1430869308,
+                "lastModified": 1430869308,
+                "connectionModelId": 7602313314,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pegar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=cGVnYXI&s=YHtROFia",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=cGVnYXI&s=YHtROFia&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204626630,
+                "timestamp": 1430869308,
+                "lastModified": 1430869308,
+                "connectionModelId": 7602313315,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to hit",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gaGl0&s=ewoNIS1L",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gaGl0&s=ewoNIS1L&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204632976,
+                "timestamp": 1430869307,
+                "lastModified": 1430869307,
+                "connectionModelId": 7602316488,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la ejecuci\u00f3n",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZWplY3VjacOzbg&s=mChfm5lq",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZWplY3VjacOzbg&s=mChfm5lq&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204632978,
+                "timestamp": 1430869307,
+                "lastModified": 1430869307,
+                "connectionModelId": 7602316489,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "execution",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZXhlY3V0aW9u&s=yHU3ggBV",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZXhlY3V0aW9u&s=yHU3ggBV&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204638772,
+                "timestamp": 1430869319,
+                "lastModified": 1430869319,
+                "connectionModelId": 7602319386,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el fracaso",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgZnJhY2Fzbw&s=ZMcAK7lf",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgZnJhY2Fzbw&s=ZMcAK7lf&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204638774,
+                "timestamp": 1430869319,
+                "lastModified": 1430869319,
+                "connectionModelId": 7602319387,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "failure",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZmFpbHVyZQ&s=Xf0hjyGc",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZmFpbHVyZQ&s=Xf0hjyGc&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204638778,
+                "timestamp": 1430869380,
+                "lastModified": 1430869380,
+                "connectionModelId": 7602319389,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la fuerza",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgZnVlcnph&s=EPQrFl1H",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgZnVlcnph&s=EPQrFl1H&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204638780,
+                "timestamp": 1430869380,
+                "lastModified": 1430869380,
+                "connectionModelId": 7602319390,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "force",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Zm9yY2U&s=mXTjm0-f",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Zm9yY2U&s=mXTjm0-f&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204680376,
+                "timestamp": 1430869379,
+                "lastModified": 1430869379,
+                "connectionModelId": 7602340188,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la huelga",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgaHVlbGdh&s=wc6LhZGK",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgaHVlbGdh&s=wc6LhZGK&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204680378,
+                "timestamp": 1430869379,
+                "lastModified": 1430869379,
+                "connectionModelId": 7602340189,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "strike",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=c3RyaWtl&s=2lh6zWr0",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=c3RyaWtl&s=2lh6zWr0&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204680784,
+                "timestamp": 1430869393,
+                "lastModified": 1430869393,
+                "connectionModelId": 7602340392,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el informe",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgaW5mb3JtZQ&s=373b.fkc",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgaW5mb3JtZQ&s=373b.fkc&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204680786,
+                "timestamp": 1430869393,
+                "lastModified": 1430869393,
+                "connectionModelId": 7602340393,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "report",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cmVwb3J0&s=SbIpHcoe",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cmVwb3J0&s=SbIpHcoe&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204687156,
+                "timestamp": 1430869392,
+                "lastModified": 1430869392,
+                "connectionModelId": 7602343578,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el juicio",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwganVpY2lv&s=9ALwxAiP",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwganVpY2lv&s=9ALwxAiP&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204687158,
+                "timestamp": 1430869392,
+                "lastModified": 1430869392,
+                "connectionModelId": 7602343579,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "judgment",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=anVkZ21lbnQ&s=LMB6G-AM",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=anVkZ21lbnQ&s=LMB6G-AM&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204687162,
+                "timestamp": 1430869392,
+                "lastModified": 1430869392,
+                "connectionModelId": 7602343581,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la ley",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgbGV5&s=6XLAoyCL",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgbGV5&s=6XLAoyCL&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204687164,
+                "timestamp": 1430869392,
+                "lastModified": 1430869392,
+                "connectionModelId": 7602343582,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "law",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bGF3&s=X0XiPc3a",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bGF3&s=X0XiPc3a&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204687168,
+                "timestamp": 1430869405,
+                "lastModified": 1430869405,
+                "connectionModelId": 7602343584,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el orgullo",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgb3JndWxsbw&s=uavbMPBY",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgb3JndWxsbw&s=uavbMPBY&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204687170,
+                "timestamp": 1430869405,
+                "lastModified": 1430869405,
+                "connectionModelId": 7602343585,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "pride",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cHJpZGU&s=tRk01ZgS",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cHJpZGU&s=tRk01ZgS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204693942,
+                "timestamp": 1430869404,
+                "lastModified": 1430869404,
+                "connectionModelId": 7602346971,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el secuestro",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgc2VjdWVzdHJv&s=-RkfaIv0",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgc2VjdWVzdHJv&s=-RkfaIv0&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204693944,
+                "timestamp": 1430869404,
+                "lastModified": 1430869404,
+                "connectionModelId": 7602346972,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "kidnapping",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=a2lkbmFwcGluZw&s=dSedWjx4",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=a2lkbmFwcGluZw&s=dSedWjx4&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204693948,
+                "timestamp": 1430869404,
+                "lastModified": 1430869404,
+                "connectionModelId": 7602346974,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "derrocar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVycm9jYXI&s=gjsW4Yyq",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVycm9jYXI&s=gjsW4Yyq&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204693950,
+                "timestamp": 1430869404,
+                "lastModified": 1430869404,
+                "connectionModelId": 7602346975,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to overthro",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gb3ZlcnRocm8&s=1fi1ADAt",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gb3ZlcnRocm8&s=1fi1ADAt&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204694398,
+                "timestamp": 1430869420,
+                "lastModified": 1430869420,
+                "connectionModelId": 7602347199,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "derrotar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVycm90YXI&s=wWCujSca",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVycm90YXI&s=wWCujSca&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204694400,
+                "timestamp": 1430869420,
+                "lastModified": 1430869420,
+                "connectionModelId": 7602347200,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to defeat",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gZGVmZWF0&s=tNKicQEY",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gZGVmZWF0&s=tNKicQEY&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204702420,
+                "timestamp": 1430869431,
+                "lastModified": 1430869431,
+                "connectionModelId": 7602351210,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "fortalecer",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=Zm9ydGFsZWNlcg&s=ejxkozl0",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=Zm9ydGFsZWNlcg&s=ejxkozl0&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204702422,
+                "timestamp": 1430869431,
+                "lastModified": 1430869431,
+                "connectionModelId": 7602351211,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to strengthen",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gc3RyZW5ndGhlbg&s=yauXKHSC",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gc3RyZW5ndGhlbg&s=yauXKHSC&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204709350,
+                "timestamp": 1430869431,
+                "lastModified": 1430869431,
+                "connectionModelId": 7602354675,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el alma",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgYWxtYQ&s=X7QRDnz1",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgYWxtYQ&s=X7QRDnz1&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204709352,
+                "timestamp": 1430869431,
+                "lastModified": 1430869431,
+                "connectionModelId": 7602354676,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "soul",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=c291bA&s=nk7C6.hI",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=c291bA&s=nk7C6.hI&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204709356,
+                "timestamp": 1430869443,
+                "lastModified": 1430869443,
+                "connectionModelId": 7602354678,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la c\u00e1rcel",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgY8OhcmNlbA&s=i8q7IMkX",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgY8OhcmNlbA&s=i8q7IMkX&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204709358,
+                "timestamp": 1430869443,
+                "lastModified": 1430869443,
+                "connectionModelId": 7602354679,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "prison, jail",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cHJpc29uLCBqYWls&s=K8RM7npR",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cHJpc29uLCBqYWls&s=K8RM7npR&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204716190,
+                "timestamp": 1430869442,
+                "lastModified": 1430869442,
+                "connectionModelId": 7602358095,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el castigo",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwgY2FzdGlnbw&s=8SUNRCt3",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwgY2FzdGlnbw&s=8SUNRCt3&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204716192,
+                "timestamp": 1430869442,
+                "lastModified": 1430869442,
+                "connectionModelId": 7602358096,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "punishment",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cHVuaXNobWVudA&s=c.krry6d",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cHVuaXNobWVudA&s=c.krry6d&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204716196,
+                "timestamp": 1430869457,
+                "lastModified": 1430869457,
+                "connectionModelId": 7602358098,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la celda",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgY2VsZGE&s=zmqkJ.SD",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgY2VsZGE&s=zmqkJ.SD&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204716198,
+                "timestamp": 1430869457,
+                "lastModified": 1430869457,
+                "connectionModelId": 7602358099,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "(prison, jail) cell",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=KHByaXNvbiwgamFpbCkgY2VsbA&s=4DlmNWr4",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=KHByaXNvbiwgamFpbCkgY2VsbA&s=4DlmNWr4&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204723768,
+                "timestamp": 1430869469,
+                "lastModified": 1430869469,
+                "connectionModelId": 7602361884,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la censura",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgY2Vuc3VyYQ&s=Uje7yXm9",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgY2Vuc3VyYQ&s=Uje7yXm9&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204723770,
+                "timestamp": 1430869469,
+                "lastModified": 1430869469,
+                "connectionModelId": 7602361885,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "censorship",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Y2Vuc29yc2hpcA&s=30Gm8Wg4",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Y2Vuc29yc2hpcA&s=30Gm8Wg4&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204749040,
+                "timestamp": 1430869501,
+                "lastModified": 1430869501,
+                "connectionModelId": 7602374520,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "el/la preso/a",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgcHJlc28vYQ&s=fFtPpXMk",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZWwvbGEgcHJlc28vYQ&s=fFtPpXMk&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204749042,
+                "timestamp": 1430869501,
+                "lastModified": 1430869501,
+                "connectionModelId": 7602374521,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "prisoner",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cHJpc29uZXI&s=PA-HEhd7",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cHJpc29uZXI&s=PA-HEhd7&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204757926,
+                "timestamp": 1430869516,
+                "lastModified": 1430869516,
+                "connectionModelId": 7602378963,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la rebeld\u00eda",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgcmViZWxkw61h&s=EHBdufl5",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgcmViZWxkw61h&s=EHBdufl5&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204757928,
+                "timestamp": 1430869516,
+                "lastModified": 1430869516,
+                "connectionModelId": 7602378964,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "rebelliousness",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cmViZWxsaW91c25lc3M&s=SYsb47V7",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cmViZWxsaW91c25lc3M&s=SYsb47V7&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204757932,
+                "timestamp": 1430869516,
+                "lastModified": 1430869516,
+                "connectionModelId": 7602378966,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "la sangre",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=bGEgc2FuZ3Jl&s=3u8-qPOj",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=bGEgc2FuZ3Jl&s=3u8-qPOj&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204757934,
+                "timestamp": 1430869516,
+                "lastModified": 1430869516,
+                "connectionModelId": 7602378967,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "blood",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Ymxvb2Q&s=j17R59hj",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Ymxvb2Q&s=j17R59hj&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204765858,
+                "timestamp": 1430869530,
+                "lastModified": 1430869530,
+                "connectionModelId": 7602382929,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "resistir",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=cmVzaXN0aXI&s=yEiKKQ0L",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=cmVzaXN0aXI&s=yEiKKQ0L&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204765860,
+                "timestamp": 1430869530,
+                "lastModified": 1430869530,
+                "connectionModelId": 7602382930,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to resist",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8gcmVzaXN0&s=qKlDGnIh",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8gcmVzaXN0&s=qKlDGnIh&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204765864,
+                "timestamp": 1430869530,
+                "lastModified": 1430869530,
+                "connectionModelId": 7602382932,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "vigilar",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=dmlnaWxhcg&s=vPe08zL5",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=dmlnaWxhcg&s=vPe08zL5&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 15204765866,
+                "timestamp": 1430869530,
+                "lastModified": 1430869530,
+                "connectionModelId": 7602382933,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "to keep watch on",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dG8ga2VlcCB3YXRjaCBvbg&s=oPEENOUf",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dG8ga2VlcCB3YXRjaCBvbg&s=oPEENOUf&speed=70",
+                    "richText": null
+                }
+            }
+        ]
+    },
+    "studiableAccents": { "word": ["\u00ed", "\u00f3", "\u00e9", "\u00e1"], "definition": [] },
+    "studyable": {
+        "id": 81925348,
+        "timestamp": 1430867659,
+        "lastModified": 1457952860,
+        "publishedTimestamp": 1430869534,
+        "creatorId": 1419976,
+        "wordLang": "es",
+        "defLang": "en",
+        "title": "Creencias e ideologias vocabulario",
+        "passwordUse": false,
+        "passwordEdit": false,
+        "accessType": 2,
+        "accessCodePrefix": null,
+        "description": "",
+        "numTerms": 90,
+        "hasImages": false,
+        "parentId": 0,
+        "creationSource": 1,
+        "privacyLockStatus": 0,
+        "hasDiagrams": false,
+        "_webUrl": "https://quizlet.com/81925348/creencias-e-ideologias-vocabulario-flash-cards/",
+        "_thumbnailUrl": null,
+        "price": null,
+        "mcqCount": 0,
+        "purchasableType": 0
+    },
+    "studyableId": 81925348,
+    "studyablePath": "/81925348/creencias-e-ideologias-vocabulario-flash-cards/",
+    "studyableType": 1,
+    "userStudyable": {
+        "id": 934306521,
+        "personId": -6449589318483891228,
+        "studyableType": 1,
+        "studyableId": 81925348,
+        "startTimestamp": 1598642875,
+        "dueTimestamp": 0,
+        "notificationStatus": 1,
+        "_folderId": null,
+        "_setId": 81925348,
+        "timestamp": 1599247675,
+        "lastModified": 1599247675
+    },
+    "wordAccents": ["\u00e1", "\u00e9", "\u00ed", "\u00f3"],
+    "writtenTypesSetting": null,
+    "images": [],
+    "imageRefs": [],
+    "diagramShapes": [],
+    "canEditRichText": false,
+    "shouldShowRichText": true,
+    "isAdsInCardsPreviewTestEnabled": false
+}

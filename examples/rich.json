@@ -1,0 +1,315 @@
+{
+    "acceptsPartialAnswer": null,
+    "advancedAudioSettings": { "wordEnabled": true, "definitionEnabled": true, "slowWordEnabled": false, "slowDefinitionEnabled": false },
+    "allAccents": [],
+    "answerWithSetting": null,
+    "audioEnabledSetting": false,
+    "definitionAccents": [],
+    "editableStudiableItemIds": [],
+    "funnelUUID": "",
+    "hasCompletedOnboarding": false,
+    "hasNonImageOnlyDefinitions": true,
+    "isEmbedding": false,
+    "isEligibleForSmartGrading": false,
+    "isSetEligibleForSmartGrading": false,
+    "learnAllPath": "/522987268/learn",
+    "learnSelectedOnlyPath": "/522987268/learn/starred",
+    "levenshteinPlusTestVariant": null,
+    "levenshteinPlusSetting": false,
+    "modePath": "/522987268/flashcards",
+    "starredModePath": "/522987268/flashcards/starred",
+    "personId": "-6449589318483891228",
+    "promptWithSetting": { "definition": false, "location": false, "term": false },
+    "questionTypesSetting": null,
+    "sponsoredRewardAdvertiser": null,
+    "selectedOnly": false,
+    "sessions": { "unstarred": null, "starred": null },
+    "setList": [
+        {
+            "id": 522987268,
+            "timestamp": 1599291032,
+            "lastModified": 1599291573,
+            "publishedTimestamp": 1599291102,
+            "creatorId": 6917826,
+            "wordLang": "en",
+            "defLang": "es",
+            "title": "test-set-anki",
+            "passwordUse": false,
+            "passwordEdit": false,
+            "accessType": 2,
+            "accessCodePrefix": null,
+            "description": "dfsdf",
+            "numTerms": 5,
+            "hasImages": false,
+            "parentId": 0,
+            "creationSource": 1,
+            "privacyLockStatus": 0,
+            "hasDiagrams": false,
+            "_webUrl": "https://quizlet.com/522987268/test-set-anki-flash-cards/",
+            "_thumbnailUrl": null,
+            "price": null,
+            "mcqCount": 0,
+            "purchasableType": 0
+        }
+    ],
+    "shouldShowAd": true,
+    "shouldShowSmartGradingUpsell": false,
+    "selectedTerms": [],
+    "smartGradingSetting": null,
+    "studiableData": {
+        "studiableItems": [
+            {
+                "id": 18761699612,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 522987268,
+                "studiableContainerType": 1,
+                "timestamp": 1599291060,
+                "lastModified": 1599291060
+            },
+            {
+                "id": 18761700446,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 522987268,
+                "studiableContainerType": 1,
+                "timestamp": 1599291079,
+                "lastModified": 1599291079
+            },
+            {
+                "id": 18761727807,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 522987268,
+                "studiableContainerType": 1,
+                "timestamp": 1599291568,
+                "lastModified": 1599291568
+            },
+            {
+                "id": 18761727808,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 522987268,
+                "studiableContainerType": 1,
+                "timestamp": 1599291568,
+                "lastModified": 1599291568
+            },
+            {
+                "id": 18761728012,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 522987268,
+                "studiableContainerType": 1,
+                "timestamp": 1599291573,
+                "lastModified": 1599291573
+            }
+        ],
+        "studiableCardSides": [
+            { "id": 56285098836, "studiableItemId": 18761699612, "label": "word", "timestamp": 1599291060, "lastModified": 1599291060 },
+            { "id": 56285098837, "studiableItemId": 18761699612, "label": "definition", "timestamp": 1599291060, "lastModified": 1599291060 },
+            { "id": 56285101338, "studiableItemId": 18761700446, "label": "word", "timestamp": 1599291079, "lastModified": 1599291079 },
+            { "id": 56285101339, "studiableItemId": 18761700446, "label": "definition", "timestamp": 1599291079, "lastModified": 1599291079 },
+            { "id": 56285183421, "studiableItemId": 18761727807, "label": "word", "timestamp": 1599291568, "lastModified": 1599291568 },
+            { "id": 56285183422, "studiableItemId": 18761727807, "label": "definition", "timestamp": 1599291568, "lastModified": 1599291568 },
+            { "id": 56285183424, "studiableItemId": 18761727808, "label": "word", "timestamp": 1599291568, "lastModified": 1599291568 },
+            { "id": 56285183425, "studiableItemId": 18761727808, "label": "definition", "timestamp": 1599291568, "lastModified": 1599291568 },
+            { "id": 56285184036, "studiableItemId": 18761728012, "label": "word", "timestamp": 1599291573, "lastModified": 1599291573 },
+            { "id": 56285184037, "studiableItemId": 18761728012, "label": "definition", "timestamp": 1599291573, "lastModified": 1599291573 }
+        ],
+        "studiableMediaConnections": [
+            {
+                "id": 112570197672,
+                "timestamp": 1599291060,
+                "lastModified": 1599291060,
+                "connectionModelId": 56285098836,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "dsfsdfdsf dfdsfsf dsf fdsfsd f",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZHNmc2RmZHNmIGRmZHNmc2YgZHNmIGZkc2ZzZCBm&s=t4QUbh0l",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZHNmc2RmZHNmIGRmZHNmc2YgZHNmIGZkc2ZzZCBm&s=t4QUbh0l&speed=70",
+                    "richText": {
+                        "type": "doc",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    { "type": "text", "marks": [{ "type": "b" }], "text": "dsfsdfdsf " },
+                                    { "type": "text", "marks": [{ "type": "b" }, { "type": "i" }], "text": "dfdsfsf" },
+                                    {
+                                        "type": "text",
+                                        "marks": [{ "type": "b" }, { "type": "i" }, { "type": "bgB", "attrs": { "class": "bgB" } }],
+                                        "text": " dsf fdsfsd f"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "id": 112570197674,
+                "timestamp": 1599291060,
+                "lastModified": 1599291060,
+                "connectionModelId": 56285098837,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "1233",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=MTIzMw&s=tcru.Gvd",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=MTIzMw&s=tcru.Gvd&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 112570202676,
+                "timestamp": 1599291079,
+                "lastModified": 1599291079,
+                "connectionModelId": 56285101338,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": { "plainText": "", "languageCode": "en", "ttsUrl": null, "ttsSlowUrl": null, "richText": null }
+            },
+            {
+                "id": 112570202678,
+                "timestamp": 1599291079,
+                "lastModified": 1599291079,
+                "connectionModelId": 56285101339,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": { "plainText": "", "languageCode": "es", "ttsUrl": null, "ttsSlowUrl": null, "richText": null }
+            },
+            {
+                "id": 112570366842,
+                "timestamp": 1599291568,
+                "lastModified": 1599291568,
+                "connectionModelId": 56285183421,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "test",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dGVzdA&s=1J7b9IDM",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dGVzdA&s=1J7b9IDM&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 112570366844,
+                "timestamp": 1599291568,
+                "lastModified": 1599291568,
+                "connectionModelId": 56285183422,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": { "plainText": "", "languageCode": "es", "ttsUrl": null, "ttsSlowUrl": null, "richText": null }
+            },
+            {
+                "id": 112570366848,
+                "timestamp": 1599291568,
+                "lastModified": 1599291568,
+                "connectionModelId": 56285183424,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": { "plainText": "", "languageCode": "en", "ttsUrl": null, "ttsSlowUrl": null, "richText": null }
+            },
+            {
+                "id": 112570366850,
+                "timestamp": 1599291568,
+                "lastModified": 1599291568,
+                "connectionModelId": 56285183425,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "definition",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVmaW5pdGlvbg&s=Int3IuSA",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVmaW5pdGlvbg&s=Int3IuSA&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 112570368072,
+                "timestamp": 1599291573,
+                "lastModified": 1599291573,
+                "connectionModelId": 56285184036,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "tex",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dGV4&s=kwsxGrGN",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dGV4&s=kwsxGrGN&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 112570368074,
+                "timestamp": 1599291573,
+                "lastModified": 1599291573,
+                "connectionModelId": 56285184037,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "def",
+                    "languageCode": "es",
+                    "ttsUrl": "/tts/es.mp3?v=13&b=ZGVm&s=vLnmvPcI",
+                    "ttsSlowUrl": "/tts/es.mp3?v=13&b=ZGVm&s=vLnmvPcI&speed=70",
+                    "richText": null
+                }
+            }
+        ]
+    },
+    "studiableAccents": { "word": [], "definition": [] },
+    "studyable": {
+        "id": 522987268,
+        "timestamp": 1599291032,
+        "lastModified": 1599291573,
+        "publishedTimestamp": 1599291102,
+        "creatorId": 6917826,
+        "wordLang": "en",
+        "defLang": "es",
+        "title": "test-set-anki",
+        "passwordUse": false,
+        "passwordEdit": false,
+        "accessType": 2,
+        "accessCodePrefix": null,
+        "description": "dfsdf",
+        "numTerms": 5,
+        "hasImages": false,
+        "parentId": 0,
+        "creationSource": 1,
+        "privacyLockStatus": 0,
+        "hasDiagrams": false,
+        "_webUrl": "https://quizlet.com/522987268/test-set-anki-flash-cards/",
+        "_thumbnailUrl": null,
+        "price": null,
+        "mcqCount": 0,
+        "purchasableType": 0
+    },
+    "studyableId": 522987268,
+    "studyablePath": "/522987268/test-set-anki-flash-cards/",
+    "studyableType": 1,
+    "userStudyable": {
+        "id": 934762814,
+        "personId": -6449589318483891228,
+        "studyableType": 1,
+        "studyableId": 522987268,
+        "startTimestamp": 1598686346,
+        "dueTimestamp": 0,
+        "notificationStatus": 1,
+        "_folderId": null,
+        "_setId": 522987268,
+        "timestamp": 1599291146,
+        "lastModified": 1599291146
+    },
+    "wordAccents": [],
+    "writtenTypesSetting": null,
+    "images": [],
+    "imageRefs": [],
+    "diagramShapes": [],
+    "canEditRichText": false,
+    "shouldShowRichText": true,
+    "isAdsInCardsPreviewTestEnabled": false
+}

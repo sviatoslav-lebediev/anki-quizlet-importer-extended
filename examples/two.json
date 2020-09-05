@@ -1,0 +1,1497 @@
+{
+    "acceptsPartialAnswer": null,
+    "advancedAudioSettings": { "wordEnabled": true, "definitionEnabled": true, "slowWordEnabled": false, "slowDefinitionEnabled": false },
+    "allAccents": [
+        "\u3002",
+        "\u30fb",
+        "\u301c",
+        "\u3042",
+        "\u3044",
+        "\u3046",
+        "\u3048",
+        "\u304c",
+        "\u304f",
+        "\u3053",
+        "\u3054",
+        "\u3055",
+        "\u3057",
+        "\u3058",
+        "\u3059",
+        "\u305b",
+        "\u305c",
+        "\u305d",
+        "\u305f",
+        "\u3060",
+        "\u3061",
+        "\u3067",
+        "\u3068",
+        "\u306a",
+        "\u306b",
+        "\u306d",
+        "\u306e",
+        "\u306f",
+        "\u3070",
+        "\u307b",
+        "\u307e",
+        "\u3082",
+        "\u3085",
+        "\u308a",
+        "\u308f",
+        "\u3093"
+    ],
+    "answerWithSetting": null,
+    "audioEnabledSetting": false,
+    "definitionAccents": [],
+    "editableStudiableItemIds": [],
+    "funnelUUID": "",
+    "hasCompletedOnboarding": false,
+    "hasNonImageOnlyDefinitions": true,
+    "isEmbedding": false,
+    "isEligibleForSmartGrading": false,
+    "isSetEligibleForSmartGrading": false,
+    "learnAllPath": "/25860132/learn",
+    "learnSelectedOnlyPath": "/25860132/learn/starred",
+    "levenshteinPlusTestVariant": null,
+    "levenshteinPlusSetting": false,
+    "modePath": "/25860132/flashcards",
+    "starredModePath": "/25860132/flashcards/starred",
+    "personId": "-6449589318483891228",
+    "promptWithSetting": { "definition": false, "location": false, "term": false },
+    "questionTypesSetting": null,
+    "sponsoredRewardAdvertiser": null,
+    "selectedOnly": false,
+    "sessions": { "unstarred": null, "starred": null },
+    "setList": [
+        {
+            "id": 25860132,
+            "timestamp": 1378754593,
+            "lastModified": 1568727696,
+            "publishedTimestamp": 1378754593,
+            "creatorId": 7765981,
+            "wordLang": "ja",
+            "defLang": "en",
+            "title": "Genki Lesson 1 Vocabulary p 40",
+            "passwordUse": false,
+            "passwordEdit": false,
+            "accessType": 2,
+            "accessCodePrefix": null,
+            "description": "The vocabulary for Genki, Vol. I, Chapter 1. Includes pictures! and r\u00f4maji.",
+            "numTerms": 28,
+            "hasImages": true,
+            "parentId": 13026901,
+            "creationSource": 0,
+            "privacyLockStatus": 0,
+            "hasDiagrams": false,
+            "_webUrl": "https://quizlet.com/25860132/genki-lesson-1-vocabulary-p-40-flash-cards/",
+            "_thumbnailUrl": "https://o.quizlet.com/sewJBEXV4jM7V4HCACTWcA_m.png",
+            "price": null,
+            "mcqCount": 0,
+            "purchasableType": 0
+        }
+    ],
+    "shouldShowAd": true,
+    "shouldShowSmartGradingUpsell": false,
+    "selectedTerms": [],
+    "smartGradingSetting": null,
+    "studiableData": {
+        "studiableItems": [
+            {
+                "id": 899083731,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713
+            },
+            {
+                "id": 899083732,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713
+            },
+            {
+                "id": 899083707,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713
+            },
+            {
+                "id": 899083733,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713
+            },
+            {
+                "id": 899083708,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727
+            },
+            {
+                "id": 899083709,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727
+            },
+            {
+                "id": 899083711,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727
+            },
+            {
+                "id": 899083712,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738
+            },
+            {
+                "id": 899083713,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738
+            },
+            {
+                "id": 899083714,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738
+            },
+            {
+                "id": 4900472743,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750
+            },
+            {
+                "id": 899083715,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750
+            },
+            {
+                "id": 899083717,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750
+            },
+            {
+                "id": 899083730,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761
+            },
+            {
+                "id": 899083719,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761
+            },
+            {
+                "id": 899083734,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761
+            },
+            {
+                "id": 899083720,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772
+            },
+            {
+                "id": 899083721,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772
+            },
+            {
+                "id": 899083722,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772
+            },
+            {
+                "id": 899083723,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727782,
+                "lastModified": 1568727782
+            },
+            {
+                "id": 4900490996,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806
+            },
+            {
+                "id": 899083724,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806
+            },
+            {
+                "id": 4900514983,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826
+            },
+            {
+                "id": 4900517830,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826
+            },
+            {
+                "id": 899083728,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826
+            },
+            {
+                "id": 899083727,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840
+            },
+            {
+                "id": 4900520121,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840
+            },
+            {
+                "id": 899083729,
+                "type": 2,
+                "rank": null,
+                "studiableContainerId": 25860132,
+                "studiableContainerType": 1,
+                "timestamp": 1568727849,
+                "lastModified": 1568727849
+            }
+        ],
+        "studiableCardSides": [
+            { "id": 2697251193, "studiableItemId": 899083731, "label": "word", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251194, "studiableItemId": 899083731, "label": "definition", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251196, "studiableItemId": 899083732, "label": "word", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251197, "studiableItemId": 899083732, "label": "definition", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251121, "studiableItemId": 899083707, "label": "word", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251122, "studiableItemId": 899083707, "label": "definition", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251199, "studiableItemId": 899083733, "label": "word", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251200, "studiableItemId": 899083733, "label": "definition", "timestamp": 1568727713, "lastModified": 1568727713 },
+            { "id": 2697251124, "studiableItemId": 899083708, "label": "word", "timestamp": 1568727727, "lastModified": 1568727727 },
+            { "id": 2697251125, "studiableItemId": 899083708, "label": "definition", "timestamp": 1568727727, "lastModified": 1568727727 },
+            { "id": 2697251127, "studiableItemId": 899083709, "label": "word", "timestamp": 1568727727, "lastModified": 1568727727 },
+            { "id": 2697251128, "studiableItemId": 899083709, "label": "definition", "timestamp": 1568727727, "lastModified": 1568727727 },
+            { "id": 2697251133, "studiableItemId": 899083711, "label": "word", "timestamp": 1568727727, "lastModified": 1568727727 },
+            { "id": 2697251134, "studiableItemId": 899083711, "label": "definition", "timestamp": 1568727727, "lastModified": 1568727727 },
+            { "id": 2697251136, "studiableItemId": 899083712, "label": "word", "timestamp": 1568727738, "lastModified": 1568727738 },
+            { "id": 2697251137, "studiableItemId": 899083712, "label": "definition", "timestamp": 1568727738, "lastModified": 1568727738 },
+            { "id": 2697251139, "studiableItemId": 899083713, "label": "word", "timestamp": 1568727738, "lastModified": 1568727738 },
+            { "id": 2697251140, "studiableItemId": 899083713, "label": "definition", "timestamp": 1568727738, "lastModified": 1568727738 },
+            { "id": 2697251142, "studiableItemId": 899083714, "label": "word", "timestamp": 1568727738, "lastModified": 1568727738 },
+            { "id": 2697251143, "studiableItemId": 899083714, "label": "definition", "timestamp": 1568727738, "lastModified": 1568727738 },
+            { "id": 14701418229, "studiableItemId": 4900472743, "label": "word", "timestamp": 1568727750, "lastModified": 1568727750 },
+            { "id": 14701418230, "studiableItemId": 4900472743, "label": "definition", "timestamp": 1568727750, "lastModified": 1568727750 },
+            { "id": 2697251145, "studiableItemId": 899083715, "label": "word", "timestamp": 1568727750, "lastModified": 1568727750 },
+            { "id": 2697251146, "studiableItemId": 899083715, "label": "definition", "timestamp": 1568727750, "lastModified": 1568727750 },
+            { "id": 2697251151, "studiableItemId": 899083717, "label": "word", "timestamp": 1568727750, "lastModified": 1568727750 },
+            { "id": 2697251152, "studiableItemId": 899083717, "label": "definition", "timestamp": 1568727750, "lastModified": 1568727750 },
+            { "id": 2697251190, "studiableItemId": 899083730, "label": "word", "timestamp": 1568727761, "lastModified": 1568727761 },
+            { "id": 2697251191, "studiableItemId": 899083730, "label": "definition", "timestamp": 1568727761, "lastModified": 1568727761 },
+            { "id": 2697251157, "studiableItemId": 899083719, "label": "word", "timestamp": 1568727761, "lastModified": 1568727761 },
+            { "id": 2697251158, "studiableItemId": 899083719, "label": "definition", "timestamp": 1568727761, "lastModified": 1568727761 },
+            { "id": 2697251202, "studiableItemId": 899083734, "label": "word", "timestamp": 1568727761, "lastModified": 1568727761 },
+            { "id": 2697251203, "studiableItemId": 899083734, "label": "definition", "timestamp": 1568727761, "lastModified": 1568727761 },
+            { "id": 2697251160, "studiableItemId": 899083720, "label": "word", "timestamp": 1568727772, "lastModified": 1568727772 },
+            { "id": 2697251161, "studiableItemId": 899083720, "label": "definition", "timestamp": 1568727772, "lastModified": 1568727772 },
+            { "id": 2697251163, "studiableItemId": 899083721, "label": "word", "timestamp": 1568727772, "lastModified": 1568727772 },
+            { "id": 2697251164, "studiableItemId": 899083721, "label": "definition", "timestamp": 1568727772, "lastModified": 1568727772 },
+            { "id": 2697251166, "studiableItemId": 899083722, "label": "word", "timestamp": 1568727772, "lastModified": 1568727772 },
+            { "id": 2697251167, "studiableItemId": 899083722, "label": "definition", "timestamp": 1568727772, "lastModified": 1568727772 },
+            { "id": 2697251169, "studiableItemId": 899083723, "label": "word", "timestamp": 1568727782, "lastModified": 1568727782 },
+            { "id": 2697251170, "studiableItemId": 899083723, "label": "definition", "timestamp": 1568727782, "lastModified": 1568727782 },
+            { "id": 14701472988, "studiableItemId": 4900490996, "label": "word", "timestamp": 1568727806, "lastModified": 1568727806 },
+            { "id": 14701472989, "studiableItemId": 4900490996, "label": "definition", "timestamp": 1568727806, "lastModified": 1568727806 },
+            { "id": 2697251172, "studiableItemId": 899083724, "label": "word", "timestamp": 1568727806, "lastModified": 1568727806 },
+            { "id": 2697251173, "studiableItemId": 899083724, "label": "definition", "timestamp": 1568727806, "lastModified": 1568727806 },
+            { "id": 14701544949, "studiableItemId": 4900514983, "label": "word", "timestamp": 1568727826, "lastModified": 1568727826 },
+            { "id": 14701544950, "studiableItemId": 4900514983, "label": "definition", "timestamp": 1568727826, "lastModified": 1568727826 },
+            { "id": 14701553490, "studiableItemId": 4900517830, "label": "word", "timestamp": 1568727826, "lastModified": 1568727826 },
+            { "id": 14701553491, "studiableItemId": 4900517830, "label": "definition", "timestamp": 1568727826, "lastModified": 1568727826 },
+            { "id": 2697251184, "studiableItemId": 899083728, "label": "word", "timestamp": 1568727826, "lastModified": 1568727826 },
+            { "id": 2697251185, "studiableItemId": 899083728, "label": "definition", "timestamp": 1568727826, "lastModified": 1568727826 },
+            { "id": 2697251181, "studiableItemId": 899083727, "label": "word", "timestamp": 1568727840, "lastModified": 1568727840 },
+            { "id": 2697251182, "studiableItemId": 899083727, "label": "definition", "timestamp": 1568727840, "lastModified": 1568727840 },
+            { "id": 14701560363, "studiableItemId": 4900520121, "label": "word", "timestamp": 1568727840, "lastModified": 1568727840 },
+            { "id": 14701560364, "studiableItemId": 4900520121, "label": "definition", "timestamp": 1568727840, "lastModified": 1568727840 },
+            { "id": 2697251187, "studiableItemId": 899083729, "label": "word", "timestamp": 1568727849, "lastModified": 1568727849 },
+            { "id": 2697251188, "studiableItemId": 899083729, "label": "definition", "timestamp": 1568727849, "lastModified": 1568727849 }
+        ],
+        "studiableMediaConnections": [
+            {
+                "id": 5394502386,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251193,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "ano\n\u3042\u306e\u3046\u3002\u3002\u3002",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=YW5vCuOBguOBruOBhuOAguOAguOAgg&s=jFNQhdlP&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=YW5vCuOBguOBruOBhuOAguOAguOAgg&s=jFNQhdlP&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502388,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251194,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "um...",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dW0uLi4&s=UJrPO5kL",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dW0uLi4&s=UJrPO5kL&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502392,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251196,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "ima\n\u3044\u307e",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=aW1hCuOBhOOBvg&s=0XgvwXQG&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=aW1hCuOBhOOBvg&s=0XgvwXQG&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502394,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251197,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "now",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bm93&s=h9SGpfyI",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bm93&s=h9SGpfyI&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502242,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251121,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "eigo\n\u3048\u3044\u3054",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=ZWlnbwrjgYjjgYTjgZQ&s=nwYL2-w8&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=ZWlnbwrjgYjjgYTjgZQ&s=nwYL2-w8&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502244,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251122,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "English language",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=RW5nbGlzaCBsYW5ndWFnZQ&s=.tT7.0E4",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=RW5nbGlzaCBsYW5ndWFnZQ&s=.tT7.0E4&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502245,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251122,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "Xh9UpGTtJShT7SYN", "url": "https://o.quizlet.com/sewJBEXV4jM7V4HCACTWcA_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502398,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251199,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "ee\n\u3048\u3048",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=ZWUK44GI44GI&s=WGuMm8AI&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=ZWUK44GI44GI&s=WGuMm8AI&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502400,
+                "timestamp": 1568727713,
+                "lastModified": 1568727713,
+                "connectionModelId": 2697251200,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "yes",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=eWVz&s=B-28ic9E",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=eWVz&s=B-28ic9E&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502248,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251124,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "gakusei\n\u304c\u304f\u305b\u3044",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=Z2FrdXNlaQrjgYzjgY.jgZvjgYQ&s=9GkcOTg7&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=Z2FrdXNlaQrjgYzjgY.jgZvjgYQ&s=9GkcOTg7&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502250,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251125,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "student",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=c3R1ZGVudA&s=hGacahUj",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=c3R1ZGVudA&s=hGacahUj&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502251,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251125,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "bfrx7vBqUZ8EPDWK", "url": "https://o.quizlet.com/n4YFS11UA-r8XUjuQjbwfQ_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502254,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251127,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "~go\n\u301c\u3054",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=fmdvCuOAnOOBlA&s=Rg7mvEaJ&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=fmdvCuOAnOOBlA&s=Rg7mvEaJ&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502256,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251128,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "language (add to country names)",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bGFuZ3VhZ2UgKGFkZCB0byBjb3VudHJ5IG5hbWVzKQ&s=EOeRFNV6",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bGFuZ3VhZ2UgKGFkZCB0byBjb3VudHJ5IG5hbWVzKQ&s=EOeRFNV6&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502266,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251133,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "koukou\n\u3053\u3046\u3053\u3046",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=a291a291CuOBk-OBhuOBk-OBhg&s=as2-fDR0&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=a291a291CuOBk-OBhuOBk-OBhg&s=as2-fDR0&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502268,
+                "timestamp": 1568727727,
+                "lastModified": 1568727727,
+                "connectionModelId": 2697251134,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "high school",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=aGlnaCBzY2hvb2w&s=GBuGS-H6",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=aGlnaCBzY2hvb2w&s=GBuGS-H6&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502272,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251136,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "gogo\n\u3054\u3054",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=Z29nbwrjgZTjgZQ&s=3L.hvX3y&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=Z29nbwrjgZTjgZQ&s=3L.hvX3y&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502274,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251137,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "P.M.",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=UC5NLg&s=xlQ8KLSp",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=UC5NLg&s=xlQ8KLSp&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502278,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251139,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "gozen\n\u3054\u305c\u3093",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=Z296ZW4K44GU44Gc44KT&s=CUXUU5G9&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=Z296ZW4K44GU44Gc44KT&s=CUXUU5G9&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502280,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251140,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "A.M.",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=QS5NLg&s=rcH7NZFc",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=QS5NLg&s=rcH7NZFc&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502284,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251142,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "~sai\n\u301c\u3055\u3044",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=fnNhaQrjgJzjgZXjgYQ&s=981Uzh0C&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=fnNhaQrjgJzjgZXjgYQ&s=981Uzh0C&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502286,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251143,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "years old",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=eWVhcnMgb2xk&s=JM2URYOS",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=eWVhcnMgb2xk&s=JM2URYOS&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502287,
+                "timestamp": 1568727738,
+                "lastModified": 1568727738,
+                "connectionModelId": 2697251143,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "VTQV6V4J3uqRG6zA", "url": "https://o.quizlet.com/wO3OL4xtvsW0IzB1rMqo7Q_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 29402836458,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 14701418229,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "~san\n\u301c\u3055\u3093",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=fnNhbgrjgJzjgZXjgpM&s=mhF535cN&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=fnNhbgrjgJzjgZXjgpM&s=mhF535cN&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 29402836460,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 14701418230,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "Mr./Mrs.",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=TXIuL01ycy4&s=k6zZ4WWZ",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=TXIuL01ycy4&s=k6zZ4WWZ&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502290,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 2697251145,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "~ji\n\u301c\u3058",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=fmppCuOAnOOBmA&s=HCEA.wRL&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=fmppCuOAnOOBmA&s=HCEA.wRL&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502292,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 2697251146,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "o' clock",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bycgY2xvY2s&s=NFGnWUxr",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bycgY2xvY2s&s=NFGnWUxr&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502302,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 2697251151,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "~jin\n\u301c\u3058\u3093",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=fmppbgrjgJzjgZjjgpM&s=hngXxjtr&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=fmppbgrjgJzjgZjjgpM&s=hngXxjtr&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502304,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 2697251152,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "person (add to country names to express nationality)",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cGVyc29uIChhZGQgdG8gY291bnRyeSBuYW1lcyB0byBleHByZXNzIG5hdGlvbmFsaXR5KQ&s=SLWG5mc9",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cGVyc29uIChhZGQgdG8gY291bnRyeSBuYW1lcyB0byBleHByZXNzIG5hdGlvbmFsaXR5KQ&s=SLWG5mc9&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502305,
+                "timestamp": 1568727750,
+                "lastModified": 1568727750,
+                "connectionModelId": 2697251152,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "s7hpgX3J2RjAV4aS", "url": "https://o.quizlet.com/FXG9ylVWVIr3lwfWjTFSDQ_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502380,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251190,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "senkou\n\u305b\u3093\u3053\u3046",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=c2Vua291CuOBm-OCk-OBk-OBhg&s=AZAU6RfJ&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=c2Vua291CuOBm-OCk-OBk-OBhg&s=AZAU6RfJ&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502382,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251191,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "major (in a subject at college)",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bWFqb3IgKGluIGEgc3ViamVjdCBhdCBjb2xsZWdlKQ&s=4zCWsT6T",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bWFqb3IgKGluIGEgc3ViamVjdCBhdCBjb2xsZWdlKQ&s=4zCWsT6T&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502314,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251157,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "sensei\n\u305b\u3093\u305b\u3044",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=c2Vuc2VpCuOBm-OCk-OBm-OBhA&s=-JArch7A&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=c2Vuc2VpCuOBm-OCk-OBm-OBhA&s=-JArch7A&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502316,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251158,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "teacher, professor",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=dGVhY2hlciwgcHJvZmVzc29y&s=E8Ho4Z-E",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=dGVhY2hlciwgcHJvZmVzc29y&s=E8Ho4Z-E&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502317,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251158,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "bU2ZYq5CFu9rNwBD", "url": "https://o.quizlet.com/LDRh9wk2vdCJESEilovTZA_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502404,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251202,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "sou desu\n\u305d\u3046\u3067\u3059",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=c291IGRlc3UK44Gd44GG44Gn44GZ&s=4Z5E-Owy&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=c291IGRlc3UK44Gd44GG44Gn44GZ&s=4Z5E-Owy&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502406,
+                "timestamp": 1568727761,
+                "lastModified": 1568727761,
+                "connectionModelId": 2697251203,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "That's right",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=VGhhdCdzIHJpZ2h0&s=i6gdXVIg",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=VGhhdCdzIHJpZ2h0&s=i6gdXVIg&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502320,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251160,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "daigaku\n\u3060\u3044\u304c\u304f",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=ZGFpZ2FrdQrjgaDjgYTjgYzjgY8&s=o.w2UlG6&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=ZGFpZ2FrdQrjgaDjgYTjgYzjgY8&s=o.w2UlG6&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502322,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251161,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "college",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Y29sbGVnZQ&s=8Dr7h3VQ",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Y29sbGVnZQ&s=8Dr7h3VQ&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502323,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251161,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "XDUWffqYkenPMcgJ", "url": "https://o.quizlet.com/aKk2Ufdd8olCFZB4qFJIsg_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502326,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251163,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "denwa\n\u3067\u3093\u308f",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=ZGVud2EK44Gn44KT44KP&s=ux3XobfZ&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=ZGVud2EK44Gn44KT44KP&s=ux3XobfZ&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502328,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251164,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "phone",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=cGhvbmU&s=PikWId7T",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=cGhvbmU&s=PikWId7T&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502329,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251164,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "XWYZTwBk3JW6wASQ", "url": "https://o.quizlet.com/Kb3CpLeiRPZPKKobfK1rPQ_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502332,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251166,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "tomodachi\n\u3068\u3082\u3060\u3061",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=dG9tb2RhY2hpCuOBqOOCguOBoOOBoQ&s=I4h06BYw&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=dG9tb2RhY2hpCuOBqOOCguOBoOOBoQ&s=I4h06BYw&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502334,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251167,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "friend",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZnJpZW5k&s=F7Bk7v63",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZnJpZW5k&s=F7Bk7v63&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502335,
+                "timestamp": 1568727772,
+                "lastModified": 1568727772,
+                "connectionModelId": 2697251167,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "zvpWZKzGMm359Kes", "url": "https://o.quizlet.com/gb70iFJ9ME1QI4SwGyWbpQ_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502338,
+                "timestamp": 1568727782,
+                "lastModified": 1568727782,
+                "connectionModelId": 2697251169,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "namae\n\u306a\u307e\u3048",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=bmFtYWUK44Gq44G-44GI&s=P6POzoHX&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=bmFtYWUK44Gq44G-44GI&s=P6POzoHX&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502340,
+                "timestamp": 1568727782,
+                "lastModified": 1568727782,
+                "connectionModelId": 2697251170,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "name",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bmFtZQ&s=0MgfhqtU",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bmFtZQ&s=0MgfhqtU&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502341,
+                "timestamp": 1568727782,
+                "lastModified": 1568727782,
+                "connectionModelId": 2697251170,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "T32mfyGj9jXZc2zR", "url": "https://o.quizlet.com/z5joZx5ZGE0oXUpBF.nWjQ_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 29402945976,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806,
+                "connectionModelId": 14701472988,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "nan/nani\n\u306a\u3093\u30fb\u306a\u306b",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=bmFuL25hbmkK44Gq44KT44O744Gq44Gr&s=5wh.YXX3&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=bmFuL25hbmkK44Gq44KT44O744Gq44Gr&s=5wh.YXX3&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 29402945978,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806,
+                "connectionModelId": 14701472989,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "what",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=d2hhdA&s=6tPMZvkL",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=d2hhdA&s=6tPMZvkL&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502344,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806,
+                "connectionModelId": 2697251172,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "nihon\n\u306b\u307b\u3093",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=bmlob24K44Gr44G744KT&s=4RADdn5S&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=bmlob24K44Gr44G744KT&s=4RADdn5S&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502346,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806,
+                "connectionModelId": 2697251173,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "Japan",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=SmFwYW4&s=MxG4MPn2",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=SmFwYW4&s=MxG4MPn2&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502347,
+                "timestamp": 1568727806,
+                "lastModified": 1568727806,
+                "connectionModelId": 2697251173,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "CvbjarBqcdRetjce", "url": "https://o.quizlet.com/drEqs6-O9Hf3b29GoT.R9g_m.png", "width": 512, "height": 512 }
+            },
+            {
+                "id": 29403089898,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 14701544949,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "~nensei\n\u301c\u306d\u3093\u305b\u3044",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=fm5lbnNlaQrjgJzjga3jgpPjgZvjgYQ&s=IMICHg6A&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=fm5lbnNlaQrjgJzjga3jgpPjgZvjgYQ&s=IMICHg6A&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 29403089900,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 14701544950,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "... year student",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=Li4uIHllYXIgc3R1ZGVudA&s=hAPH5XPz",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=Li4uIHllYXIgc3R1ZGVudA&s=hAPH5XPz&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 29403106980,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 14701553490,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "hai\n\u306f\u3044",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=aGFpCuOBr-OBhA&s=2sDbdEmA&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=aGFpCuOBr-OBhA&s=2sDbdEmA&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 29403106982,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 14701553491,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "yes",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=eWVz&s=B-28ic9E",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=eWVz&s=B-28ic9E&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502368,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 2697251184,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "ryuugakusei\n\u308a\u3085\u3046\u304c\u304f\u305b\u3044",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=cnl1dWdha3VzZWkK44KK44KF44GG44GM44GP44Gb44GE&s=PFqF84nm&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=cnl1dWdha3VzZWkK44KK44KF44GG44GM44GP44Gb44GE&s=PFqF84nm&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502370,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 2697251185,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "exchange student",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=ZXhjaGFuZ2Ugc3R1ZGVudA&s=wKMqvJ3t",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=ZXhjaGFuZ2Ugc3R1ZGVudA&s=wKMqvJ3t&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502371,
+                "timestamp": 1568727826,
+                "lastModified": 1568727826,
+                "connectionModelId": 2697251185,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "yeFVDHRSJuVRTpd2", "url": "https://o.quizlet.com/1CYsqI0wzuzaQtdfEeIRGA_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 5394502362,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840,
+                "connectionModelId": 2697251181,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "bangou\n\u3070\u3093\u3054\u3046",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=YmFuZ291CuOBsOOCk-OBlOOBhg&s=aXZ.44vA&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=YmFuZ291CuOBsOOCk-OBlOOBhg&s=aXZ.44vA&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502364,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840,
+                "connectionModelId": 2697251182,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "numbers (sequence)",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=bnVtYmVycyAoc2VxdWVuY2Up&s=AblC7uN-",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=bnVtYmVycyAoc2VxdWVuY2Up&s=AblC7uN-&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502365,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840,
+                "connectionModelId": 2697251182,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "7XFT5w2ctABVQtT4", "url": "https://o.quizlet.com/n8ul34kBWPOiDkRS0KGUpQ_m.png", "width": 1024, "height": 775 }
+            },
+            {
+                "id": 29403120726,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840,
+                "connectionModelId": 14701560363,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "han\n\u306f\u3093",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=aGFuCuOBr-OCkw&s=w6F5im8s&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=aGFuCuOBr-OCkw&s=w6F5im8s&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 29403120728,
+                "timestamp": 1568727840,
+                "lastModified": 1568727840,
+                "connectionModelId": 14701560364,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "half",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=aGFsZg&s=VcjVkA7m",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=aGFsZg&s=VcjVkA7m&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502374,
+                "timestamp": 1568727849,
+                "lastModified": 1568727849,
+                "connectionModelId": 2697251187,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "watashi\n\u308f\u305f\u3057",
+                    "languageCode": "ja",
+                    "ttsUrl": "/tts/ja.mp3?v=13&b=d2F0YXNoaQrjgo.jgZ.jgZc&s=P22zrJXs&speed=83",
+                    "ttsSlowUrl": "/tts/ja.mp3?v=13&b=d2F0YXNoaQrjgo.jgZ.jgZc&s=P22zrJXs&speed=60",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502376,
+                "timestamp": 1568727849,
+                "lastModified": 1568727849,
+                "connectionModelId": 2697251188,
+                "connectionType": 5,
+                "mediaType": 1,
+                "text": {
+                    "plainText": "I, me",
+                    "languageCode": "en",
+                    "ttsUrl": "/tts/en.mp3?v=14&b=SSwgbWU&s=48chJXil",
+                    "ttsSlowUrl": "/tts/en.mp3?v=14&b=SSwgbWU&s=48chJXil&speed=70",
+                    "richText": null
+                }
+            },
+            {
+                "id": 5394502377,
+                "timestamp": 1568727849,
+                "lastModified": 1568727849,
+                "connectionModelId": 2697251188,
+                "connectionType": 5,
+                "mediaType": 2,
+                "image": { "code": "JmQPqfB4VXuETCHE", "url": "https://o.quizlet.com/LPYhUqM.LuGINcYQtl2aRQ_m.png", "width": 1024, "height": 775 }
+            }
+        ]
+    },
+    "studiableAccents": {
+        "word": [
+            "\u3093",
+            "\u3044",
+            "\u3046",
+            "\u3054",
+            "\u305b",
+            "\u301c",
+            "\u3048",
+            "\u306a",
+            "\u3002",
+            "\u304c",
+            "\u304f",
+            "\u3053",
+            "\u3060",
+            "\u306f",
+            "\u308f",
+            "\u3067",
+            "\u3058",
+            "\u3055",
+            "\u306b",
+            "\u307e",
+            "\u3070",
+            "\u3085",
+            "\u308a",
+            "\u306d",
+            "\u307b",
+            "\u305f",
+            "\u3042",
+            "\u30fb",
+            "\u3061",
+            "\u3082",
+            "\u3068",
+            "\u3059",
+            "\u306e",
+            "\u305d",
+            "\u305c",
+            "\u3057"
+        ],
+        "definition": []
+    },
+    "studyable": {
+        "id": 25860132,
+        "timestamp": 1378754593,
+        "lastModified": 1568727696,
+        "publishedTimestamp": 1378754593,
+        "creatorId": 7765981,
+        "wordLang": "ja",
+        "defLang": "en",
+        "title": "Genki Lesson 1 Vocabulary p 40",
+        "passwordUse": false,
+        "passwordEdit": false,
+        "accessType": 2,
+        "accessCodePrefix": null,
+        "description": "The vocabulary for Genki, Vol. I, Chapter 1. Includes pictures! and r\u00f4maji.",
+        "numTerms": 28,
+        "hasImages": true,
+        "parentId": 13026901,
+        "creationSource": 0,
+        "privacyLockStatus": 0,
+        "hasDiagrams": false,
+        "_webUrl": "https://quizlet.com/25860132/genki-lesson-1-vocabulary-p-40-flash-cards/",
+        "_thumbnailUrl": "https://o.quizlet.com/sewJBEXV4jM7V4HCACTWcA_m.png",
+        "price": null,
+        "mcqCount": 0,
+        "purchasableType": 0
+    },
+    "studyableId": 25860132,
+    "studyablePath": "/25860132/genki-lesson-1-vocabulary-p-40-flash-cards/",
+    "studyableType": 1,
+    "userStudyable": {
+        "id": 934300446,
+        "personId": -6449589318483891228,
+        "studyableType": 1,
+        "studyableId": 25860132,
+        "startTimestamp": 1598642621,
+        "dueTimestamp": 0,
+        "notificationStatus": 1,
+        "_folderId": null,
+        "_setId": 25860132,
+        "timestamp": 1599247421,
+        "lastModified": 1599247421
+    },
+    "wordAccents": [
+        "\u3002",
+        "\u30fb",
+        "\u301c",
+        "\u3042",
+        "\u3044",
+        "\u3046",
+        "\u3048",
+        "\u304c",
+        "\u304f",
+        "\u3053",
+        "\u3054",
+        "\u3055",
+        "\u3057",
+        "\u3058",
+        "\u3059",
+        "\u305b",
+        "\u305c",
+        "\u305d",
+        "\u305f",
+        "\u3060",
+        "\u3061",
+        "\u3067",
+        "\u3068",
+        "\u306a",
+        "\u306b",
+        "\u306d",
+        "\u306e",
+        "\u306f",
+        "\u3070",
+        "\u307b",
+        "\u307e",
+        "\u3082",
+        "\u3085",
+        "\u308a",
+        "\u308f",
+        "\u3093"
+    ],
+    "writtenTypesSetting": null,
+    "images": [],
+    "imageRefs": [],
+    "diagramShapes": [],
+    "canEditRichText": false,
+    "shouldShowRichText": true,
+    "isAdsInCardsPreviewTestEnabled": false
+}
