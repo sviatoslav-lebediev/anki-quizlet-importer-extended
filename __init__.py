@@ -336,7 +336,7 @@ class QuizletWindow(QWidget):
         downloadAudio = self.value_download_audio.isChecked()
 
         for item in items:
-            if not startPhrase or startPhrase == item["term"] or startPhrase == item["definition"]:
+            if "".__eq__(startPhrase) or startPhrase == item["term"] or startPhrase == item["definition"]:
                 startProcess = True
 
             if not stopProcess and startProcess:
@@ -365,7 +365,7 @@ class QuizletWindow(QWidget):
                 self.label_results.setText(("Imported {0}/{1}".format(progress, len(items))))
                 mw.app.processEvents()
 
-            if stopPhrase == item["term"] or stopPhrase == item["definition"]:
+            if not "".__eq__(stopPhrase) and (stopPhrase == item["term"] or stopPhrase == item["definition"]):
                 stopProcess = True
 
         mw.col.reset()
