@@ -262,13 +262,7 @@ class QuizletWindow(QWidget):
         self.label_results.setText("Connecting to Quizlet...")
 
         # build URL
-        # deck_url = ("https://api.quizlet.com/2.0/sets/{0}".format(quizletDeckID))
-        # deck_url += ("?client_id={0}".format(QuizletWindow.__APIKEY))
         deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
-
-        # stop previous thread first
-        # if not self.thread == None:
-        #     self.thread.terminate()
 
         # download the data!
         self.thread = QuizletDownloader(self, deck_url)
@@ -404,13 +398,18 @@ def mapItems(jsonData):
         definition = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"]) ), None)
 
         image = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"] and x["mediaType"] == 2)), None)
+        definition_audio = parseAudioUrlItem(definition)
+
+        if not definition_audio:
+            definition_audio = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"] and x["mediaType"] == 4)), None)
+            definition_audio = definition_audio["audio"]["url"] if definition_audio else None
 
         result.append({
             "id": studiableItem["id"],
             "term": parseTextItem(term),
             "termAudio": parseAudioUrlItem(term),
             "definition": parseTextItem(definition),
-            "definitionAudio": parseAudioUrlItem(definition),
+            "definitionAudio": definition_audio,
             "imageUrl": image["image"].get("url") if image else None
         })
 
