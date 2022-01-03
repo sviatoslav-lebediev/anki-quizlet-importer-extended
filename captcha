@@ -72,7 +72,6 @@
 __window = None
 
 import sys, math, time, urllib.parse, json, re, os
-from operator import itemgetter
 
 # Anki
 from aqt import mw
@@ -91,10 +90,6 @@ import shutil
 from requests.cookies import RequestsCookieJar
 
 requests.packages.urllib3.disable_warnings()
-
-headers = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
-}
 
 headers = {
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
@@ -131,33 +126,33 @@ def addCustomModel(name, col):
 
     # create custom model for imported deck
     mm = col.models
-    existing = mm.byName("Basic Quizlet Extended")
+    existing = mm.byName("Basic Quizlet")
     if existing:
-        return existing
-    m = mm.new("Basic Quizlet Extended")
+        fields = mm.fieldNames(existing)
+        if "Front" in fields and "Back" in fields:
+            return existing
+        else:
+            existing['name'] += "-" + checksum(str(time.time()))[:5]
+            mm.save(existing)
+    m = mm.new("Basic Quizlet")
 
     # add fields
-    mm.addField(m, mm.newField("FrontText"))
-    mm.addField(m, mm.newField("FrontAudio"))
-    mm.addField(m, mm.newField("BackText"))
-    mm.addField(m, mm.newField("BackAudio"))
-    mm.addField(m, mm.newField("Image"))
+    mm.addField(m, mm.newField("Front"))
+    mm.addField(m, mm.newField("Back"))
     mm.addField(m, mm.newField("Add Reverse"))
 
     # add cards
     t = mm.newTemplate("Normal")
 
-
     # front
-    t['qfmt'] = "{{FrontText}}\n<br><br>\n{{FrontAudio}}"
-    t['afmt'] = "{{FrontText}}\n<hr id=answer>\n{{BackText}}\n<br><br>\n{{Image}}\n<br><br>\n{{BackAudio}}"
+    t['qfmt'] = "{{Front}}"
+    t['afmt'] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}"
     mm.addTemplate(m, t)
-
 
     # back
     t = mm.newTemplate("Reverse")
-    t['qfmt'] = "{{#Add Reverse}}{{BackText}}\n<br><br>\n{{BackAudio}}{{/Add Reverse}}"
-    t['afmt'] = "{{BackText}}\n<hr id=answer>\n{{FrontText}}\n<br><br>\n{{FrontAudio}}\n{{Image}}"
+    t['qfmt'] = "{{#Add Reverse}}{{Back}}{{/Add Reverse}}"
+    t['afmt'] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Front}}"
     mm.addTemplate(m, t)
 
     mm.add(m)
@@ -166,31 +161,6 @@ def addCustomModel(name, col):
 # throw up a window with some info (used for testing)
 def debug(message):
     QMessageBox.information(QWidget(), "Message", message)
-
-def getText(d, text=''):
-    if d is None:
-        return text
-    if d['type'] == 'text':
-        text = d['text']
-        if 'marks' in d:
-            for m in d['marks']:
-                if m['type'] in ['b', 'i', 'u']:
-                    text = '<{0}>{1}</{0}>'.format(m['type'], text)
-                if 'attrs' in m:
-                    attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
-                    text = '<span {}>{}</span>'.format(attrs, text)
-        return text
-    text = ''.join([getText(c) for c in d['content']]) if d.get('content') else ''
-    if d['type'] == 'paragraph':
-        text = '<div>{}</div>'.format(text)
-    return text
-
-def ankify(text):
-    text = text.replace('\n','<br>')
-    text = text.replace('class="bgY"', 'style="background-color:#fff4e5;"')
-    text = text.replace('class="bgB"', 'style="background-color:#cde7fa;"')
-    text = text.replace('class="bgP"', 'style="background-color:#fde8ff;"')
-    return text
 
 class QuizletWindow(QWidget):
 
@@ -229,36 +199,8 @@ class QuizletWindow(QWidget):
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
 
-
-        self.box_download_audio = QHBoxLayout()
-        self.value_download_audio = QCheckBox("",self)
-        self.value_download_audio.toggle();
-        self.value_download_audio.setMinimumWidth(300)
-        self.label_download_audio = QLabel("Download audio:")
-        self.box_download_audio.addWidget(self.label_download_audio)
-        self.box_download_audio.addWidget(self.value_download_audio)
-
-        self.box_start_phrase = QHBoxLayout()
-        self.value_start_phrase = QLineEdit("",self)
-        self.value_start_phrase.setMinimumWidth(300)
-        self.value_start_phrase.setPlaceholderText('Start from this phrase. Can be empty')
-        self.label_start_phrase = QLabel("Start Phrase:")
-        self.box_start_phrase.addWidget(self.label_start_phrase)
-        self.box_start_phrase.addWidget(self.value_start_phrase)
-
-        self.box_stop_phrase = QHBoxLayout()
-        self.value_stop_phrase = QLineEdit("",self)
-        self.value_stop_phrase.setMinimumWidth(300)
-        self.value_stop_phrase.setPlaceholderText('Stop after this phrase. Can be empty')
-        self.label_stop_phrase = QLabel("Stop Phrase:")
-        self.box_stop_phrase.addWidget(self.label_stop_phrase)
-        self.box_stop_phrase.addWidget(self.value_stop_phrase)
-
         # add layouts to left
         self.box_left.addLayout(self.box_name)
-        self.box_left.addLayout(self.box_download_audio)
-        self.box_left.addLayout(self.box_start_phrase)
-        self.box_left.addLayout(self.box_stop_phrase)
 
         # right side
         self.box_right = QVBoxLayout()
@@ -396,7 +338,7 @@ class QuizletWindow(QWidget):
             self.page = r.text
         except Exception as e:
             self.resolveCaptcha(url)
-    
+
     def onCode(self):
         # grab url input
         url = self.text_url.text()
@@ -533,14 +475,48 @@ class QuizletWindow(QWidget):
 
         if parentDeck:
             name = "{}::{}".format(parentDeck, name)
-        
-        items = result['items']
-        progress = 0
 
-        result['term_count'] = len(items)
+        if "termIdToTermsMap" in result:
+            terms = []
+            for c in sorted(result['termIdToTermsMap'].values(), key=lambda v: v["rank"]):
+                terms.append({
+                    'word': c['word'],
+                    'definition': c['definition'],
+                    '_imageUrl': c["_imageUrl"] or '',
+                    'wordRichText': c.get('wordRichText', ''),
+                    'definitionRichText': c.get('definitionRichText', ''),
+                })
+        elif "studiableData" in result:
+            terms = {}
+            data = result["studiableData"]
+            for d in data["studiableItems"]:
+                terms[d["id"]] = {}
+            smc = {}
+            for d in data["studiableMediaConnections"]:
+                id_ = d["connectionModelId"]
+                if id_ not in smc:
+                    smc[id_] = {}
+                # "plainText", "languageCode", "ttsUrl", "ttsSlowUrl", "richText"
+                for k, v in d.get("text", {}).items():
+                    smc[id_][k] = v
+                if "image" in d:
+                    smc[id_]["_imageUrl"] = d["image"]["url"]
+            for d in data["studiableCardSides"]:
+                id_ = d["studiableItemId"]
+                terms[id_][d["label"]] = smc[d["id"]].get("plainText", "")
+                terms[id_]["{}RichText".format(d["label"])] = smc[d["id"]].get("richText", "")
+                terms[id_]["_imageUrl"] = smc[d["id"]].get("_imageUrl", "")
+            terms = terms.values()
+        else:
+            terms = result['terms']
+
+        result['term_count'] = len(terms)
 
         deck = mw.col.decks.get(mw.col.decks.id(name))
         model = addCustomModel(name, mw.col)
+
+        if config["rich_text_formatting"] and ".bgY" not in model["css"]:
+            model["css"] += rich_text_css
 
         # assign custom model to new deck
         mw.col.decks.select(deck["id"])
@@ -551,55 +527,62 @@ class QuizletWindow(QWidget):
         model["did"] = deck["id"]
         mw.col.models.save(model)
 
-        startProcess = False
-        stopProcess = False
-        startPhrase = self.value_start_phrase.text()
-        stopPhrase = self.value_stop_phrase.text()
-        downloadAudio = self.value_download_audio.isChecked()
+        def getText(d, text=''):
+            if d is None:
+                return text
+            if d['type'] == 'text':
+                text = d['text']
+                if 'marks' in d:
+                    for m in d['marks']:
+                        if m['type'] in ['b', 'i', 'u']:
+                            text = '<{0}>{1}</{0}>'.format(m['type'], text)
+                        if 'attrs' in m:
+                            attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
+                            text = '<span {}>{}</span>'.format(attrs, text)
+                return text
+            text = ''.join([getText(c) for c in d['content']])
+            if d['type'] == 'paragraph':
+                text = '<div>{}</div>'.format(text)
+            return text
 
-        for item in items:
-            if "".__eq__(startPhrase) or startPhrase == item["term"] or startPhrase == item["definition"]:
-                startProcess = True
+        def ankify(text):
+            text = text.replace('\n','<br>')
+            text = re.sub(r'\*(.+?)\*', r'<b>\1</b>', text)
+            return text
 
-            if not stopProcess and startProcess:
-                note = mw.col.newNote()
-                note["FrontText"] = item["term"]
-                note["BackText"] = item["definition"]
-                note["FrontText"] = ankify(note["FrontText"])
-                note["BackText"] = ankify(note["BackText"])
-
-                if item.get('termAudio') and downloadAudio:
-                    file_name = self.fileDownloader(self.getAudioUrl(item['termAudio']), str(item["id"]) + "-front.mp3")
-                    note["FrontAudio"] = "[sound:" + file_name +"]"
-
-                if item.get('definitionAudio') and downloadAudio:
-                    file_name = self.fileDownloader(self.getAudioUrl(item["definitionAudio"]), str(item["id"]) + "-back.mp3")
-                    note["BackAudio"] = "[sound:" + file_name +"]"
-
-                if item.get('imageUrl'):
-                    file_name = self.fileDownloader(item["imageUrl"])
-                    note["Image"] += '<div><img src="{0}"></div>'.format(file_name)
-
-                    mw.app.processEvents()
-                mw.col.addNote(note)
-
-                progress += 1
-                self.label_results.setText(("Imported {0}/{1}".format(progress, len(items))))
+        for term in terms:
+            note = mw.col.newNote()
+            note["Front"] = ankify(term['word'])
+            note["Back"] = ankify(term['definition'])
+            if config["rich_text_formatting"]:
+                note["Front"] = getText(term['wordRichText'], note["Front"])
+                note["Back"] = getText(term['definitionRichText'], note["Back"])
+            if "photo" in term and term["photo"]:
+                photo_urls = {
+                  "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
+                  "2": "https://o.quizlet.com/i/{1}.jpg",
+                  "3": "https://o.quizlet.com/{1}.{2}"
+                }
+                img_tkns = term["photo"].split(',')
+                img_type = img_tkns[0]
+                term["_imageUrl"] = photo_urls[img_type].format(*img_tkns)
+            if '_imageUrl' in term and term["_imageUrl"]:
+                # file_name = self.fileDownloader(term["image"]["url"])
+                file_name = self.fileDownloader(term["_imageUrl"])
+                if note["Back"]:
+                    note["Back"] += "<div><br></div>"
+                note["Back"] += '<div><img src="{0}"></div>'.format(file_name)
                 mw.app.processEvents()
-
-            if not "".__eq__(stopPhrase) and (stopPhrase == item["term"] or stopPhrase == item["definition"]):
-                stopProcess = True
-
+            if config["rich_text_formatting"]:
+                note["Front"] = '<link rel="stylesheet" href="_quizlet.css">' + note["Front"]
+            mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
 
-    def getAudioUrl (self, word_audio):
-        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
-
     # download the images
-    def fileDownloader(self, url, suffix=''):
+    def fileDownloader(self, url):
         url = url.replace('_m', '')
-        file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
+        file_name = "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
         r = requests.get(url, stream=True, verify=False, headers=headers, timeout=15)
         if r.status_code == 200:
@@ -608,45 +591,10 @@ class QuizletWindow(QWidget):
                 shutil.copyfileobj(r.raw, f)
         return file_name
 
-def parseTextItem(item):
-    return getText(item["text"]["richText"], item["text"]["plainText"])
-
-def parseAudioUrlItem(item):
-    return item["text"]["ttsUrl"]
-
-def mapItems(jsonData):
-    studiableItems, studiableCardSides, studiableMediaConnections = itemgetter('studiableItems', 'studiableCardSides','studiableMediaConnections')(jsonData['studiableData'])
-    result = []
-
-    for studiableItem in studiableItems:
-        term_id = next((x for x in studiableCardSides if (x["studiableItemId"] == studiableItem["id"] and x["label"] == 'word') ), None)
-        definition_id = next((x for x in studiableCardSides if (x["studiableItemId"] == studiableItem["id"] and x["label"] == 'definition') ), None)
-
-        term = next((x for x in studiableMediaConnections if (x["connectionModelId"] == term_id["id"]) ), None)
-        definition = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"]) ), None)
-
-        image = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"] and x["mediaType"] == 2)), None)
-        definition_audio = parseAudioUrlItem(definition)
-
-        if not definition_audio:
-            definition_audio = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"] and x["mediaType"] == 4)), None)
-            definition_audio = definition_audio["audio"]["url"] if definition_audio else None
-
-        result.append({
-            "id": studiableItem["id"],
-            "term": parseTextItem(term),
-            "termAudio": parseAudioUrlItem(term),
-            "definition": parseTextItem(definition),
-            "definitionAudio": definition_audio,
-            "imageUrl": image["image"].get("url") if image else None
-        })
-
-    return result
-
 class QuizletDownloader(QThread):
 
     # thread that downloads results from the Quizlet API
-    def __init__(self, window, url):
+    def __init__(self, window, url, page="", data=""):
         super(QuizletDownloader, self).__init__()
         self.url = url
         self.window = window
