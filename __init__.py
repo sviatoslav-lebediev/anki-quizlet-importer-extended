@@ -156,7 +156,8 @@ def addCustomModel(name, col):
 
 # throw up a window with some info (used for testing)
 def debug(message):
-    QMessageBox.information(QWidget(), "Message", message)
+    # QMessageBox.information(QWidget(), "Message", message)
+    None
 
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.ssl_ import create_urllib3_context
@@ -410,7 +411,7 @@ class QuizletWindow(QWidget):
             name = result['studyable']['title']
         else:
             name = result['title']
-
+        progress = 0
         if parentDeck:
             name = "{}::{}".format(parentDeck, name)
 
@@ -421,7 +422,8 @@ class QuizletWindow(QWidget):
                     'word': c['word'],
                     'definition': c['definition'],
                     '_imageUrl': c["_imageUrl"] or '',
-                    ''
+                    '_wordAudioUrl': c["_wordAudioUrl"] or '',
+                    '_definitionAudioUrl': c['_definitionAudioUrl'] or '',
                     'wordRichText': c.get('wordRichText', ''),
                     'definitionRichText': c.get('definitionRichText', ''),
                 })
@@ -513,15 +515,16 @@ class QuizletWindow(QWidget):
                     note["BackText"] += "<div><br></div>"
                 note["BackText"] += '<div><img src="{0}"></div>'.format(file_name)
             # Start adding audio
-            if '_wordAudioUrl' in term and term["__wordAudioUrl"]:
+            if '_wordAudioUrl' in term and term["_wordAudioUrl"]:
                 file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]),"-front.mp3")
                 note["FrontAudio"] = "[sound:" + file_name +"]"
             if '_definitionAudioUrl' in term and term["_definitionAudioUrl"]:
                 file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]),"-back.mp3")
                 note["BackAudio"] = "[sound:" + file_name +"]"
+                progress += 1
+                self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
                 mw.app.processEvents()
-            if config["rich_text_formatting"]:
-                note["FrontText"] = '<link rel="stylesheet" href="_quizlet.css">' + note["FrontText"]
+            
             mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
