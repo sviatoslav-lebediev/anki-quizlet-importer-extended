@@ -66,8 +66,6 @@
 
 #               Update 04/09/2020
 #               - move the add-on to GitHub
-#               Update 17/10/2020
-#     
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
@@ -78,16 +76,22 @@ import sys, math, time, urllib.parse, json, re, os
 # Anki
 from aqt import mw
 from aqt.qt import *
-from aqt.utils import showText
+from aqt.utils import showText, tooltip
 from anki.utils import checksum
+
+try:
+    from PyQt5.QtNetwork import QNetworkCookieJar
+except:
+    from PyQt6.QtNetwork import QNetworkCookieJar
 
 import requests
 import shutil
 
+from requests.cookies import RequestsCookieJar
+
 requests.packages.urllib3.disable_warnings()
 
 headers = {
-  "Accept-Language": "en-US,en;q=0.9,*;q=0.5",
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
 }
 
@@ -122,33 +126,33 @@ def addCustomModel(name, col):
 
     # create custom model for imported deck
     mm = col.models
-    existing = mm.byName("Basic Quizlet Extended")
+    existing = mm.byName("Basic Quizlet")
     if existing:
-        return existing
-    m = mm.new("Basic Quizlet Extended")
+        fields = mm.fieldNames(existing)
+        if "Front" in fields and "Back" in fields:
+            return existing
+        else:
+            existing['name'] += "-" + checksum(str(time.time()))[:5]
+            mm.save(existing)
+    m = mm.new("Basic Quizlet")
 
     # add fields
-    mm.addField(m, mm.newField("FrontText"))
-    mm.addField(m, mm.newField("FrontAudio"))
-    mm.addField(m, mm.newField("BackText"))
-    mm.addField(m, mm.newField("BackAudio"))
-    mm.addField(m, mm.newField("Image"))
+    mm.addField(m, mm.newField("Front"))
+    mm.addField(m, mm.newField("Back"))
     mm.addField(m, mm.newField("Add Reverse"))
 
     # add cards
     t = mm.newTemplate("Normal")
 
-
     # front
-    t['qfmt'] = "{{FrontText}}\n<br><br>\n{{FrontAudio}}"
-    t['afmt'] = "{{FrontText}}\n<hr id=answer>\n{{BackText}}\n<br><br>\n{{Image}}\n<br><br>\n{{BackAudio}}"
+    t['qfmt'] = "{{Front}}"
+    t['afmt'] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}"
     mm.addTemplate(m, t)
-
 
     # back
     t = mm.newTemplate("Reverse")
-    t['qfmt'] = "{{#Add Reverse}}{{BackText}}\n<br><br>\n{{BackAudio}}{{/Add Reverse}}"
-    t['afmt'] = "{{BackText}}\n<hr id=answer>\n{{FrontText}}\n<br><br>\n{{FrontAudio}}\n{{Image}}"
+    t['qfmt'] = "{{#Add Reverse}}{{Back}}{{/Add Reverse}}"
+    t['afmt'] = "{{FrontSide}}\n\n<hr id=answer>\n\n{{Front}}"
     mm.addTemplate(m, t)
 
     mm.add(m)
@@ -156,18 +160,7 @@ def addCustomModel(name, col):
 
 # throw up a window with some info (used for testing)
 def debug(message):
-    # QMessageBox.information(QWidget(), "Message", message)
-    None
-
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.ssl_ import create_urllib3_context
-
-class CloudflareAdapter(HTTPAdapter):
-
-    def init_poolmanager(self, *args, **kwargs):
-        ctx = create_urllib3_context(ciphers='AES256-GCM-SHA384')
-        kwargs['ssl_context'] = ctx
-        super().init_poolmanager(*args, **kwargs)
+    QMessageBox.information(QWidget(), "Message", message)
 
 class QuizletWindow(QWidget):
 
@@ -182,6 +175,8 @@ class QuizletWindow(QWidget):
         self.thread = None
         self.closed = False
 
+        self.page = ""
+        self.data = ""
         self.cookies = self.getCookies()
 
         self.initGUI()
@@ -203,20 +198,10 @@ class QuizletWindow(QWidget):
 
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
-        # parentDeck field
-
-        self.box_parent = QHBoxLayout()
-        self.label_parentDeck = QLabel("Parent deck name")
-        self.parentDeck = QLineEdit ("",self)
-        self.parentDeck.setMinimumWidth(300)
-
-        self.box_parent.addWidget(self.label_parentDeck)
-        self.box_parent.addWidget(self.parentDeck)
 
         # add layouts to left
-
         self.box_left.addLayout(self.box_name)
-        self.box_left.addLayout(self.box_parent)
+
         # right side
         self.box_right = QVBoxLayout()
 
@@ -246,12 +231,89 @@ class QuizletWindow(QWidget):
         self.box_top.addStretch(1)
         self.setLayout(self.box_top)
 
+        # import by copying the page source code from the web browser
+        # as a way to bypass 403 Forbidden
+        QShortcut(QKeySequence("Ctrl+U"), self, activated=self.getPage)
+        self.text_url.installEventFilter(self) # Fix Ctrl+U on Ubuntu
+
+        # QShortcut(QKeySequence("Ctrl+G"), self, activated=self.resolveCaptcha)
+
         # go, baby go!
         self.setMinimumWidth(500)
         self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.setWindowTitle("Improved Quizlet to Anki Importer")
         self.resize(self.minimumSizeHint())
         self.show()
+
+    def eventFilter(self, obj: QObject, evt: QEvent):
+        if obj is self.text_url and evt.type() == QEvent.ShortcutOverride:
+            if evt.modifiers() & Qt.ControlModifier and evt.key() == Qt.Key_U:
+                return True
+        return False
+
+    def resolveCaptcha(self, url):
+        url = url.strip()
+        if not url:
+            tooltip("Oops! You forgot the Quizlet URL :(")
+            return
+        d = QDialog(self)
+        d.setWindowTitle("Captcha Challenge")
+        d.setMinimumWidth(500)
+        d.setWindowModality(Qt.WindowModal)
+        l = QVBoxLayout()
+        wv = QWebEngineView()
+        p = QWebEngineProfile("cloudflare", wv)
+        p.setHttpUserAgent(headers["User-Agent"])
+        wp = QWebEnginePage(p, wv)
+        wv.setPage(wp)
+        cs = p.cookieStore()
+        self.captcha = None
+        def onCookieAdded(cookie):
+            if self.captcha is None:
+                self.captcha = QNetworkCookieJar()
+            self.captcha.insertCookie(cookie)
+        cs.cookieAdded.connect(onCookieAdded)
+        wv.load(QUrl(url))
+        bb = QDialogButtonBox(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.data = ""
+        def setCookiesAndData(data):
+            self.data = data
+            self.cookies = RequestsCookieJar()
+            for c in self.captcha.allCookies():
+                rq = requests.cookies.create_cookie(name=str(c.name(), 'utf-8'), value=str(c.value(), 'utf-8'))
+                rq.domain = c.domain()
+                self.cookies.set_cookie(rq)
+            wp.runJavaScript('JSON.stringify(window.Quizlet["dashboardData"])', getDashboardData)
+        def getDashboardData(text):
+            self.dashboard_data = text
+            d.accept()
+        def getData():
+            wp.runJavaScript('window.Quizlet["setPageData"]["title"] = document.title; JSON.stringify(window.Quizlet["setPageData"])', setCookiesAndData)
+        bb.accepted.connect(getData)
+        bb.rejected.connect(d.reject)
+        l.addWidget(wv)
+        l.addWidget(bb)
+        d.setLayout(l)
+        d.exec_()
+
+    def getPage(self):
+        d = QDialog(self)
+        d.setWindowTitle("Improved Quizlet to Anki Importer")
+        d.setMinimumWidth(400)
+        d.setWindowModality(Qt.WindowModal)
+        l = QVBoxLayout()
+        te = QPlainTextEdit()
+        bb = QDialogButtonBox(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.page = ""
+        def setPage():
+            self.page = te.toPlainText()
+            d.accept()
+            self.onCode()
+        bb.accepted.connect(setPage)
+        l.addWidget(te)
+        l.addWidget(bb)
+        d.setLayout(l)
+        d.exec_()
 
     def getCookies(self):
         config = mw.addonManager.getConfig(__name__)
@@ -266,67 +328,64 @@ class QuizletWindow(QWidget):
             cookies = { key: morsel.value for key, morsel in C.items() }
         return cookies
 
+    def downloadPage(self, url, *args, **kwargs):
+        self.page = ''
+        self.data = ''
+        self.dashboard_data = ''
+        try:
+            r = requests.get(url, *args, **kwargs)
+            r.raise_for_status()
+            self.page = r.text
+        except Exception as e:
+            self.resolveCaptcha(url)
+
     def onCode(self):
-        parentDeck = self.parentDeck.text()
         # grab url input
-        report = {'error': [], 'success': []}
-        urls = self.text_url.text().splitlines()
-        self.label_results.setText(("There are <b>{0}</b> urls in total. Starting".format(len(urls))))
-        self.sleep(0.5)
-        for url in urls:
-            if not url:
-                continue
+        url = self.text_url.text()
 
-            # voodoo needed for some error handling
-            if urllib.parse.urlparse(url).scheme:
-                urlDomain = urllib.parse.urlparse(url).netloc
-                urlPath = urllib.parse.urlparse(url).path
-            else:
-                urlDomain = urllib.parse.urlparse("https://"+url).netloc
-                urlPath = urllib.parse.urlparse("https://"+url).path
+        # voodoo needed for some error handling
+        if urllib.parse.urlparse(url).scheme:
+            urlDomain = urllib.parse.urlparse(url).netloc
+            urlPath = urllib.parse.urlparse(url).path
+        else:
+            urlDomain = urllib.parse.urlparse("https://"+url).netloc
+            urlPath = urllib.parse.urlparse("https://"+url).path
 
-            # validate quizlet URL
-            if url == "":
-                self.label_results.setText("Oops! You forgot the deck URL :(")
-                return
-            elif not "quizlet.com" in urlDomain:
-                self.label_results.setText("Oops! That's not a Quizlet URL :(")
-                return
-            self.button_code.setEnabled(False)
+        # validate quizlet URL
+        if url == "":
+            self.label_results.setText("Oops! You forgot the deck URL :(")
+            return
+        elif not "quizlet.com" in urlDomain:
+            self.label_results.setText("Oops! That's not a Quizlet URL :(")
+            return
 
-            if "/folders/" not in url:
-                self.downloadSet(url, parentDeck)
-                self.sleep(1.5)
-            elif "/folders/" in url :
-                s = requests.Session()
-                s.mount('https://', CloudflareAdapter())
-                r = s.get(url, verify=False, headers=headers, cookies=self.cookies)                
-                r.raise_for_status()
+        self.button_code.setEnabled(False)
 
+        if "/folders/" not in url:
+            self.downloadSet(url)
+        else:
+            self.downloadPage(url, verify=False, headers=headers, cookies=self.cookies, timeout=15)
+
+            if not self.dashboard_data:
                 regex = re.escape('window.Quizlet["dashboardData"] = ')
                 regex += r'(.+?)'
                 regex += re.escape('; QLoad("Quizlet.dashboardData");')
+                m = re.search(regex, self.page)
+                self.dashboard_data = m.group(1).strip()
 
-                m = re.search(regex, r.text)
+            results = json.loads(self.dashboard_data)
+            self.data = ''
+            self.dashboard_data = ''
 
-                data = m.group(1).strip()
-                results = json.loads(data)
+            assert len(results["models"]["folder"]) == 1
+            quzletFolder = results["models"]["folder"][0]
+            for quizletSet in results["models"]["set"]:
+                if self.closed:
+                    return
+                self.downloadSet(quizletSet["_webUrl"], quzletFolder["name"])
+                self.sleep(1.5)
 
-                assert len(results["models"]["folder"]) == 1
-
-                quizletFolder = results["models"]["folder"][0]
-                setMap = { s["id"]:s for s in results["models"]["set"] }
-                for folderSet in results["models"]["folderSet"]:
-                    if self.closed:
-                        return
-                    quizletSet = setMap[folderSet["setId"]]
-                    if parentDeck == "":
-                        self.downloadSet(quizletSet["_webUrl"], quizletFolder["name"])
-                    else:
-                        self.downloadSet(quizletSet["_webUrl"], parentDeck)
-                    self.sleep(1.5)
-
-            self.button_code.setEnabled(True)
+        self.button_code.setEnabled(True)
 
     def closeEvent(self, evt):
         self.closed = True
@@ -364,7 +423,8 @@ class QuizletWindow(QWidget):
         #     self.thread.terminate()
 
         # download the data!
-        self.thread = QuizletDownloader(self, deck_url)
+        self.downloadPage(deck_url, verify=False, headers=headers, cookies=self.cookies, timeout=15)
+        self.thread = QuizletDownloader(self, deck_url, page=self.page, data=self.data)
         self.thread.start()
 
         while not self.thread.isFinished():
@@ -375,7 +435,7 @@ class QuizletWindow(QWidget):
         if self.thread.error:
             if self.thread.errorCode == 403:
                 if self.thread.errorCaptcha:
-                    self.label_results.setText("Sorry, it's behind a captcha.")
+                    self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")
                 else:
                     self.label_results.setText("Sorry, this is a private deck :(")
             elif self.thread.errorCode == 404:
@@ -395,6 +455,8 @@ class QuizletWindow(QWidget):
 
         # self.thread.terminate()
         self.thread = None
+        self.page = ""
+        self.data = ""
 
     def createDeck(self, result, parentDeck=""):
         config = mw.addonManager.getConfig(__name__)
@@ -410,7 +472,7 @@ class QuizletWindow(QWidget):
             name = result['studyable']['title']
         else:
             name = result['title']
-        progress = 0
+
         if parentDeck:
             name = "{}::{}".format(parentDeck, name)
 
@@ -421,11 +483,8 @@ class QuizletWindow(QWidget):
                     'word': c['word'],
                     'definition': c['definition'],
                     '_imageUrl': c["_imageUrl"] or '',
-                    '_wordAudioUrl': c["_wordAudioUrl"] or '',
-                    '_definitionAudioUrl': c['_definitionAudioUrl'] or '',
                     'wordRichText': c.get('wordRichText', ''),
                     'definitionRichText': c.get('definitionRichText', ''),
-                    'id': c["id"]
                 })
         elif "studiableData" in result:
             terms = {}
@@ -481,7 +540,7 @@ class QuizletWindow(QWidget):
                             attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
                             text = '<span {}>{}</span>'.format(attrs, text)
                 return text
-            text = ''.join([getText(c) if c else '<br>' for c in d.get('content', [''])])
+            text = ''.join([getText(c) for c in d['content']])
             if d['type'] == 'paragraph':
                 text = '<div>{}</div>'.format(text)
             return text
@@ -490,15 +549,14 @@ class QuizletWindow(QWidget):
             text = text.replace('\n','<br>')
             text = re.sub(r'\*(.+?)\*', r'<b>\1</b>', text)
             return text
-        debug(str(terms))
+
         for term in terms:
-            debug(str(term))
             note = mw.col.newNote()
-            note["FrontText"] = ankify(term['word'])
-            note["BackText"] = ankify(term['definition'])
+            note["Front"] = ankify(term['word'])
+            note["Back"] = ankify(term['definition'])
             if config["rich_text_formatting"]:
-                note["FrontText"] = getText(term['wordRichText'], note["FrontText"])
-                note["BackText"] = getText(term['definitionRichText'], note["BackText"])
+                note["Front"] = getText(term['wordRichText'], note["Front"])
+                note["Back"] = getText(term['definitionRichText'], note["Back"])
             if "photo" in term and term["photo"]:
                 photo_urls = {
                   "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
@@ -511,36 +569,22 @@ class QuizletWindow(QWidget):
             if '_imageUrl' in term and term["_imageUrl"]:
                 # file_name = self.fileDownloader(term["image"]["url"])
                 file_name = self.fileDownloader(term["_imageUrl"])
-                if note["BackText"]:
-                    note["BackText"] += "<div><br></div>"
-                note["BackText"] += '<div><img src="{0}"></div>'.format(file_name)
-            # Start adding audio
-            if '_wordAudioUrl' in term and term["_wordAudioUrl"]:
-                debug(str(self.getAudioUrl(term["_wordAudioUrl"])))
-                file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]),str(term["id"]) + "-front.mp3")
-                note["FrontAudio"] = "[sound:" + file_name +"]"
-                print("Added front audio" + file_name)
-            if '_definitionAudioUrl' in term and term["_definitionAudioUrl"]:
-                debug(str(self.getAudioUrl(term["_definitionAudioUrl"])))
-                file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]), str(term["id"]) + "-back.mp3")
-                note["BackAudio"] = "[sound:" + file_name +"]"
-                print("Added back audio " + file_name)
-            progress += 1
-            self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
-            mw.app.processEvents()
+                if note["Back"]:
+                    note["Back"] += "<div><br></div>"
+                note["Back"] += '<div><img src="{0}"></div>'.format(file_name)
+                mw.app.processEvents()
+            if config["rich_text_formatting"]:
+                note["Front"] = '<link rel="stylesheet" href="_quizlet.css">' + note["Front"]
             mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
 
-    def getAudioUrl (self, word_audio):
-        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}&{1}".format(word_audio,".mp3")
-
     # download the images
-    def fileDownloader(self, url, suffix=''):
+    def fileDownloader(self, url):
         url = url.replace('_m', '')
-        file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
+        file_name = "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
-        r = requests.get(url, stream=True, verify=False, headers=headers)
+        r = requests.get(url, stream=True, verify=False, headers=headers, timeout=15)
         if r.status_code == 200:
             with open(file_name, 'wb') as f:
                 r.raw.decode_content = True
@@ -550,11 +594,12 @@ class QuizletWindow(QWidget):
 class QuizletDownloader(QThread):
 
     # thread that downloads results from the Quizlet API
-    def __init__(self, window, url):
+    def __init__(self, window, url, page="", data=""):
         super(QuizletDownloader, self).__init__()
-        self.window = window
-
         self.url = url
+        self.window = window
+        self.page = page
+        self.data = data
         self.results = None
 
         self.error = False
@@ -566,47 +611,52 @@ class QuizletDownloader(QThread):
     def run(self):
         r = None
         try:
-            s = requests.Session()
-            s.mount('https://', CloudflareAdapter())
-            r = s.get(self.url, verify=False, headers=headers, cookies=self.window.cookies)
-            r.raise_for_status()
+            if self.data:
+                self.results = json.loads(self.data)
+            else:
+                text = self.page
 
-            regex = re.escape('window.Quizlet["setPasswordData"]')
+                regex = re.escape('window.Quizlet["setPasswordData"]')
 
-            if re.search(regex, r.text):
-                self.error = True
-                self.errorCode = 403
-                return
+                if re.search(regex, text):
+                    self.error = True
+                    self.errorCode = 403
+                    return
 
-            regex = re.escape('window.Quizlet["setPageData"] = ')
-            regex += r'(.+?)'
-            regex += re.escape('; QLoad("Quizlet.setPageData");')
-            m = re.search(regex, r.text)
-
-            if not m:
-                regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                regex = re.escape('window.Quizlet["setPageData"] = ')
                 regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.assistantModeData");')
-                m = re.search(regex, r.text)
+                regex += re.escape('; QLoad("Quizlet.setPageData");')
+                m = re.search(regex, text)
 
-            if not m:
-                regex = re.escape('window.Quizlet["cardsModeData"] = ')
-                regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.cardsModeData");')
-                m = re.search(regex, r.text)
+                if not m:
+                    regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                    regex += r'(.+?)'
+                    regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                    m = re.search(regex, text)
 
-            data = m.group(1).strip()
-            self.results = json.loads(data)
+                if not m:
+                    regex = re.escape('window.Quizlet["cardsModeData"] = ')
+                    regex += r'(.+?)'
+                    regex += re.escape('; QLoad("Quizlet.cardsModeData");')
+                    m = re.search(regex, text)
 
-            title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
-            m = re.search(r'<title>(.+?)</title>', r.text)
-            if m:
-                title = m.group(1)
-                title = re.sub(r' \| Quizlet$', '', title)
-                title = re.sub(r'^Flashcards ', '', title)
-                title = re.sub(r'\s+', ' ', title)
-                title = title.strip()
-            self.results['title'] = title
+                assert m, 'NO MATCH\n\n' + text
+
+                self.data = m.group(1).strip()
+
+                title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
+                m = re.search(r'<title>(.+?)</title>', text)
+                if m:
+                    title = m.group(1)
+                    title = re.sub(r' \| Quizlet$', '', title)
+                    title = re.sub(r'^Flashcards ', '', title)
+                    title = re.sub(r'\s+', ' ', title)
+                    title = title.strip()
+
+                self.results = json.loads(self.data)
+
+                self.results['title'] = title
+
         except requests.HTTPError as e:
             self.error = True
             self.errorCode = e.response.status_code
