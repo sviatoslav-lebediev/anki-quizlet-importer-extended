@@ -87,6 +87,7 @@ import shutil
 requests.packages.urllib3.disable_warnings()
 
 headers = {
+  "Accept-Language": "en-US,en;q=0.9,*;q=0.5",
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
 }
 
@@ -157,6 +158,16 @@ def addCustomModel(name, col):
 def debug(message):
     QMessageBox.information(QWidget(), "Message", message)
 
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.ssl_ import create_urllib3_context
+
+class CloudflareAdapter(HTTPAdapter):
+
+    def init_poolmanager(self, *args, **kwargs):
+        ctx = create_urllib3_context(ciphers='AES256-GCM-SHA384')
+        kwargs['ssl_context'] = ctx
+        super().init_poolmanager(*args, **kwargs)
+
 class QuizletWindow(QWidget):
 
     # used to access Quizlet API
@@ -225,7 +236,7 @@ class QuizletWindow(QWidget):
         self.box_upper.addLayout(self.box_right)
 
         # results label
-        self.label_results = QLabel("This importer has three use cases: 1. single url; 2. multiple urls on multiple lines and 3. folder.\n Parent deck name can be cutomized. If not provided, it will either use the folder name \n(if a folder url is provided) or save the deck as a first-level deck.\n\n Single url example: https://quizlet.com/515858716/japanese-shops-fruit-flash-cards/")
+        self.label_results = QLabel("This importer has three use cases: 1. single url; 2. multiple urls on multiple lines and 3. folder.\n Parent deck name can be cutomized. If not provided, it will either use the folder name \n(if a folder url is provided) or save the deck as a first-level deck.\n\n Single url example: TESTINGTESTINGTESTING/")
 
         # add all widgets to top layout
         self.box_top.addLayout(self.box_upper)
@@ -286,7 +297,9 @@ class QuizletWindow(QWidget):
                 self.downloadSet(url, parentDeck)
                 self.sleep(1.5)
             elif "/folders/" in url :
-                r = requests.get(url, verify=False, headers=headers, cookies=self.cookies)
+                s = requests.Session()
+                s.mount('https://', CloudflareAdapter())
+                r = s.get(url, verify=False, headers=headers, cookies=self.cookies)                
                 r.raise_for_status()
 
                 regex = re.escape('window.Quizlet["dashboardData"] = ')
@@ -361,7 +374,7 @@ class QuizletWindow(QWidget):
         if self.thread.error:
             if self.thread.errorCode == 403:
                 if self.thread.errorCaptcha:
-                    self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")
+                    self.label_results.setText("Sorry, it's behind a captcha.")
                 else:
                     self.label_results.setText("Sorry, this is a private deck :(")
             elif self.thread.errorCode == 404:
@@ -476,11 +489,11 @@ class QuizletWindow(QWidget):
 
         for term in terms:
             note = mw.col.newNote()
-            note["Front"] = ankify(term['word'])
-            note["Back"] = ankify(term['definition'])
+            note["FrontText"] = ankify(term['word'])
+            note["BackText"] = ankify(term['definition'])
             if config["rich_text_formatting"]:
-                note["Front"] = getText(term['wordRichText'], note["Front"])
-                note["Back"] = getText(term['definitionRichText'], note["Back"])
+                note["FrontText"] = getText(term['wordRichText'], note["FrontText"])
+                note["BackText"] = getText(term['definitionRichText'], note["BackText"])
             if "photo" in term and term["photo"]:
                 photo_urls = {
                   "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
@@ -493,12 +506,12 @@ class QuizletWindow(QWidget):
             if '_imageUrl' in term and term["_imageUrl"]:
                 # file_name = self.fileDownloader(term["image"]["url"])
                 file_name = self.fileDownloader(term["_imageUrl"])
-                if note["Back"]:
-                    note["Back"] += "<div><br></div>"
-                note["Back"] += '<div><img src="{0}"></div>'.format(file_name)
+                if note["BackText"]:
+                    note["BackText"] += "<div><br></div>"
+                note["BackText"] += '<div><img src="{0}"></div>'.format(file_name)
                 mw.app.processEvents()
             if config["rich_text_formatting"]:
-                note["Front"] = '<link rel="stylesheet" href="_quizlet.css">' + note["Front"]
+                note["FrontText"] = '<link rel="stylesheet" href="_quizlet.css">' + note["FrontText"]
             mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
@@ -534,7 +547,9 @@ class QuizletDownloader(QThread):
     def run(self):
         r = None
         try:
-            r = requests.get(self.url, verify=False, headers=headers, cookies=self.window.cookies)
+            s = requests.Session()
+            s.mount('https://', CloudflareAdapter())
+            r = s.get(self.url, verify=False, headers=headers, cookies=self.window.cookies)
             r.raise_for_status()
 
             regex = re.escape('window.Quizlet["setPasswordData"]')

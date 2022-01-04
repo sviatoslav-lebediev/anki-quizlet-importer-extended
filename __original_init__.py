@@ -89,6 +89,7 @@ import shutil
 requests.packages.urllib3.disable_warnings()
 
 headers = {
+  "Accept-Language": "en-US,en;q=0.9,*;q=0.5",
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
 }
 
@@ -158,6 +159,16 @@ def addCustomModel(name, col):
 # throw up a window with some info (used for testing)
 def debug(message):
     QMessageBox.information(QWidget(), "Message", message)
+
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.ssl_ import create_urllib3_context
+
+class CloudflareAdapter(HTTPAdapter):
+
+    def init_poolmanager(self, *args, **kwargs):
+        ctx = create_urllib3_context(ciphers='AES256-GCM-SHA384')
+        kwargs['ssl_context'] = ctx
+        super().init_poolmanager(*args, **kwargs)
 
 class QuizletWindow(QWidget):
 
@@ -288,7 +299,9 @@ class QuizletWindow(QWidget):
                 self.downloadSet(url, parentDeck)
                 self.sleep(1.5)
             elif "/folders/" in url :
-                r = requests.get(url, verify=False, headers=headers, cookies=self.cookies)
+                s = requests.Session()
+                s.mount('https://', CloudflareAdapter())
+                r = s.get(url, verify=False, headers=headers, cookies=self.cookies)
                 r.raise_for_status()
 
                 regex = re.escape('window.Quizlet["dashboardData"] = ')
@@ -363,7 +376,7 @@ class QuizletWindow(QWidget):
         if self.thread.error:
             if self.thread.errorCode == 403:
                 if self.thread.errorCaptcha:
-                    self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")
+                    self.label_results.setText("Sorry, it's behind a captcha.")
                 else:
                     self.label_results.setText("Sorry, this is a private deck :(")
             elif self.thread.errorCode == 404:
@@ -536,7 +549,9 @@ class QuizletDownloader(QThread):
     def run(self):
         r = None
         try:
-            r = requests.get(self.url, verify=False, headers=headers, cookies=self.window.cookies)
+            s = requests.Session()
+            s.mount('https://', CloudflareAdapter())
+            r = s.get(self.url, verify=False, headers=headers, cookies=self.window.cookies)
             r.raise_for_status()
 
             regex = re.escape('window.Quizlet["setPasswordData"]')
