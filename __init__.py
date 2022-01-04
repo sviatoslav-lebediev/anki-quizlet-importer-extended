@@ -397,7 +397,6 @@ class QuizletWindow(QWidget):
         self.thread = None
 
     def createDeck(self, result, parentDeck=""):
-        debug(str(result))
         config = mw.addonManager.getConfig(__name__)
 
         if config["rich_text_formatting"] and not os.path.exists("_quizlet.css"):
@@ -426,6 +425,7 @@ class QuizletWindow(QWidget):
                     '_definitionAudioUrl': c['_definitionAudioUrl'] or '',
                     'wordRichText': c.get('wordRichText', ''),
                     'definitionRichText': c.get('definitionRichText', ''),
+                    'id': c["id"]
                 })
         elif "studiableData" in result:
             terms = {}
@@ -490,9 +490,9 @@ class QuizletWindow(QWidget):
             text = text.replace('\n','<br>')
             text = re.sub(r'\*(.+?)\*', r'<b>\1</b>', text)
             return text
-
+        debug(str(terms))
         for term in terms:
-            debug(str(terms))
+            debug(str(term))
             note = mw.col.newNote()
             note["FrontText"] = ankify(term['word'])
             note["BackText"] = ankify(term['definition'])
@@ -516,21 +516,24 @@ class QuizletWindow(QWidget):
                 note["BackText"] += '<div><img src="{0}"></div>'.format(file_name)
             # Start adding audio
             if '_wordAudioUrl' in term and term["_wordAudioUrl"]:
-                file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]),"-front.mp3")
+                debug(str(self.getAudioUrl(term["_wordAudioUrl"])))
+                file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]),str(term["id"]) + "-front.mp3")
                 note["FrontAudio"] = "[sound:" + file_name +"]"
+                print("Added front audio" + file_name)
             if '_definitionAudioUrl' in term and term["_definitionAudioUrl"]:
-                file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]),"-back.mp3")
+                debug(str(self.getAudioUrl(term["_definitionAudioUrl"])))
+                file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]), str(term["id"]) + "-back.mp3")
                 note["BackAudio"] = "[sound:" + file_name +"]"
-                progress += 1
-                self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
-                mw.app.processEvents()
-            
+                print("Added back audio " + file_name)
+            progress += 1
+            self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
+            mw.app.processEvents()
             mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
 
     def getAudioUrl (self, word_audio):
-        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}&".format(word_audio)
+        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}&{1}".format(word_audio,".mp3")
 
     # download the images
     def fileDownloader(self, url, suffix=''):
