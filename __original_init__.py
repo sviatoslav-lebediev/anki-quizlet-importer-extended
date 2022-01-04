@@ -56,13 +56,26 @@
 #               - fix for Anki 2.1.28
 #
 #               Update 30/08/2020
-#               - add Return shortcut and rich text highlight
+#               - add Return shortcut
+#
+#               Update 31/08/2020
+#               - add rich text formatting
+#
+#               Update 03/09/2020
+#               - make it working again after Quizlet update
+
+#               Update 04/09/2020
+#               - move the add-on to GitHub
+
+#               Update 17/10/2020
+#               - added functionality to import multiple urls (with liutiming)
+
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
 __window = None
 
-import sys, math, time, urllib.parse, json, re
+import sys, math, time, urllib.parse, json, re, os
 
 # Anki
 from aqt import mw
@@ -76,8 +89,34 @@ import shutil
 requests.packages.urllib3.disable_warnings()
 
 headers = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"
 }
+
+rich_text_css = """
+:root {
+  --yellow_light_background: #fff4e5;
+  --blue_light_background: #cde7fa;
+  --pink_light_background: #fde8ff;
+}
+
+.nightMode {
+  --yellow_light_background: #8c7620;
+  --blue_light_background: #295f87;
+  --pink_light_background: #7d537f;
+}
+
+.bgY {
+  background-color: var(--yellow_light_background);
+}
+
+.bgB {
+  background-color: var(--blue_light_background);
+}
+
+.bgP {
+  background-color: var(--pink_light_background);
+}
+"""
 
 # add custom model if needed
 def addCustomModel(name, col):
@@ -131,6 +170,9 @@ class QuizletWindow(QWidget):
 
         self.results = None
         self.thread = None
+        self.closed = False
+
+        self.cookies = self.getCookies()
 
         self.initGUI()
 
@@ -151,10 +193,20 @@ class QuizletWindow(QWidget):
 
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
+        # parentDeck field
+
+        self.box_parent = QHBoxLayout()
+        self.label_parentDeck = QLabel("Parent deck name")
+        self.parentDeck = QLineEdit ("",self)
+        self.parentDeck.setMinimumWidth(300)
+
+        self.box_parent.addWidget(self.label_parentDeck)
+        self.box_parent.addWidget(self.parentDeck)
 
         # add layouts to left
-        self.box_left.addLayout(self.box_name)
 
+        self.box_left.addLayout(self.box_name)
+        self.box_left.addLayout(self.box_parent)
         # right side
         self.box_right = QVBoxLayout()
 
@@ -175,10 +227,11 @@ class QuizletWindow(QWidget):
         self.box_upper.addLayout(self.box_right)
 
         # results label
-        self.label_results = QLabel("\r\n<i>Example: https://quizlet.com/150875612/usmle-flash-cards/</i>")
+        self.label_results = QLabel("This importer has three use cases: 1. single url; 2. multiple urls on multiple lines and 3. folder.\n Parent deck name can be cutomized. If not provided, it will either use the folder name \n(if a folder url is provided) or save the deck as a first-level deck.\n\n Single url example: https://quizlet.com/515858716/japanese-shops-fruit-flash-cards/")
 
         # add all widgets to top layout
         self.box_top.addLayout(self.box_upper)
+        self.box_top.addSpacing(10)
         self.box_top.addWidget(self.label_results)
         self.box_top.addStretch(1)
         self.setLayout(self.box_top)
@@ -187,29 +240,93 @@ class QuizletWindow(QWidget):
         self.setMinimumWidth(500)
         self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.setWindowTitle("Improved Quizlet to Anki Importer")
+        self.resize(self.minimumSizeHint())
         self.show()
 
+    def getCookies(self):
+        config = mw.addonManager.getConfig(__name__)
+
+        cookies = {}
+        if config["qlts"]:
+            cookies = { "qlts": config["qlts"] }
+        elif config["cookies"]:
+            from http.cookies import SimpleCookie
+            C = SimpleCookie()
+            C.load(config["cookies"])
+            cookies = { key: morsel.value for key, morsel in C.items() }
+        return cookies
+
     def onCode(self):
-
+        parentDeck = self.parentDeck.text()
         # grab url input
-        url = self.text_url.text()
+        report = {'error': [], 'success': []}
+        urls = self.text_url.text().splitlines()
+        self.label_results.setText(("There are <b>{0}</b> urls in total. Starting".format(len(urls))))
+        self.sleep(0.5)
+        for url in urls:
+            if not url:
+                continue
 
-        # voodoo needed for some error handling
-        if urllib.parse.urlparse(url).scheme:
-            urlDomain = urllib.parse.urlparse(url).netloc
-            urlPath = urllib.parse.urlparse(url).path
-        else:
-            urlDomain = urllib.parse.urlparse("https://"+url).netloc
-            urlPath = urllib.parse.urlparse("https://"+url).path
+            # voodoo needed for some error handling
+            if urllib.parse.urlparse(url).scheme:
+                urlDomain = urllib.parse.urlparse(url).netloc
+                urlPath = urllib.parse.urlparse(url).path
+            else:
+                urlDomain = urllib.parse.urlparse("https://"+url).netloc
+                urlPath = urllib.parse.urlparse("https://"+url).path
 
-        # validate quizlet URL
-        if url == "":
-            self.label_results.setText("Oops! You forgot the deck URL :(")
-            return
-        elif not "quizlet.com" in urlDomain:
-            self.label_results.setText("Oops! That's not a Quizlet URL :(")
-            return
+            # validate quizlet URL
+            if url == "":
+                self.label_results.setText("Oops! You forgot the deck URL :(")
+                return
+            elif not "quizlet.com" in urlDomain:
+                self.label_results.setText("Oops! That's not a Quizlet URL :(")
+                return
+            self.button_code.setEnabled(False)
 
+            if "/folders/" not in url:
+                self.downloadSet(url, parentDeck)
+                self.sleep(1.5)
+            elif "/folders/" in url :
+                r = requests.get(url, verify=False, headers=headers, cookies=self.cookies)
+                r.raise_for_status()
+
+                regex = re.escape('window.Quizlet["dashboardData"] = ')
+                regex += r'(.+?)'
+                regex += re.escape('; QLoad("Quizlet.dashboardData");')
+
+                m = re.search(regex, r.text)
+
+                data = m.group(1).strip()
+                results = json.loads(data)
+
+                assert len(results["models"]["folder"]) == 1
+
+                quizletFolder = results["models"]["folder"][0]
+                setMap = { s["id"]:s for s in results["models"]["set"] }
+                for folderSet in results["models"]["folderSet"]:
+                    if self.closed:
+                        return
+                    quizletSet = setMap[folderSet["setId"]]
+                    if parentDeck == "":
+                        self.downloadSet(quizletSet["_webUrl"], quizletFolder["name"])
+                    else:
+                        self.downloadSet(quizletSet["_webUrl"], parentDeck)
+                    self.sleep(1.5)
+
+            self.button_code.setEnabled(True)
+
+    def closeEvent(self, evt):
+        self.closed = True
+        evt.accept()
+
+    def sleep(self, seconds):
+        start = time.time()
+        while time.time() - start < seconds:
+            time.sleep(0.01)
+            QApplication.instance().processEvents()
+
+    def downloadSet(self, urlPath, parentDeck=""):
         # validate and set Quizlet deck ID
         quizletDeckID = urlPath.strip("/")
         if quizletDeckID == "":
@@ -227,7 +344,8 @@ class QuizletWindow(QWidget):
         # build URL
         # deck_url = ("https://api.quizlet.com/2.0/sets/{0}".format(quizletDeckID))
         # deck_url += ("?client_id={0}".format(QuizletWindow.__APIKEY))
-        deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
+        # deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
+        deck_url = urlPath
 
         # stop previous thread first
         # if self.thread is not None:
@@ -259,14 +377,20 @@ class QuizletWindow(QWidget):
             deck = self.thread.results
             # self.label_results.setText(("Importing deck {0} by {1}...".format(deck["title"], deck["created_by"])))
             self.label_results.setText(("Importing deck {0}...".format(deck["title"])))
-            self.createDeck(deck)
+            self.createDeck(deck, parentDeck)
             # self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards by <i>{2}</i>)".format(deck["title"], deck["term_count"], deck["created_by"])))
             self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
 
         # self.thread.terminate()
         self.thread = None
 
-    def createDeck(self, result):
+    def createDeck(self, result, parentDeck=""):
+        config = mw.addonManager.getConfig(__name__)
+
+        if config["rich_text_formatting"] and not os.path.exists("_quizlet.css"):
+            with open("_quizlet.css", "w") as f:
+                f.write(rich_text_css.lstrip())
+
         # create new deck and custom model
         if "set" in result:
             name = result['set']['title']
@@ -274,6 +398,9 @@ class QuizletWindow(QWidget):
             name = result['studyable']['title']
         else:
             name = result['title']
+
+        if parentDeck:
+            name = "{}::{}".format(parentDeck, name)
 
         if "termIdToTermsMap" in result:
             terms = []
@@ -285,6 +412,27 @@ class QuizletWindow(QWidget):
                     'wordRichText': c.get('wordRichText', ''),
                     'definitionRichText': c.get('definitionRichText', ''),
                 })
+        elif "studiableData" in result:
+            terms = {}
+            data = result["studiableData"]
+            for d in data["studiableItems"]:
+                terms[d["id"]] = {}
+            smc = {}
+            for d in data["studiableMediaConnections"]:
+                id_ = d["connectionModelId"]
+                if id_ not in smc:
+                    smc[id_] = {}
+                # "plainText", "languageCode", "ttsUrl", "ttsSlowUrl", "richText"
+                for k, v in d.get("text", {}).items():
+                    smc[id_][k] = v
+                if "image" in d:
+                    smc[id_]["_imageUrl"] = d["image"]["url"]
+            for d in data["studiableCardSides"]:
+                id_ = d["studiableItemId"]
+                terms[id_][d["label"]] = smc[d["id"]].get("plainText", "")
+                terms[id_]["{}RichText".format(d["label"])] = smc[d["id"]].get("richText", "")
+                terms[id_]["_imageUrl"] = smc[d["id"]].get("_imageUrl", "")
+            terms = terms.values()
         else:
             terms = result['terms']
 
@@ -292,6 +440,9 @@ class QuizletWindow(QWidget):
 
         deck = mw.col.decks.get(mw.col.decks.id(name))
         model = addCustomModel(name, mw.col)
+
+        if config["rich_text_formatting"] and ".bgY" not in model["css"]:
+            model["css"] += rich_text_css
 
         # assign custom model to new deck
         mw.col.decks.select(deck["id"])
@@ -315,24 +466,23 @@ class QuizletWindow(QWidget):
                             attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
                             text = '<span {}>{}</span>'.format(attrs, text)
                 return text
-            text = ''.join([getText(c) for c in d['content']])
+            text = ''.join([getText(c) if c else '<br>' for c in d.get('content', [''])])
             if d['type'] == 'paragraph':
                 text = '<div>{}</div>'.format(text)
             return text
 
         def ankify(text):
             text = text.replace('\n','<br>')
-            text = text.replace('class="bgY"', 'style="background-color:#fff4e5;"')
-            text = text.replace('class="bgB"', 'style="background-color:#cde7fa;"')
-            text = text.replace('class="bgP"', 'style="background-color:#fde8ff;"')
+            text = re.sub(r'\*(.+?)\*', r'<b>\1</b>', text)
             return text
 
         for term in terms:
             note = mw.col.newNote()
-            note["Front"] = getText(term['wordRichText'], term['word'])
-            note["Back"] = getText(term['definitionRichText'], term['definition'])
-            note["Front"] = ankify(note["Front"])
-            note["Back"] = ankify(note["Back"])
+            note["Front"] = ankify(term['word'])
+            note["Back"] = ankify(term['definition'])
+            if config["rich_text_formatting"]:
+                note["Front"] = getText(term['wordRichText'], note["Front"])
+                note["Back"] = getText(term['definitionRichText'], note["Back"])
             if "photo" in term and term["photo"]:
                 photo_urls = {
                   "1": "https://farm{1}.staticflickr.com/{2}/{3}_{4}.jpg",
@@ -349,6 +499,8 @@ class QuizletWindow(QWidget):
                     note["Back"] += "<div><br></div>"
                 note["Back"] += '<div><img src="{0}"></div>'.format(file_name)
                 mw.app.processEvents()
+            if config["rich_text_formatting"]:
+                note["Front"] = '<link rel="stylesheet" href="_quizlet.css">' + note["Front"]
             mw.col.addNote(note)
         mw.col.reset()
         mw.reset()
@@ -384,18 +536,7 @@ class QuizletDownloader(QThread):
     def run(self):
         r = None
         try:
-            config = mw.addonManager.getConfig(__name__)
-
-            cookies = {}
-            if config["qlts"]:
-                cookies = { "qlts": config["qlts"] }
-            elif config["cookies"]:
-                from http.cookies import SimpleCookie
-                C = SimpleCookie()
-                C.load(config["cookies"])
-                cookies = { key: morsel.value for key, morsel in C.items() }
-
-            r = requests.get(self.url, verify=False, headers=headers, cookies=cookies)
+            r = requests.get(self.url, verify=False, headers=headers, cookies=self.window.cookies)
             r.raise_for_status()
 
             regex = re.escape('window.Quizlet["setPasswordData"]')
@@ -445,7 +586,7 @@ class QuizletDownloader(QThread):
             self.errorMessage = "Invalid json: {0}".format(e)
         except Exception as e:
             self.error = True
-            self.errorMessage = "{}\n-----------------\n{}".format(e, r.text)
+            self.errorMessage = "{}\n-----------------\n{}".format(e, r.text if r else "")
         # yep, we got it
 
 # plugin was called from Anki
