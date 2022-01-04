@@ -421,6 +421,7 @@ class QuizletWindow(QWidget):
                     'word': c['word'],
                     'definition': c['definition'],
                     '_imageUrl': c["_imageUrl"] or '',
+                    ''
                     'wordRichText': c.get('wordRichText', ''),
                     'definitionRichText': c.get('definitionRichText', ''),
                 })
@@ -511,6 +512,13 @@ class QuizletWindow(QWidget):
                 if note["BackText"]:
                     note["BackText"] += "<div><br></div>"
                 note["BackText"] += '<div><img src="{0}"></div>'.format(file_name)
+            # Start adding audio
+            if '_wordAudioUrl' in term and term["__wordAudioUrl"]:
+                file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]),"-front.mp3")
+                note["FrontAudio"] = "[sound:" + file_name +"]"
+            if '_definitionAudioUrl' in term and term["_definitionAudioUrl"]:
+                file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]),"-back.mp3")
+                note["BackAudio"] = "[sound:" + file_name +"]"
                 mw.app.processEvents()
             if config["rich_text_formatting"]:
                 note["FrontText"] = '<link rel="stylesheet" href="_quizlet.css">' + note["FrontText"]
@@ -518,10 +526,13 @@ class QuizletWindow(QWidget):
         mw.col.reset()
         mw.reset()
 
+    def getAudioUrl (self, word_audio):
+        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}&".format(word_audio)
+
     # download the images
-    def fileDownloader(self, url):
+    def fileDownloader(self, url, suffix=''):
         url = url.replace('_m', '')
-        file_name = "quizlet-" + url.split('/')[-1]
+        file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
         r = requests.get(url, stream=True, verify=False, headers=headers)
         if r.status_code == 200:
