@@ -396,6 +396,7 @@ class QuizletWindow(QWidget):
         self.thread = None
 
     def createDeck(self, result, parentDeck=""):
+        debug(str(result))
         config = mw.addonManager.getConfig(__name__)
 
         if config["rich_text_formatting"] and not os.path.exists("_quizlet.css"):
@@ -488,6 +489,7 @@ class QuizletWindow(QWidget):
             return text
 
         for term in terms:
+            debug(str(terms))
             note = mw.col.newNote()
             note["FrontText"] = ankify(term['word'])
             note["BackText"] = ankify(term['definition'])
