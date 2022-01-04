@@ -132,7 +132,7 @@ def addCustomModel(name, col):
 
     # create custom model for imported deck
     mm = col.models
-    existing = mm.byName("Basic Quizlet Extended")
+    existing = mm.by_name("Basic Quizlet Extended")
     if existing:
         return existing
     m = mm.new("Basic Quizlet Extended")
@@ -345,7 +345,7 @@ class QuizletWindow(QWidget):
             C.load(config["cookies"])
             cookies = { key: morsel.value for key, morsel in C.items() }
         return cookies
-        
+
     def downloadPage(self, url, *args, **kwargs):
         self.page = ''
         self.data = ''
@@ -356,7 +356,7 @@ class QuizletWindow(QWidget):
             self.page = r.text
         except Exception as e:
             self.resolveCaptcha(url)
-    
+
     def onCode(self):
         parentDeck = self.parentDeck.text()
         # grab url input
@@ -548,7 +548,7 @@ class QuizletWindow(QWidget):
         mw.col.decks.save(deck)
 
         # assign new deck to custom model
-        mw.col.models.setCurrent(model)
+        mw.col.models.set_current(model)
         model["did"] = deck["id"]
         mw.col.models.save(model)
 
@@ -603,12 +603,12 @@ class QuizletWindow(QWidget):
                 debug(str(self.getAudioUrl(term["_wordAudioUrl"])))
                 file_name = self.fileDownloader(self.getAudioUrl(term["_wordAudioUrl"]),str(term["id"]) + "-front.mp3")
                 note["FrontAudio"] = "[sound:" + file_name +"]"
-                print("Added front audio" + file_name)
+                print("Added front audio" + self.getAudioUrl(term["_wordAudioUrl"]))
             if '_definitionAudioUrl' in term and term["_definitionAudioUrl"]:
                 debug(str(self.getAudioUrl(term["_definitionAudioUrl"])))
                 file_name = self.fileDownloader(self.getAudioUrl(term["_definitionAudioUrl"]), str(term["id"]) + "-back.mp3")
                 note["BackAudio"] = "[sound:" + file_name +"]"
-                print("Added back audio " + file_name)
+                print("Added back audio " + self.getAudioUrl(term["_wordAudioUrl"]))
             progress += 1
             self.label_results.setText(("Imported {0}/{1}".format(progress, len(terms))))
             mw.app.processEvents()
@@ -658,43 +658,43 @@ class QuizletDownloader(QThread):
             else:
                 text = self.page
 
-            regex = re.escape('window.Quizlet["setPasswordData"]')
+                regex = re.escape('window.Quizlet["setPasswordData"]')
 
-            if re.search(regex, text):
-                self.error = True
-                self.errorCode = 403
-                return
+                if re.search(regex, text):
+                    self.error = True
+                    self.errorCode = 403
+                    return
 
-            regex = re.escape('window.Quizlet["setPageData"] = ')
-            regex += r'(.+?)'
-            regex += re.escape('; QLoad("Quizlet.setPageData");')
-            m = re.search(regex, text)
-
-            if not m:
-                regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                regex = re.escape('window.Quizlet["setPageData"] = ')
                 regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                regex += re.escape('; QLoad("Quizlet.setPageData");')
                 m = re.search(regex, text)
 
-            if not m:
-                regex = re.escape('window.Quizlet["cardsModeData"] = ')
-                regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.cardsModeData");')
-                m = re.search(regex, text)
+                if not m:
+                    regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                    regex += r'(.+?)'
+                    regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                    m = re.search(regex, text)
 
-            assert m, 'NO MATCH\n\n' + text
+                if not m:
+                    regex = re.escape('window.Quizlet["cardsModeData"] = ')
+                    regex += r'(.+?)'
+                    regex += re.escape('; QLoad("Quizlet.cardsModeData");')
+                    m = re.search(regex, text)
 
-            self.data = m.group(1).strip()
+                assert m, 'NO MATCH\n\n' + text
 
-            title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
-            m = re.search(r'<title>(.+?)</title>', text)
-            if m:
-                title = m.group(1)
-                title = re.sub(r' \| Quizlet$', '', title)
-                title = re.sub(r'^Flashcards ', '', title)
-                title = re.sub(r'\s+', ' ', title)
-                title = title.strip()
-                
+                self.data = m.group(1).strip()
+
+                title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
+                m = re.search(r'<title>(.+?)</title>', text)
+                if m:
+                    title = m.group(1)
+                    title = re.sub(r' \| Quizlet$', '', title)
+                    title = re.sub(r'^Flashcards ', '', title)
+                    title = re.sub(r'\s+', ' ', title)
+                    title = title.strip()
+
                 self.results = json.loads(self.data)
 
                 self.results['title'] = title
