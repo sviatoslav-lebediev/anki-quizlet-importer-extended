@@ -132,7 +132,7 @@ def addCustomModel(name, col):
 
     # create custom model for imported deck
     mm = col.models
-    existing = mm.by_name("Basic Quizlet Extended")
+    existing = mm.byName("Basic Quizlet Extended")
     if existing:
         return existing
     m = mm.new("Basic Quizlet Extended")
