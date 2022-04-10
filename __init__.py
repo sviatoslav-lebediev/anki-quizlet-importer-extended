@@ -387,30 +387,40 @@ def parseAudioUrlItem(item):
     return item["text"]["ttsUrl"]
 
 def mapItems(jsonData):
-    studiableItems, studiableCardSides, studiableMediaConnections = itemgetter('studiableItems', 'studiableCardSides','studiableMediaConnections')(jsonData['studiableData'])
+    studiableItems = itemgetter('studiableItems')(jsonData['studiableDocumentData'])
     result = []
+    image= None
+    term_audio= None
+    definition_audio= None
 
     for studiableItem in studiableItems:
-        term_id = next((x for x in studiableCardSides if (x["studiableItemId"] == studiableItem["id"] and x["label"] == 'word') ), None)
-        definition_id = next((x for x in studiableCardSides if (x["studiableItemId"] == studiableItem["id"] and x["label"] == 'definition') ), None)
+        for side in studiableItem["cardSides"]:
+            if (side["label"] == "word"):
+                for media in side["media"]:
+                    if media["type"] == 1:
+                        term = media["plainText"]
 
-        term = next((x for x in studiableMediaConnections if (x["connectionModelId"] == term_id["id"]) ), None)
-        definition = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"]) ), None)
+                        if media["ttsUrl"]:
+                            term_audio = media["ttsUrl"]
 
-        image = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"] and x["mediaType"] == 2)), None)
-        definition_audio = parseAudioUrlItem(definition)
+            if (side["label"] == "definition"):
+                for media in side["media"]:
+                    if media["type"] == 1:
+                        definition = media["plainText"]
 
-        if not definition_audio:
-            definition_audio = next((x for x in studiableMediaConnections if (x["connectionModelId"] == definition_id["id"] and x["mediaType"] == 4)), None)
-            definition_audio = definition_audio["audio"]["url"] if definition_audio else None
+                        if media["ttsUrl"]:
+                            definition_audio = media["ttsUrl"]
+
+                    if media["type"] == 2:
+                        image = media["url"]
 
         result.append({
             "id": studiableItem["id"],
-            "term": parseTextItem(term),
-            "termAudio": parseAudioUrlItem(term),
-            "definition": parseTextItem(definition),
+            "term": term,
+            "termAudio": term_audio,
+            "definition": definition,
             "definitionAudio": definition_audio,
-            "imageUrl": image["image"].get("url") if image else None
+            "imageUrl": image
         })
 
     return result
