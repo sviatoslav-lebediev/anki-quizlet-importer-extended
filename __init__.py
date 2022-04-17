@@ -389,11 +389,12 @@ def parseAudioUrlItem(item):
 def mapItems(jsonData):
     studiableItems = itemgetter('studiableItems')(jsonData['studiableDocumentData'])
     result = []
-    image= None
-    term_audio= None
-    definition_audio= None
 
     for studiableItem in studiableItems:
+        image= None
+        term_audio= None
+        definition_audio= None
+
         for side in studiableItem["cardSides"]:
             if (side["label"] == "word"):
                 for media in side["media"]:
