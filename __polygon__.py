@@ -53,20 +53,26 @@ def mapItems(jsonData):
         for side in studiableItem["cardSides"]:
             if (side["label"] == "word"):
                 for media in side["media"]:
+                    if media["type"] == 4:
+                        term_audio = media["url"]
+
                     if media["type"] == 1:
                         term = media["plainText"]
 
-                        if media["ttsUrl"]:
+                        if media["ttsUrl"] and term_audio == None:
                             term_audio = media["ttsUrl"]
 
 
 
             if (side["label"] == "definition"):
                 for media in side["media"]:
+                    if media["type"] == 4:
+                        definition_audio = media["url"]
+
                     if media["type"] == 1:
                         definition = media["plainText"]
 
-                        if media["ttsUrl"]:
+                        if media["ttsUrl"] and definition_audio == None:
                             definition_audio = media["ttsUrl"]
 
                     if media["type"] == 2:
