@@ -133,9 +133,6 @@ def ankify(text):
 
 class QuizletWindow(QWidget):
 
-    # used to access Quizlet API
-    __APIKEY = "ke9tZw8YM6"
-
     # main window of Quizlet plugin
     def __init__(self):
         super(QuizletWindow, self).__init__()
@@ -171,6 +168,13 @@ class QuizletWindow(QWidget):
         self.box_download_audio.addWidget(self.label_download_audio)
         self.box_download_audio.addWidget(self.value_download_audio)
 
+        self.box_add_reverse = QHBoxLayout()
+        self.value_add_reverse = QCheckBox("",self)
+        self.value_add_reverse.setMinimumWidth(300)
+        self.label_add_reverse = QLabel("Add reverse:")
+        self.box_add_reverse.addWidget(self.label_add_reverse)
+        self.box_add_reverse.addWidget(self.value_add_reverse)
+
         self.box_start_phrase = QHBoxLayout()
         self.value_start_phrase = QLineEdit("",self)
         self.value_start_phrase.setMinimumWidth(300)
@@ -190,6 +194,7 @@ class QuizletWindow(QWidget):
         # add layouts to left
         self.box_left.addLayout(self.box_name)
         self.box_left.addLayout(self.box_download_audio)
+        self.box_left.addLayout(self.box_add_reverse)
         self.box_left.addLayout(self.box_start_phrase)
         self.box_left.addLayout(self.box_stop_phrase)
 
@@ -328,6 +333,7 @@ class QuizletWindow(QWidget):
         startPhrase = self.value_start_phrase.text()
         stopPhrase = self.value_stop_phrase.text()
         downloadAudio = self.value_download_audio.isChecked()
+        addReverse = self.value_add_reverse.isChecked()
 
         for item in items:
             if "".__eq__(startPhrase) or startPhrase == item["term"] or startPhrase == item["definition"]:
@@ -353,6 +359,10 @@ class QuizletWindow(QWidget):
                     note["Image"] += '<div><img src="{0}"></div>'.format(file_name)
 
                     mw.app.processEvents()
+
+                if  addReverse:
+                    note["Add Reverse"] = "True"
+
                 mw.col.addNote(note)
 
                 progress += 1
