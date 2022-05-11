@@ -385,7 +385,7 @@ class QuizletWindow(QWidget):
         # get original, non-mobile version of images
         r = requests.get(url, stream=True, verify=False, headers=headers)
         if r.status_code == 200:
-            with open(file_name, 'wb') as f:
+            with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
                 r.raw.decode_content = True
                 shutil.copyfileobj(r.raw, f)
         return file_name
