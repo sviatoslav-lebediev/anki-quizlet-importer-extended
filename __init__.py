@@ -391,10 +391,7 @@ class QuizletWindow(QWidget):
         return file_name
 
 def parseTextItem(item):
-    return getText(item["text"]["richText"], item["text"]["plainText"])
-
-def parseAudioUrlItem(item):
-    return item["text"]["ttsUrl"]
+    return getText(item["richText"], item["plainText"])
 
 def mapItems(jsonData):
     studiableItems = itemgetter('studiableItems')(jsonData['studiableDocumentData'])
@@ -412,7 +409,7 @@ def mapItems(jsonData):
                         term_audio = media["url"]
 
                     if media["type"] == 1:
-                        term = media["plainText"]
+                        term = parseTextItem(media)
 
                         if media["ttsUrl"] and term_audio == None:
                             term_audio = media["ttsUrl"]
@@ -423,7 +420,7 @@ def mapItems(jsonData):
                         definition_audio = media["url"]
 
                     if media["type"] == 1:
-                        definition = media["plainText"]
+                        definition = parseTextItem(media)
 
                         if media["ttsUrl"] and definition_audio == None:
                             definition_audio = media["ttsUrl"]
