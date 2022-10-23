@@ -191,12 +191,23 @@ class QuizletWindow(QWidget):
         self.box_stop_phrase.addWidget(self.label_stop_phrase)
         self.box_stop_phrase.addWidget(self.value_stop_phrase)
 
+        self.box_incoming_html = QHBoxLayout()
+        self.value_incoming_html = QTextEdit("",self)
+        self.value_incoming_html.setMinimumWidth(300)
+        self.value_incoming_html.setPlaceholderText("Enter page html. (try if VPN doesn't work)")
+        self.label_incoming_html = QLabel("Page html:")
+        self.box_incoming_html.addWidget(self.label_incoming_html)
+        self.box_incoming_html.addWidget(self.value_incoming_html)
+
+
+
         # add layouts to left
         self.box_left.addLayout(self.box_name)
         self.box_left.addLayout(self.box_download_audio)
         self.box_left.addLayout(self.box_add_reverse)
         self.box_left.addLayout(self.box_start_phrase)
         self.box_left.addLayout(self.box_stop_phrase)
+        self.box_left.addLayout(self.box_incoming_html)
 
         # right side
         self.box_right = QVBoxLayout()
@@ -213,7 +224,7 @@ class QuizletWindow(QWidget):
 
         # add left and right layouts to upper
         self.box_upper.addLayout(self.box_left)
-        self.box_upper.addSpacing(20)
+        self.box_upper.addSpacing(50)
         self.box_upper.addLayout(self.box_right)
 
         # results label
@@ -235,6 +246,7 @@ class QuizletWindow(QWidget):
 
         # grab url input
         url = self.text_url.text()
+        html = self.value_incoming_html.toPlainText()
 
         # voodoo needed for some error handling
         if urllib.parse.urlparse(url).scheme:
@@ -270,7 +282,7 @@ class QuizletWindow(QWidget):
         deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
 
         # download the data!
-        self.thread = QuizletDownloader(self, deck_url)
+        self.thread = QuizletDownloader(self, deck_url, html)
         self.thread.start()
 
         while not self.thread.isFinished():
@@ -391,10 +403,7 @@ class QuizletWindow(QWidget):
         return file_name
 
 def parseTextItem(item):
-    return getText(item["text"]["richText"], item["text"]["plainText"])
-
-def parseAudioUrlItem(item):
-    return item["text"]["ttsUrl"]
+    return getText(item["richText"], item["plainText"])
 
 def mapItems(jsonData):
     studiableItems = itemgetter('studiableItems')(jsonData['studiableDocumentData'])
@@ -412,7 +421,7 @@ def mapItems(jsonData):
                         term_audio = media["url"]
 
                     if media["type"] == 1:
-                        term = media["plainText"]
+                        term = parseTextItem(media)
 
                         if media["ttsUrl"] and term_audio == None:
                             term_audio = media["ttsUrl"]
@@ -423,7 +432,7 @@ def mapItems(jsonData):
                         definition_audio = media["url"]
 
                     if media["type"] == 1:
-                        definition = media["plainText"]
+                        definition = parseTextItem(media)
 
                         if media["ttsUrl"] and definition_audio == None:
                             definition_audio = media["ttsUrl"]
@@ -445,11 +454,12 @@ def mapItems(jsonData):
 class QuizletDownloader(QThread):
 
     # thread that downloads results from the Quizlet API
-    def __init__(self, window, url):
+    def __init__(self, window, url, html):
         super(QuizletDownloader, self).__init__()
         self.window = window
 
         self.url = url
+        self.html = html
         self.results = None
 
         self.error = False
@@ -472,12 +482,18 @@ class QuizletDownloader(QThread):
                 C.load(config["cookies"])
                 cookies = { key: morsel.value for key, morsel in C.items() }
 
-            r = requests.get(self.url, verify=False, headers=headers, cookies=cookies)
-            r.raise_for_status()
+            page_html = ''
+
+            if self.html:
+                page_html = self.html
+            else:
+                r = requests.get(self.url, verify=False, headers=headers, cookies=cookies)
+                r.raise_for_status()
+                page_html = r.text
 
             regex = re.escape('window.Quizlet["setPasswordData"]')
 
-            if re.search(regex, r.text):
+            if re.search(regex, page_html):
                 self.error = True
                 self.errorCode = 403
                 return
@@ -485,26 +501,26 @@ class QuizletDownloader(QThread):
             regex = re.escape('window.Quizlet["setPageData"] = ')
             regex += r'(.+?)'
             regex += re.escape('; QLoad("Quizlet.setPageData");')
-            m = re.search(regex, r.text)
+            m = re.search(regex, page_html)
 
             if not m:
                 regex = re.escape('window.Quizlet["assistantModeData"] = ')
                 regex += r'(.+?)'
                 regex += re.escape('; QLoad("Quizlet.assistantModeData");')
-                m = re.search(regex, r.text)
+                m = re.search(regex, page_html)
 
             if not m:
                 regex = re.escape('window.Quizlet["cardsModeData"] = ')
                 regex += r'(.+?)'
                 regex += re.escape('; QLoad("Quizlet.cardsModeData");')
-                m = re.search(regex, r.text)
+                m = re.search(regex, page_html)
 
             data = m.group(1).strip()
             self.results = {}
             self.results['items'] = mapItems(json.loads(data))
 
             title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
-            m = re.search(r'<title>(.+?)</title>', r.text)
+            m = re.search(r'<title>(.+?)</title>', page_html)
             if m:
                 title = m.group(1)
                 title = re.sub(r' \| Quizlet$', '', title)
@@ -523,7 +539,7 @@ class QuizletDownloader(QThread):
             self.errorMessage = "Invalid json: {0}".format(e)
         except Exception as e:
             self.error = True
-            self.errorMessage = "{}\n-----------------\n{}".format(e, r.text)
+            self.errorMessage = "{}\n-----------------\n{}".format(e, page_html)
         # yep, we got it
 
 # plugin was called from Anki
