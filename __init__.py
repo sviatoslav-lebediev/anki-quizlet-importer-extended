@@ -58,6 +58,7 @@ from aqt.utils import showText
 from aqt.qt import *
 from aqt import mw
 from operator import itemgetter
+
 __window = None
 
 
@@ -485,72 +486,95 @@ class QuizletDownloader(QThread):
         self.errorMessage = None
 
     def run(self):
-        r = None
-        try:
-            config = mw.addonManager.getConfig(__name__)
+        proxyRetry = True
 
-            cookies = {}
-            if config["qlts"]:
-                cookies = {"qlts": config["qlts"]}
-            elif config["cookies"]:
-                from http.cookies import SimpleCookie
-                C = SimpleCookie()
-                C.load(config["cookies"])
-                cookies = {key: morsel.value for key, morsel in C.items()}
+        while True:
+            try:
+                r = None
+                config = mw.addonManager.getConfig(__name__)
+                cookies = {}
 
-            r = requests.get(self.url, verify=False,
-                             headers=headers, cookies=cookies)
-            r.raise_for_status()
+                if config["qlts"]:
+                    cookies = {"qlts": config["qlts"]}
+                elif config["cookies"]:
+                    from http.cookies import SimpleCookie
+                    C = SimpleCookie()
+                    C.load(config["cookies"])
+                    cookies = {key: morsel.value for key, morsel in C.items()}
+                url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + self.url
+                r = requests.get(url, verify=False,
+                                 headers=headers, cookies=cookies)
+                r.raise_for_status()
 
-            regex = re.escape('window.Quizlet["setPasswordData"]')
+                regex = re.escape('window.Quizlet["setPasswordData"]')
 
-            if re.search(regex, r.text):
-                self.error = True
-                self.errorCode = 403
-                return
+                if re.search(regex, r.text):
+                    if (proxyRetry):
+                        proxyRetry = False
+                        continue
+                    else:
+                        self.error = True
+                        self.errorCode = 403
+                        return
 
-            regex = re.escape('window.Quizlet["setPageData"] = ')
-            regex += r'(.+?)'
-            regex += re.escape('; QLoad("Quizlet.setPageData");')
-            m = re.search(regex, r.text)
-
-            if not m:
-                regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                regex = re.escape('window.Quizlet["setPageData"] = ')
                 regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                regex += re.escape('; QLoad("Quizlet.setPageData");')
                 m = re.search(regex, r.text)
 
-            if not m:
-                regex = re.escape('window.Quizlet["cardsModeData"] = ')
-                regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.cardsModeData");')
-                m = re.search(regex, r.text)
+                if not m:
+                    regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                    regex += r'(.+?)'
+                    regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                    m = re.search(regex, r.text)
 
-            data = m.group(1).strip()
-            self.results = {}
-            self.results['items'] = mapItems(json.loads(data))
+                if not m:
+                    regex = re.escape('window.Quizlet["cardsModeData"] = ')
+                    regex += r'(.+?)'
+                    regex += re.escape('; QLoad("Quizlet.cardsModeData");')
+                    m = re.search(regex, r.text)
 
-            title = os.path.basename(self.url.strip()) or "Quizlet Flashcards"
-            m = re.search(r'<title>(.+?)</title>', r.text)
-            if m:
-                title = m.group(1)
-                title = re.sub(r' \| Quizlet$', '', title)
-                title = re.sub(r'^Flashcards ', '', title)
-                title = re.sub(r'\s+', ' ', title)
-                title = title.strip()
-            self.results['title'] = title
-        except requests.HTTPError as e:
-            self.error = True
-            self.errorCode = e.response.status_code
-            self.errorMessage = e.response.text
-            if "CF-Chl-Bypass" in e.response.headers:
-                self.errorCaptcha = True
-        except ValueError as e:
-            self.error = True
-            self.errorMessage = "Invalid json: {0}".format(e)
-        except Exception as e:
-            self.error = True
-            self.errorMessage = "{}\n-----------------\n{}".format(e, r.text)
+                data = m.group(1).strip()
+                self.results = {}
+                self.results['items'] = mapItems(json.loads(data))
+
+                title = os.path.basename(
+                    self.url.strip()) or "Quizlet Flashcards"
+                m = re.search(r'<title>(.+?)</title>', r.text)
+                if m:
+                    title = m.group(1)
+                    title = re.sub(r' \| Quizlet$', '', title)
+                    title = re.sub(r'^Flashcards ', '', title)
+                    title = re.sub(r'\s+', ' ', title)
+                    title = title.strip()
+                self.results['title'] = title
+            except requests.HTTPError as e:
+                if proxyRetry == True:
+                    proxyRetry = False
+                    continue
+                else:
+                    self.error = True
+                    self.errorCode = e.response.status_code
+                    self.errorMessage = e.response.text
+                    if "CF-Chl-Bypass" in e.response.headers:
+                        self.errorCaptcha = True
+            except ValueError as e:
+                if proxyRetry == True:
+                    proxyRetry = False
+                    continue
+                else:
+                    self.error = True
+                    self.errorMessage = "Invalid json1: {0}".format(e)
+            except Exception as e:
+                if proxyRetry == True:
+                    proxyRetry = False
+                    continue
+                else:
+                    self.error = True
+                    self.errorMessage = "{}\n-----------------\n{}".format(
+                        e, r.text)
+            break
+
         # yep, we got it
 
 # plugin was called from Anki
