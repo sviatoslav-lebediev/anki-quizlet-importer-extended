@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 #
 # Name:        Quizlet plugin for Anki 2.0
 # Purpose:     Import decks from Quizlet into Anki 2.0
@@ -43,29 +43,36 @@
 #
 #               Update 29/04/2020
 #               - suggest to disable VPN if a set is blocked by a captcha (by kelciour)
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 #!/usr/bin/env python
 
+import re
+import json
+import urllib.parse
+import time
+import math
+import sys
+import shutil
+import requests
+from aqt.utils import showText
+from aqt.qt import *
+from aqt import mw
+from operator import itemgetter
 __window = None
 
-import sys, math, time, urllib.parse, json, re
-from operator import itemgetter
 
 # Anki
-from aqt import mw
-from aqt.qt import *
-from aqt.utils import showText
 
-import requests
-import shutil
 
 requests.packages.urllib3.disable_warnings()
 
 headers = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
 }
 
 # add custom model if needed
+
+
 def addCustomModel(name, col):
 
     # create custom model for imported deck
@@ -86,12 +93,10 @@ def addCustomModel(name, col):
     # add cards
     t = mm.newTemplate("Normal")
 
-
     # front
     t['qfmt'] = "{{FrontText}}\n<br><br>\n{{FrontAudio}}"
     t['afmt'] = "{{FrontText}}\n<hr id=answer>\n{{BackText}}\n<br><br>\n{{Image}}\n<br><br>\n{{BackAudio}}"
     mm.addTemplate(m, t)
-
 
     # back
     t = mm.newTemplate("Reverse")
@@ -103,8 +108,11 @@ def addCustomModel(name, col):
     return m
 
 # throw up a window with some info (used for testing)
+
+
 def debug(message):
     QMessageBox.information(QWidget(), "Message", message)
+
 
 def getText(d, text=''):
     if d is None:
@@ -116,20 +124,24 @@ def getText(d, text=''):
                 if m['type'] in ['b', 'i', 'u']:
                     text = '<{0}>{1}</{0}>'.format(m['type'], text)
                 if 'attrs' in m:
-                    attrs = " ".join(['{}="{}"'.format(k, v) for k, v in m['attrs'].items()])
+                    attrs = " ".join(['{}="{}"'.format(k, v)
+                                     for k, v in m['attrs'].items()])
                     text = '<span {}>{}</span>'.format(attrs, text)
         return text
-    text = ''.join([getText(c) for c in d['content']]) if d.get('content') else ''
+    text = ''.join([getText(c) for c in d['content']]
+                   ) if d.get('content') else ''
     if d['type'] == 'paragraph':
         text = '<div>{}</div>'.format(text)
     return text
 
+
 def ankify(text):
-    text = text.replace('\n','<br>')
+    text = text.replace('\n', '<br>')
     text = text.replace('class="bgY"', 'style="background-color:#fff4e5;"')
     text = text.replace('class="bgB"', 'style="background-color:#cde7fa;"')
     text = text.replace('class="bgP"', 'style="background-color:#fde8ff;"')
     return text
+
 
 class QuizletWindow(QWidget):
 
@@ -154,39 +166,40 @@ class QuizletWindow(QWidget):
         # quizlet url field
         self.box_name = QHBoxLayout()
         self.label_url = QLabel("Quizlet URL:")
-        self.text_url = QLineEdit("",self)
+        self.text_url = QLineEdit("", self)
         self.text_url.setMinimumWidth(300)
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
 
-
         self.box_download_audio = QHBoxLayout()
-        self.value_download_audio = QCheckBox("",self)
-        self.value_download_audio.toggle();
+        self.value_download_audio = QCheckBox("", self)
+        self.value_download_audio.toggle()
         self.value_download_audio.setMinimumWidth(300)
         self.label_download_audio = QLabel("Download audio:")
         self.box_download_audio.addWidget(self.label_download_audio)
         self.box_download_audio.addWidget(self.value_download_audio)
 
         self.box_add_reverse = QHBoxLayout()
-        self.value_add_reverse = QCheckBox("",self)
+        self.value_add_reverse = QCheckBox("", self)
         self.value_add_reverse.setMinimumWidth(300)
         self.label_add_reverse = QLabel("Add reverse:")
         self.box_add_reverse.addWidget(self.label_add_reverse)
         self.box_add_reverse.addWidget(self.value_add_reverse)
 
         self.box_start_phrase = QHBoxLayout()
-        self.value_start_phrase = QLineEdit("",self)
+        self.value_start_phrase = QLineEdit("", self)
         self.value_start_phrase.setMinimumWidth(300)
-        self.value_start_phrase.setPlaceholderText('Start from this phrase. Can be empty')
+        self.value_start_phrase.setPlaceholderText(
+            'Start from this phrase. Can be empty')
         self.label_start_phrase = QLabel("Start Phrase:")
         self.box_start_phrase.addWidget(self.label_start_phrase)
         self.box_start_phrase.addWidget(self.value_start_phrase)
 
         self.box_stop_phrase = QHBoxLayout()
-        self.value_stop_phrase = QLineEdit("",self)
+        self.value_stop_phrase = QLineEdit("", self)
         self.value_stop_phrase.setMinimumWidth(300)
-        self.value_stop_phrase.setPlaceholderText('Stop after this phrase. Can be empty')
+        self.value_stop_phrase.setPlaceholderText(
+            'Stop after this phrase. Can be empty')
         self.label_stop_phrase = QLabel("Stop Phrase:")
         self.box_stop_phrase.addWidget(self.label_stop_phrase)
         self.box_stop_phrase.addWidget(self.value_stop_phrase)
@@ -217,7 +230,8 @@ class QuizletWindow(QWidget):
         self.box_upper.addLayout(self.box_right)
 
         # results label
-        self.label_results = QLabel("\r\n<i>Example: https://quizlet.com/150875612/usmle-flash-cards/</i>")
+        self.label_results = QLabel(
+            "\r\n<i>Example: https://quizlet.com/150875612/usmle-flash-cards/</i>")
 
         # add all widgets to top layout
         self.box_top.addLayout(self.box_upper)
@@ -258,9 +272,10 @@ class QuizletWindow(QWidget):
             self.label_results.setText("Oops! Please use the full deck URL :(")
             return
         elif not bool(re.search(r'\d', quizletDeckID)):
-            self.label_results.setText("Oops! No deck ID found in path <i>{0}</i> :(".format(quizletDeckID))
+            self.label_results.setText(
+                "Oops! No deck ID found in path <i>{0}</i> :(".format(quizletDeckID))
             return
-        else: # get first set of digits from url path
+        else:  # get first set of digits from url path
             quizletDeckID = re.search(r"\d+", quizletDeckID).group(0)
 
         # and aaawaaaay we go...
@@ -281,23 +296,28 @@ class QuizletWindow(QWidget):
         if self.thread.error:
             if self.thread.errorCode == 403:
                 if self.thread.errorCaptcha:
-                    self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")
+                    self.label_results.setText(
+                        "Sorry, it's behind a captcha. Try to disable VPN")
                 else:
-                    self.label_results.setText("Sorry, this is a private deck :(")
+                    self.label_results.setText(
+                        "Sorry, this is a private deck :(")
             elif self.thread.errorCode == 404:
-                self.label_results.setText("Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
+                self.label_results.setText(
+                    "Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
             else:
                 self.label_results.setText("Unknown Error")
                 # errorMessage = json.loads(self.thread.errorMessage)
                 # showText(json.dumps(errorMessage, indent=4))
                 showText(self.thread.errorMessage)
-        else: # everything went through, let's roll!
+        else:  # everything went through, let's roll!
             deck = self.thread.results
             # self.label_results.setText(("Importing deck {0} by {1}...".format(deck["title"], deck["created_by"])))
-            self.label_results.setText(("Importing deck {0}...".format(deck["title"])))
+            self.label_results.setText(
+                ("Importing deck {0}...".format(deck["title"])))
             self.createDeck(deck)
             # self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards by <i>{2}</i>)".format(deck["title"], deck["term_count"], deck["created_by"])))
-            self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
+            self.label_results.setText(
+                ("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
 
         # self.thread.terminate()
         self.thread = None
@@ -311,7 +331,7 @@ class QuizletWindow(QWidget):
         else:
             name = result['title']
 
-        items= result['items']
+        items = result['items']
         progress = 0
 
         result['term_count'] = len(items)
@@ -347,26 +367,30 @@ class QuizletWindow(QWidget):
                 note["BackText"] = ankify(note["BackText"])
 
                 if item.get('termAudio') and downloadAudio:
-                    file_name = self.fileDownloader(self.getAudioUrl(item['termAudio']), str(item["id"]) + "-front.mp3")
-                    note["FrontAudio"] = "[sound:" + file_name +"]"
+                    file_name = self.fileDownloader(self.getAudioUrl(
+                        item['termAudio']), str(item["id"]) + "-front.mp3")
+                    note["FrontAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('definitionAudio') and downloadAudio:
-                    file_name = self.fileDownloader(self.getAudioUrl(item["definitionAudio"]), str(item["id"]) + "-back.mp3")
-                    note["BackAudio"] = "[sound:" + file_name +"]"
+                    file_name = self.fileDownloader(self.getAudioUrl(
+                        item["definitionAudio"]), str(item["id"]) + "-back.mp3")
+                    note["BackAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('imageUrl'):
                     file_name = self.fileDownloader(item["imageUrl"])
-                    note["Image"] += '<div><img src="{0}"></div>'.format(file_name)
+                    note["Image"] += '<div><img src="{0}"></div>'.format(
+                        file_name)
 
                     mw.app.processEvents()
 
-                if  addReverse:
+                if addReverse:
                     note["Add Reverse"] = "True"
 
                 mw.col.addNote(note)
 
                 progress += 1
-                self.label_results.setText(("Imported {0}/{1}".format(progress, len(items))))
+                self.label_results.setText(
+                    ("Imported {0}/{1}".format(progress, len(items))))
                 mw.app.processEvents()
 
             if not "".__eq__(stopPhrase) and (stopPhrase == item["term"] or stopPhrase == item["definition"]):
@@ -375,13 +399,14 @@ class QuizletWindow(QWidget):
         mw.col.reset()
         mw.reset()
 
-    def getAudioUrl (self, word_audio):
+    def getAudioUrl(self, word_audio):
         return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
 
     # download the images
     def fileDownloader(self, url, suffix=''):
         url = url.replace('_m', '')
-        file_name = "quizlet-" + suffix if suffix else  "quizlet-" + url.split('/')[-1]
+        file_name = "quizlet-" + \
+            suffix if suffix else "quizlet-" + url.split('/')[-1]
         # get original, non-mobile version of images
         r = requests.get(url, stream=True, verify=False, headers=headers)
         if r.status_code == 200:
@@ -390,17 +415,20 @@ class QuizletWindow(QWidget):
                 shutil.copyfileobj(r.raw, f)
         return file_name
 
+
 def parseTextItem(item):
     return getText(item["richText"], item["plainText"])
 
+
 def mapItems(jsonData):
-    studiableItems = itemgetter('studiableItems')(jsonData['studiableDocumentData'])
+    studiableItems = itemgetter('studiableItems')(
+        jsonData['studiableDocumentData'])
     result = []
 
     for studiableItem in studiableItems:
-        image= None
-        term_audio= None
-        definition_audio= None
+        image = None
+        term_audio = None
+        definition_audio = None
 
         for side in studiableItem["cardSides"]:
             if (side["label"] == "word"):
@@ -439,6 +467,7 @@ def mapItems(jsonData):
 
     return result
 
+
 class QuizletDownloader(QThread):
 
     # thread that downloads results from the Quizlet API
@@ -462,14 +491,15 @@ class QuizletDownloader(QThread):
 
             cookies = {}
             if config["qlts"]:
-                cookies = { "qlts": config["qlts"] }
+                cookies = {"qlts": config["qlts"]}
             elif config["cookies"]:
                 from http.cookies import SimpleCookie
                 C = SimpleCookie()
                 C.load(config["cookies"])
-                cookies = { key: morsel.value for key, morsel in C.items() }
+                cookies = {key: morsel.value for key, morsel in C.items()}
 
-            r = requests.get(self.url, verify=False, headers=headers, cookies=cookies)
+            r = requests.get(self.url, verify=False,
+                             headers=headers, cookies=cookies)
             r.raise_for_status()
 
             regex = re.escape('window.Quizlet["setPasswordData"]')
@@ -524,9 +554,12 @@ class QuizletDownloader(QThread):
         # yep, we got it
 
 # plugin was called from Anki
+
+
 def runQuizletPlugin():
     global __window
     __window = QuizletWindow()
+
 
 # create menu item in Anki
 action = QAction("Import from Quizlet", mw)
