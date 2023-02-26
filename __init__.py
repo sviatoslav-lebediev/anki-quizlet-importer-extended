@@ -49,9 +49,6 @@
 import re
 import json
 import urllib.parse
-import time
-import math
-import sys
 import shutil
 import requests
 from aqt.utils import showText
@@ -61,14 +58,11 @@ from operator import itemgetter
 
 __window = None
 
-
 # Anki
-
-
 requests.packages.urllib3.disable_warnings()
 
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 }
 
 # add custom model if needed
@@ -422,8 +416,10 @@ def parseTextItem(item):
 
 
 def mapItems(jsonData):
-    studiableItems = itemgetter('studiableItems')(
-        jsonData['studiableDocumentData'])
+    studiableDocumentData = jsonData['studiableDocumentData']
+    setIdToDiagramImage = itemgetter(
+        'setIdToDiagramImage')(studiableDocumentData)
+    studiableItems = itemgetter('studiableItems')(studiableDocumentData)
     result = []
 
     for studiableItem in studiableItems:
@@ -454,8 +450,15 @@ def mapItems(jsonData):
                         if media["ttsUrl"] and definition_audio == None:
                             definition_audio = media["ttsUrl"]
 
-                    if media["type"] == 2:
+                    if (media["type"] == 2) and (image == None):
                         image = media["url"]
+
+            # partial shape support
+            if (side["label"] == "location"):
+                for media in side["media"]:
+                    if (media["type"] == 5) and (image == None):
+                        image = setIdToDiagramImage[str(
+                            studiableItem["studiableContainerId"])]["url"]
 
         result.append({
             "id": studiableItem["id"],
