@@ -504,7 +504,9 @@ class QuizletDownloader(QThread):
                     C = SimpleCookie()
                     C.load(config["cookies"])
                     cookies = {key: morsel.value for key, morsel in C.items()}
-                url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + self.url
+
+                url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
+                    urllib.parse.quote(self.url, safe='()*!\'')
                 r = requests.get(url, verify=False,
                                  headers=headers, cookies=cookies)
                 r.raise_for_status()
