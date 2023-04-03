@@ -10,39 +10,21 @@
 # Created:     04/07/2017
 #
 # Changlog:    Inital release
-#               - Rolph's plugin functionality was broken, so...
-#               - removed search tables and associated functions to KISS
-#               - reused the original API key, dunno if that's OK
-#               - replaced with just one box, for a quizlet URL
-#               - added basic error handling for dummies
-#
-#               Update 04/09/2017
-#               - modified to now take a full Quizlet url for ease of use
-#               - provide feedback if trying to download a private deck
-#               - return RFC 2616 response codes when error handling
-#               - don't make a new card type every time a new deck imported
-#               - better code documentation so people can modify it
-#
-#               Update 01/31/2018
-#               - get original quality images instead of mobile version
-#
-#               Update 09/12/2018
-#               - updated to Anki 2.1 (by kelciour)
-#
-#               Update 04/02/2020
-#               - download a set without API key since it's no longer working (by kelciour)
-#
-#               Update 19/02/2020
-#               - download private or password-protected sets using cookies (by kelciour)
-#
-#               Update 25/02/2020
-#               - make it work again by adding the User-Agent header (by kelciour)
-#
-#               Update 14/04/2020
-#               - try to get title from HTML a bit differently (by kelciour)
-#
-#               Update 29/04/2020
-#               - suggest to disable VPN if a set is blocked by a captcha (by kelciour)
+# * 2023-04-02 parser improvements
+# * 2023-02-26 partial shapes support
+# * 2022-10-30 add a proxy retry
+# * 2022-05-15 add a rich text support
+# * 2022-05-12 custom media folder fix (thx, https://github.com/mhujer)
+# * 2022-04-20 add an "Add reverse" option
+# * 2022-04-18 fix issue with original audio
+# * 2022-04-17 fix issue with images/audio
+# * 2022-04-10 fix mapping algorithm (thx, https://github.com/mhujer)
+# * 2020-09-10 update audio download algorithm
+# * 2020-09-08 have fixed audio download for special decks :)
+# * 2020-09-06 have fixed a partial import. shame on me :)
+# * 2020-09-05 made an audio download optional
+# * 2020-09-05 update a quizlet parser
+
 # -------------------------------------------------------------------------------
 #!/usr/bin/env python
 
