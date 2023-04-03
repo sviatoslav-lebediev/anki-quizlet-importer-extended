@@ -1,7 +1,10 @@
 import re
 import json
-from operator import itemgetter
-__window = None
+import requests
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
+}
 
 
 def getText(d, text=''):
@@ -43,9 +46,10 @@ def parseAudioUrlItem(item):
 
 def mapItems(jsonData):
     studiableDocumentData = jsonData['studiableDocumentData']
-    setIdToDiagramImage = itemgetter(
-        'setIdToDiagramImage')(studiableDocumentData)
-    studiableItems = itemgetter('studiableItems')(studiableDocumentData)
+    setIdToDiagramImage = studiableDocumentData.get(
+        'setIdToDiagramImage', None)
+    studiableItems = studiableDocumentData.get(
+        'studiableItems', studiableDocumentData.get('studiableItem'))
     result = []
     image = None
     term_audio = None
@@ -121,6 +125,27 @@ def mapItems(jsonData):
     return result
 
 
+def getUnofficialApiData():
+    quizletDeckID = 363366586
+    deckUrl = 'https://quizlet.com/webapi/3.9/sets/{0}'.format(
+        quizletDeckID)
+    itemsUrl = 'https://quizlet.com/webapi/3.9/studiable-item-documents?filters%5BstudiableContainerId%5D={0}&filters%5BstudiableContainerType%5D=1&perPage={1}&page=1'.format(
+        quizletDeckID, 2000)
+
+    deckResponse = requests.get(deckUrl, verify=False, headers=headers)
+    itemsResponse = requests.get(
+        itemsUrl, verify=False, headers=headers)
+
+    rawJson = {"studiableDocumentData": json.loads(
+        itemsResponse.text)["responses"][0]["models"]}
+
+    items = mapItems(rawJson)
+    title = json.loads(deckResponse.text)["responses"][
+        0]['models']['set'][0]['title']
+
+    print(json.dumps(items, indent=4, sort_keys=True))
+
+
 def run():
     try:
         text = None
@@ -173,4 +198,4 @@ def run():
     # yep, we got it
 
 
-run()
+getUnofficialApiData()

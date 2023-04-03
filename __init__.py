@@ -280,7 +280,7 @@ class QuizletWindow(QWidget):
         deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
 
         # download the data!
-        self.thread = QuizletDownloader(self, deck_url)
+        self.thread = QuizletDownloader(self, deck_url, quizletDeckID)
         self.thread.start()
 
         while not self.thread.isFinished():
@@ -417,9 +417,10 @@ def parseTextItem(item):
 
 def mapItems(jsonData):
     studiableDocumentData = jsonData['studiableDocumentData']
-    setIdToDiagramImage = itemgetter(
-        'setIdToDiagramImage')(studiableDocumentData)
-    studiableItems = itemgetter('studiableItems')(studiableDocumentData)
+    setIdToDiagramImage = studiableDocumentData.get(
+        'setIdToDiagramImage', None)
+    studiableItems = studiableDocumentData.get(
+        'studiableItems', studiableDocumentData.get('studiableItem'))
     result = []
 
     for studiableItem in studiableItems:
@@ -475,12 +476,13 @@ def mapItems(jsonData):
 class QuizletDownloader(QThread):
 
     # thread that downloads results from the Quizlet API
-    def __init__(self, window, url):
+    def __init__(self, window, url, quizletDeckID):
         super(QuizletDownloader, self).__init__()
         self.window = window
 
         self.url = url
         self.results = None
+        self.quizletDeckID = quizletDeckID
 
         self.error = False
         self.errorCode = None
@@ -488,7 +490,34 @@ class QuizletDownloader(QThread):
         self.errorReason = None
         self.errorMessage = None
 
-    def run(self):
+    def getDataFromApi(self):
+        try:
+            deckUrl = 'https://quizlet.com/webapi/3.9/sets/{0}'.format(
+                self.quizletDeckID)
+            # TODO download more than 1000 items
+            itemsUrl = 'https://quizlet.com/webapi/3.9/studiable-item-documents?filters%5BstudiableContainerId%5D={0}&filters%5BstudiableContainerType%5D=1&perPage={1}&page=1'.format(
+                self.quizletDeckID, 1000)
+
+            deckResponse = requests.get(deckUrl, verify=False, headers=headers)
+            itemsResponse = requests.get(
+                itemsUrl, verify=False, headers=headers)
+
+            rawJson = {"studiableDocumentData": json.loads(
+                itemsResponse.text)["responses"][0]["models"]}
+
+            items = mapItems(rawJson)
+            title = json.loads(deckResponse.text)["responses"][
+                0]['models']['set'][0]['title']
+
+            self.results = {}
+            self.results['items'] = items
+            self.results['title'] = title
+        except Exception as e:
+            self.error = True
+            self.errorMessage = "{}\n-----------------\n{}".format(
+                e, itemsResponse.text)
+
+    def getDataFromPage(self):
         proxyRetry = True
 
         while True:
@@ -579,8 +608,13 @@ class QuizletDownloader(QThread):
                     self.errorMessage = "{}\n-----------------\n{}".format(
                         e, r.text)
             break
-
         # yep, we got it
+
+    def run(self):
+        self.getDataFromPage()
+
+        if (self.error):
+            self.getDataFromApi()
 
 # plugin was called from Anki
 
