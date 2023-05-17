@@ -1,6 +1,6 @@
 import re
 import json
-import requests
+
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36"
@@ -150,7 +150,7 @@ def run():
     try:
         text = None
         results = None
-        with open('./examples/1.html', 'r') as file:
+        with open('./examples/diagram.html', 'r') as file:
             text = file.read()
 
         regex = re.escape('window.Quizlet["setPasswordData"]')
@@ -198,4 +198,4 @@ def run():
     # yep, we got it
 
 
-getUnofficialApiData()
+run()
