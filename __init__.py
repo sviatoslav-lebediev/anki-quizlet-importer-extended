@@ -144,6 +144,7 @@ class QuizletWindow(QWidget):
 
         # left side
         self.box_left = QVBoxLayout()
+        self.check_boxes = QHBoxLayout()
 
         # quizlet url field
         self.box_name = QHBoxLayout()
@@ -156,17 +157,25 @@ class QuizletWindow(QWidget):
         self.box_download_audio = QHBoxLayout()
         self.value_download_audio = QCheckBox("", self)
         self.value_download_audio.toggle()
-        self.value_download_audio.setMinimumWidth(300)
         self.label_download_audio = QLabel("Download audio:")
         self.box_download_audio.addWidget(self.label_download_audio)
         self.box_download_audio.addWidget(self.value_download_audio)
 
         self.box_add_reverse = QHBoxLayout()
         self.value_add_reverse = QCheckBox("", self)
-        self.value_add_reverse.setMinimumWidth(300)
         self.label_add_reverse = QLabel("Add reverse:")
         self.box_add_reverse.addWidget(self.label_add_reverse)
         self.box_add_reverse.addWidget(self.value_add_reverse)
+
+        self.box_skip_errors = QHBoxLayout()
+        self.value_skip_errors = QCheckBox("", self)
+        self.value_skip_errors.setToolTip(
+            'Will skip audio/images download errors')
+        self.label_skip_errors = QLabel("Skip errors:")
+        self.label_skip_errors.setToolTip(
+            'Will skip audio/images download errors')
+        self.box_skip_errors.addWidget(self.label_skip_errors)
+        self.box_skip_errors.addWidget(self.value_skip_errors)
 
         self.box_start_phrase = QHBoxLayout()
         self.value_start_phrase = QLineEdit("", self)
@@ -188,8 +197,12 @@ class QuizletWindow(QWidget):
 
         # add layouts to left
         self.box_left.addLayout(self.box_name)
-        self.box_left.addLayout(self.box_download_audio)
-        self.box_left.addLayout(self.box_add_reverse)
+        self.box_left.addLayout(self.check_boxes)
+        self.check_boxes.addLayout(self.box_download_audio)
+        self.check_boxes.addLayout(self.box_add_reverse)
+        self.check_boxes.addLayout(self.box_skip_errors)
+        self.check_boxes.addStretch()
+
         self.box_left.addLayout(self.box_start_phrase)
         self.box_left.addLayout(self.box_stop_phrase)
 
@@ -199,12 +212,13 @@ class QuizletWindow(QWidget):
         # code (import set) button
         self.box_code = QHBoxLayout()
         self.button_code = QPushButton("Import Deck", self)
-        self.box_code.addStretch(1)
+        # self.box_code.addStretch(1)
         self.box_code.addWidget(self.button_code)
         self.button_code.clicked.connect(self.onCode)
 
         # add layouts to right
         self.box_right.addLayout(self.box_code)
+        self.box_right.addStretch()
 
         # add left and right layouts to upper
         self.box_upper.addLayout(self.box_left)
@@ -351,17 +365,20 @@ class QuizletWindow(QWidget):
                 if item.get('termAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
                         item['termAudio']), str(item["id"]) + "-front.mp3")
-                    note["FrontAudio"] = "[sound:" + file_name + "]"
+                    if file_name:
+                        note["FrontAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('definitionAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
                         item["definitionAudio"]), str(item["id"]) + "-back.mp3")
-                    note["BackAudio"] = "[sound:" + file_name + "]"
+                    if file_name:
+                        note["BackAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('imageUrl'):
                     file_name = self.fileDownloader(item["imageUrl"])
-                    note["Image"] += '<div><img src="{0}"></div>'.format(
-                        file_name)
+                    if file_name:
+                        note["Image"] += '<div><img src="{0}"></div>'.format(
+                            file_name)
 
                     mw.app.processEvents()
 
@@ -386,15 +403,21 @@ class QuizletWindow(QWidget):
 
     # download the images
     def fileDownloader(self, url, suffix=''):
+        skip_errors = self.value_skip_errors.isChecked()
         url = url.replace('_m', '')
         file_name = "quizlet-" + \
             suffix if suffix else "quizlet-" + url.split('/')[-1]
-        # get original, non-mobile version of images
-        r = urllib2.urlopen(urllib2.Request(url, headers=headers))
-        if r.getcode() == 200:
-            with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
-                f.write(r.read())
-        return file_name
+        try:
+            r = urllib2.urlopen(urllib2.Request(url, headers=headers))
+            if r.getcode() == 200:
+                with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
+                    f.write(r.read())
+            return file_name
+        except urllib2.HTTPError as e:
+            if skip_errors:
+                return None
+            else:
+                raise e
 
 
 def parseTextItem(item):
