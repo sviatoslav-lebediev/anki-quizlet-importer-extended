@@ -31,8 +31,8 @@
 import re
 import json
 import urllib.parse
-import shutil
 import requests
+import webbrowser
 from aqt.utils import showText
 from aqt.qt import *
 from aqt import mw
@@ -126,7 +126,6 @@ def ankify(text):
 
 
 class QuizletWindow(QWidget):
-
     # main window of Quizlet plugin
     def __init__(self):
         super(QuizletWindow, self).__init__()
@@ -146,11 +145,44 @@ class QuizletWindow(QWidget):
         self.box_left = QVBoxLayout()
         self.check_boxes = QHBoxLayout()
 
+        self.box_incoming_html = QHBoxLayout()
+        self.box_incoming_html_left = QVBoxLayout()
+        self.box_incoming_html_right = QHBoxLayout()
+
+        self.value_incoming_html = QTextEdit("", self)
+        self.value_incoming_html.setMinimumWidth(300)
+        self.value_incoming_html.setPlaceholderText(
+            """Enter page html if you constantly receive errors
+
+1.Enter the url
+2.Click on the 'Open page' button
+3.Right click, 'View page source'
+4.Copy the html
+5.If you don't need audio, uncheck the box
+""")
+
+        self.label_incoming_html = QLabel("Page html:")
+        self.label_incoming_html.setMinimumWidth(98)
+        self.button_html = QPushButton("Open html", self)
+        self.button_html.clicked.connect(self.onHmtl)
+
+        self.box_incoming_html_left.addWidget(self.label_incoming_html)
+        self.box_incoming_html_left.addWidget(self.button_html)
+        self.box_incoming_html_left.addStretch()
+
+        self.box_incoming_html_right.addWidget(self.value_incoming_html)
+        self.box_incoming_html.addLayout(self.box_incoming_html_left)
+        self.box_incoming_html.addLayout(self.box_incoming_html_right)
+
         # quizlet url field
         self.box_name = QHBoxLayout()
         self.label_url = QLabel("Quizlet URL:")
         self.text_url = QLineEdit("", self)
         self.text_url.setMinimumWidth(300)
+        self.text_url.setFocusPolicy(Qt.StrongFocus)
+        self.text_url.setFocus()
+
+        self.label_url.setMinimumWidth(100)
         self.box_name.addWidget(self.label_url)
         self.box_name.addWidget(self.text_url)
 
@@ -158,6 +190,7 @@ class QuizletWindow(QWidget):
         self.value_download_audio = QCheckBox("", self)
         self.value_download_audio.toggle()
         self.label_download_audio = QLabel("Download audio:")
+        self.label_download_audio.setMinimumWidth(100)
         self.box_download_audio.addWidget(self.label_download_audio)
         self.box_download_audio.addWidget(self.value_download_audio)
 
@@ -183,6 +216,7 @@ class QuizletWindow(QWidget):
         self.value_start_phrase.setPlaceholderText(
             'Start from this phrase. Can be empty')
         self.label_start_phrase = QLabel("Start Phrase:")
+        self.label_start_phrase.setMinimumWidth(100)
         self.box_start_phrase.addWidget(self.label_start_phrase)
         self.box_start_phrase.addWidget(self.value_start_phrase)
 
@@ -192,6 +226,7 @@ class QuizletWindow(QWidget):
         self.value_stop_phrase.setPlaceholderText(
             'Stop after this phrase. Can be empty')
         self.label_stop_phrase = QLabel("Stop Phrase:")
+        self.label_stop_phrase.setMinimumWidth(100)
         self.box_stop_phrase.addWidget(self.label_stop_phrase)
         self.box_stop_phrase.addWidget(self.value_stop_phrase)
 
@@ -205,6 +240,7 @@ class QuizletWindow(QWidget):
 
         self.box_left.addLayout(self.box_start_phrase)
         self.box_left.addLayout(self.box_stop_phrase)
+        self.box_left.addLayout(self.box_incoming_html)
 
         # right side
         self.box_right = QVBoxLayout()
@@ -236,23 +272,32 @@ class QuizletWindow(QWidget):
         self.setLayout(self.box_top)
 
         # go, baby go!
-        self.setMinimumWidth(500)
+        self.setMinimumWidth(400)
         self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.setWindowTitle("Improved Quizlet to Anki Importer")
         self.show()
 
-    def onCode(self):
+    def onHmtl(self):
+        """
+        Opens the flascards html page in browser
+        """
+        quizletDeckID = self.getQuizletDeckID()
 
+        if quizletDeckID == None:
+            return
+
+        webbrowser.open(
+            "https://quizlet.com/{}/flashcards".format(quizletDeckID))
+
+    def getQuizletDeckID(self):
         # grab url input
         url = self.text_url.text()
 
         # voodoo needed for some error handling
         if urllib.parse.urlparse(url).scheme:
             urlDomain = urllib.parse.urlparse(url).netloc
-            urlPath = urllib.parse.urlparse(url).path
         else:
             urlDomain = urllib.parse.urlparse("https://"+url).netloc
-            urlPath = urllib.parse.urlparse("https://"+url).path
 
         # validate quizlet URL
         if url == "":
@@ -262,8 +307,14 @@ class QuizletWindow(QWidget):
             self.label_results.setText("Oops! That's not a Quizlet URL :(")
             return
 
+        # voodoo needed for some error handling
+        if urllib.parse.urlparse(url).scheme:
+            urlPath = urllib.parse.urlparse(url).path
+        else:
+            urlPath = urllib.parse.urlparse("https://"+url).path
         # validate and set Quizlet deck ID
         quizletDeckID = urlPath.strip("/")
+
         if quizletDeckID == "":
             self.label_results.setText("Oops! Please use the full deck URL :(")
             return
@@ -274,6 +325,15 @@ class QuizletWindow(QWidget):
         else:  # get first set of digits from url path
             quizletDeckID = re.search(r"\d+", quizletDeckID).group(0)
 
+        return quizletDeckID
+
+    def onCode(self):
+        html = self.value_incoming_html.toPlainText()
+        quizletDeckID = self.getQuizletDeckID()
+
+        if quizletDeckID == None:
+            return
+
         # and aaawaaaay we go...
         self.label_results.setText("Connecting to Quizlet...")
 
@@ -281,7 +341,7 @@ class QuizletWindow(QWidget):
         deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
 
         # download the data!
-        self.thread = QuizletDownloader(self, deck_url, quizletDeckID)
+        self.thread = QuizletDownloader(self, deck_url, quizletDeckID, html)
         self.thread.start()
 
         while not self.thread.isFinished():
@@ -485,12 +545,13 @@ def mapItems(jsonData):
 class QuizletDownloader(QThread):
 
     # thread that downloads results from the Quizlet API
-    def __init__(self, window, url, quizletDeckID):
+    def __init__(self, window, url, quizletDeckID, html):
         super(QuizletDownloader, self).__init__()
         self.window = window
 
         self.url = url
         self.results = None
+        self.html = html
         self.quizletDeckID = quizletDeckID
 
         self.error = False
@@ -543,15 +604,21 @@ class QuizletDownloader(QThread):
                     C.load(config["cookies"])
                     cookies = {key: morsel.value for key, morsel in C.items()}
 
-                url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
-                    urllib.parse.quote(self.url, safe='()*!\'')
-                r = requests.get(url, verify=False,
-                                 headers=headers, cookies=cookies)
-                r.raise_for_status()
+                page_html = ''
+
+                if self.html:
+                    page_html = self.html
+                else:
+                    url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
+                        urllib.parse.quote(self.url, safe='()*!\'')
+                    r = requests.get(url, verify=False,
+                                     headers=headers, cookies=cookies)
+                    r.raise_for_status()
+                    page_html = r.text
 
                 regex = re.escape('window.Quizlet["setPasswordData"]')
 
-                if re.search(regex, r.text):
+                if re.search(regex, page_html):
                     if (proxyRetry):
                         proxyRetry = False
                         continue
@@ -563,19 +630,19 @@ class QuizletDownloader(QThread):
                 regex = re.escape('window.Quizlet["setPageData"] = ')
                 regex += r'(.+?)'
                 regex += re.escape('; QLoad("Quizlet.setPageData");')
-                m = re.search(regex, r.text)
+                m = re.search(regex, page_html)
 
                 if not m:
                     regex = re.escape('window.Quizlet["assistantModeData"] = ')
                     regex += r'(.+?)'
                     regex += re.escape('; QLoad("Quizlet.assistantModeData");')
-                    m = re.search(regex, r.text)
+                    m = re.search(regex, page_html)
 
                 if not m:
                     regex = re.escape('window.Quizlet["cardsModeData"] = ')
                     regex += r'(.+?)'
                     regex += re.escape('; QLoad("Quizlet.cardsModeData");')
-                    m = re.search(regex, r.text)
+                    m = re.search(regex, page_html)
 
                 data = m.group(1).strip()
                 self.results = {}
@@ -583,7 +650,7 @@ class QuizletDownloader(QThread):
 
                 title = os.path.basename(
                     self.url.strip()) or "Quizlet Flashcards"
-                m = re.search(r'<title>(.+?)</title>', r.text)
+                m = re.search(r'<title>(.+?)</title>', page_html)
                 if m:
                     title = m.group(1)
                     title = re.sub(r' \| Quizlet$', '', title)
@@ -615,7 +682,7 @@ class QuizletDownloader(QThread):
                 else:
                     self.error = True
                     self.errorMessage = "{}\n-----------------\n{}".format(
-                        e, r.text)
+                        e, page_html)
             break
         # yep, we got it
 
