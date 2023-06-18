@@ -484,12 +484,7 @@ def parseTextItem(item):
     return getText(item["richText"], item["plainText"])
 
 
-def mapItems(jsonData):
-    studiableDocumentData = jsonData['studiableDocumentData']
-    setIdToDiagramImage = studiableDocumentData.get(
-        'setIdToDiagramImage', None)
-    studiableItems = studiableDocumentData.get(
-        'studiableItems', studiableDocumentData.get('studiableItem'))
+def mapItems(studiableItems, setIdToDiagramImage):
     result = []
 
     for studiableItem in studiableItems:
@@ -632,32 +627,65 @@ class QuizletDownloader(QThread):
                 regex += re.escape('; QLoad("Quizlet.setPageData");')
                 m = re.search(regex, page_html)
 
+                studiableItems = None
+                setIdToDiagramImage = None
+
                 if not m:
                     regex = re.escape('window.Quizlet["assistantModeData"] = ')
                     regex += r'(.+?)'
                     regex += re.escape('; QLoad("Quizlet.assistantModeData");')
                     m = re.search(regex, page_html)
+                    if m:
+                        data = json.loads(m.group(1).strip())
+                        studiableDocumentData = data['studiableDocumentData']
+                        setIdToDiagramImage = studiableDocumentData.get(
+                            'setIdToDiagramImage', None)
+                        studiableItems = studiableDocumentData.get(
+                            'studiableItems', studiableDocumentData.get('studiableItem'))
 
                 if not m:
                     regex = re.escape('window.Quizlet["cardsModeData"] = ')
                     regex += r'(.+?)'
                     regex += re.escape('; QLoad("Quizlet.cardsModeData");')
                     m = re.search(regex, page_html)
+                    if m:
+                        data = json.loads(m.group(1).strip())
+                        studiableDocumentData = data['studiableDocumentData']
+                        setIdToDiagramImage = studiableDocumentData.get(
+                            'setIdToDiagramImage', None)
+                        studiableItems = studiableDocumentData.get(
+                            'studiableItems', studiableDocumentData.get('studiableItem'))
 
-                data = m.group(1).strip()
+                if not m:
+                    regex = re.escape('dehydratedReduxStateKey":')
+                    regex += r'(.+?)'
+                    regex += re.escape('},"__N_SSP')
+                    m = re.search(regex, page_html)
+                    rawData = m.group(1).strip()
+                    data = json.loads(json.loads(rawData))
+                    studiableItems = data["studyModesCommon"]["studiableData"]["studiableItems"]
+                    setIdToDiagramImage = data["studyModesCommon"]["studiableData"]["setIdToDiagramImage"]
+
+                if not studiableItems:
+                    raise Exception("Can't extract data")
+
                 self.results = {}
-                self.results['items'] = mapItems(json.loads(data))
+                self.results['items'] = mapItems(
+                    studiableItems, setIdToDiagramImage)
 
                 title = os.path.basename(
                     self.url.strip()) or "Quizlet Flashcards"
                 m = re.search(r'<title>(.+?)</title>', page_html)
+
                 if m:
                     title = m.group(1)
                     title = re.sub(r' \| Quizlet$', '', title)
                     title = re.sub(r'^Flashcards ', '', title)
                     title = re.sub(r'\s+', ' ', title)
                     title = title.strip()
+
                 self.results['title'] = title
+
             except requests.HTTPError as e:
                 if proxyRetry == True:
                     proxyRetry = False
@@ -676,7 +704,7 @@ class QuizletDownloader(QThread):
                     self.error = True
                     self.errorMessage = "Invalid json1: {0}".format(e)
             except Exception as e:
-                if proxyRetry == True:
+                if proxyRetry == True and not self.html:
                     proxyRetry = False
                     continue
                 else:

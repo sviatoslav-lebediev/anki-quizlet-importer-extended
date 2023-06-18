@@ -1,5 +1,6 @@
 import re
 import json
+import ast
 
 
 headers = {
@@ -44,12 +45,11 @@ def parseAudioUrlItem(item):
     return item["text"]["ttsUrl"]
 
 
-def mapItems(jsonData):
-    studiableDocumentData = jsonData['studiableDocumentData']
-    setIdToDiagramImage = studiableDocumentData.get(
-        'setIdToDiagramImage', None)
-    studiableItems = studiableDocumentData.get(
-        'studiableItems', studiableDocumentData.get('studiableItem'))
+def mapItems(studiableItems, setIdToDiagramImage):
+    # setIdToDiagramImage = studiableDocumentData.get(
+    #     'setIdToDiagramImage', None)
+    # studiableItems = studiableDocumentData.get(
+    #     'studiableItems', studiableDocumentData.get('studiableItem'))
     result = []
     image = None
     term_audio = None
@@ -92,27 +92,6 @@ def mapItems(jsonData):
                         image = setIdToDiagramImage[str(
                             studiableItem["studiableContainerId"])]["url"]
 
-    # "studiableDocumentData": {
-    #     "setIdToDiagramImage": {
-    #         "363366586": {
-    #             "code": "FptcNGFe5ZbXby45",
-    #             "height": 750,
-    #             "url": "https://o.quizlet.com/eQYBl8GJvHXbLeXJ3nd0Zw_b.png",
-    #             "width": 999
-    #         }
-    #     },
-            # if term == 'Where is Paragonimus westermani found?':
-            #         print ("yep", term_audio)
-            #         print ({
-            #             "id": studiableItem["id"],
-            #             "term": term,
-            #             "termAudio": term_audio,
-            #             "definition": definition,
-            #             "definitionAudio": definition_audio,
-            #             "imageUrl": image
-            #             })
-            #         quit()
-
         result.append({
             "id": studiableItem["id"],
             "term": term,
@@ -150,7 +129,7 @@ def run():
     try:
         text = None
         results = None
-        with open('./examples/diagram.html', 'r') as file:
+        with open('./examples/2.html', 'r') as file:
             text = file.read()
 
         regex = re.escape('window.Quizlet["setPasswordData"]')
@@ -163,21 +142,50 @@ def run():
         regex += re.escape('; QLoad("Quizlet.setPageData");')
         m = re.search(regex, text)
 
+        studiableItems = None
+        setIdToDiagramImage = None
+
         if not m:
             regex = re.escape('window.Quizlet["assistantModeData"] = ')
             regex += r'(.+?)'
             regex += re.escape('; QLoad("Quizlet.assistantModeData");')
             m = re.search(regex, text)
+            if m:
+                data = json.loads(m.group(1).strip())
+                studiableDocumentData = data['studiableDocumentData']
+                setIdToDiagramImage = studiableDocumentData.get(
+                    'setIdToDiagramImage', None)
+                studiableItems = studiableDocumentData.get(
+                    'studiableItems', studiableDocumentData.get('studiableItem'))
 
         if not m:
             regex = re.escape('window.Quizlet["cardsModeData"] = ')
             regex += r'(.+?)'
             regex += re.escape('; QLoad("Quizlet.cardsModeData");')
             m = re.search(regex, text)
+            if m:
+                data = json.loads(m.group(1).strip())
+                studiableDocumentData = data['studiableDocumentData']
+                setIdToDiagramImage = studiableDocumentData.get(
+                    'setIdToDiagramImage', None)
+                studiableItems = studiableDocumentData.get(
+                    'studiableItems', studiableDocumentData.get('studiableItem'))
 
-        data = m.group(1).strip()
+        if not m:
+            regex = re.escape('dehydratedReduxStateKey":')
+            regex += r'(.+?)'
+            regex += re.escape('},"__N_SSP')
+            m = re.search(regex, text)
+            rawData = m.group(1).strip()
+            data = json.loads(json.loads(rawData))
+            studiableItems = data["studyModesCommon"]["studiableData"]["studiableItems"]
+            setIdToDiagramImage = data["studyModesCommon"]["studiableData"]["setIdToDiagramImage"]
+
+        if not studiableItems:
+            raise Exception("Can't extract data")
+
         results = {}
-        results['items'] = mapItems(json.loads(data))
+        results['items'] = mapItems(studiableItems, setIdToDiagramImage)
 
         m = re.search(r'<title>(.+?)</title>', text)
         if m:
