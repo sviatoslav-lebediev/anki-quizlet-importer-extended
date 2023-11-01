@@ -179,7 +179,10 @@ class QuizletWindow(QWidget):
         self.label_url = QLabel("Quizlet URL:")
         self.text_url = QLineEdit("", self)
         self.text_url.setMinimumWidth(300)
-        self.text_url.setFocusPolicy(Qt.StrongFocus)
+
+        if hasattr(Qt, "StrongFocus"):
+            self.text_url.setFocusPolicy(Qt.StrongFocus)
+
         self.text_url.setFocus()
 
         self.label_url.setMinimumWidth(100)
