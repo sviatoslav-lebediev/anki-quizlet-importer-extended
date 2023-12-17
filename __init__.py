@@ -179,10 +179,7 @@ class QuizletWindow(QWidget):
         self.label_url = QLabel("Quizlet URL:")
         self.text_url = QLineEdit("", self)
         self.text_url.setMinimumWidth(300)
-
-        if hasattr(Qt, "StrongFocus"):
-            self.text_url.setFocusPolicy(Qt.StrongFocus)
-
+        self.text_url.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.text_url.setFocus()
 
         self.label_url.setMinimumWidth(100)
@@ -276,10 +273,7 @@ class QuizletWindow(QWidget):
 
         # go, baby go!
         self.setMinimumWidth(400)
-
-        if hasattr(QSizePolicy, "Minimum"):
-            self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-
+        self.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         self.setWindowTitle("Improved Quizlet to Anki Importer")
         self.show()
 
