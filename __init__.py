@@ -272,7 +272,7 @@ class QuizletWindow(QWidget):
         self.setLayout(self.box_top)
 
         # go, baby go!
-        self.setMinimumWidth(400)
+        self.setMinimumWidth(600)
         self.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         self.setWindowTitle("Improved Quizlet to Anki Importer")
         self.show()
