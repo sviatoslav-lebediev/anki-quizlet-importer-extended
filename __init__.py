@@ -459,7 +459,12 @@ class QuizletWindow(QWidget):
         mw.reset()
 
     def getAudioUrl(self, word_audio):
-        return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
+        if word_audio.startswith('http'):
+            return word_audio
+        else:
+            quizlet_url = urllib.parse.quote("https://quizlet.com/{0}".format(word_audio), safe='()*!\'');
+
+            return "https://quizlet-proxy.proto.click/quizlet-media?url={0}".format(quizlet_url)
 
     # download the images
     def fileDownloader(self, url, suffix=''):
