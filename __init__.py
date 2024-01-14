@@ -132,6 +132,7 @@ class QuizletWindow(QWidget):
 
         self.results = None
         self.thread = None
+        self.config = mw.addonManager.getConfig(__name__)
 
         self.initGUI()
 
@@ -246,10 +247,14 @@ class QuizletWindow(QWidget):
         self.box_right = QVBoxLayout()
 
         # code (import set) button
-        self.box_code = QHBoxLayout()
+        self.box_code = QVBoxLayout()
         self.button_code = QPushButton("Import Deck", self)
+        self.discussion_button = QPushButton("Audio fix discussion")
+        self.discussion_button.clicked.connect(self.onDiscussion)
+        self.discussion_button.setStyleSheet("QPushButton { text-align: left; color: #087FFF; text-decoration: underline; border: none; }")
         # self.box_code.addStretch(1)
         self.box_code.addWidget(self.button_code)
+        self.box_code.addWidget(self.discussion_button)
         self.button_code.clicked.connect(self.onCode)
 
         # add layouts to right
@@ -279,7 +284,7 @@ class QuizletWindow(QWidget):
 
     def onHmtl(self):
         """
-        Opens the flascards html page in browser
+        Opens the flascards html page in a browser
         """
         quizletDeckID = self.getQuizletDeckID()
 
@@ -288,6 +293,12 @@ class QuizletWindow(QWidget):
 
         webbrowser.open(
             "https://quizlet.com/{}/flashcards".format(quizletDeckID))
+
+    def onDiscussion(self):
+        """
+        Opens the audio fix discussion page in a browser
+        """
+        webbrowser.open("https://github.com/sviatoslav-lebediev/anki-quizlet-importer-extended/discussions/156")
 
     def getQuizletDeckID(self):
         # grab url input
@@ -424,13 +435,13 @@ class QuizletWindow(QWidget):
 
                 if item.get('termAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
-                        item['termAudio']), str(item["id"]) + "-front.mp3")
+                        item['termAudio']), str(item["id"]) + "-front.mp3", fallback=True)
                     if file_name:
                         note["FrontAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('definitionAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
-                        item["definitionAudio"]), str(item["id"]) + "-back.mp3")
+                        item["definitionAudio"]), str(item["id"]) + "-back.mp3", fallback=True)
                     if file_name:
                         note["BackAudio"] = "[sound:" + file_name + "]"
 
@@ -462,29 +473,43 @@ class QuizletWindow(QWidget):
         return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
 
     # download the images
-    def fileDownloader(self, url, suffix=''):
+    def fileDownloader(self, url, suffix='', fallback=False):
         skip_errors = self.value_skip_errors.isChecked()
         url = url.replace('_m', '')
         file_name = "quizlet-" + \
             suffix if suffix else "quizlet-" + url.split('/')[-1]
-        try:
-            r = urllib2.urlopen(urllib2.Request(url, headers=headers))
-            if r.getcode() == 200:
-                with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
-                    f.write(r.read())
-            return file_name
-        except urllib2.HTTPError as e:
-            if skip_errors:
-                return None
-            else:
-                raise e
+        fallback_call = False;
+        request_headers = headers.copy()
 
+        while True:
+            try:
+                return download_media(url, file_name, request_headers)
+            except urllib2.HTTPError as e:
+                if fallback and not fallback_call and self.config['license']:
+                    fallback_call = True
+                    url = "https://quizlet-proxy.proto.click/quizlet-media?url={0}".format(urllib.parse.quote(url))
+                    request_headers["x-api-key"] = self.config["license"]
+                    continue
+                if skip_errors:
+                    return None
+                else:
+                    debug(f"throwing exception {e.code}")
+                    raise e
+
+
+def download_media (url, file_name, headers):
+    r = urllib2.urlopen(urllib2.Request(url, headers=headers))
+
+    if r.getcode() == 200:
+        with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
+            f.write(r.read())
+    return file_name
 
 def parseTextItem(item):
     return getText(item["richText"], item["plainText"])
 
 
-def mapItems(studiableItems, setIdToDiagramImage):
+def mapItems(studiableItems, setIdToDiagramImage=None):
     result = []
 
     for studiableItem in studiableItems:
