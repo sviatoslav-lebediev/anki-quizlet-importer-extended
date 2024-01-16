@@ -485,10 +485,10 @@ class QuizletWindow(QWidget):
             try:
                 return download_media(url, file_name, request_headers)
             except urllib2.HTTPError as e:
-                if fallback and not fallback_call and self.config['license']:
+                if fallback and not fallback_call and self.config.get('license'):
                     fallback_call = True
                     url = "https://quizlet-proxy.proto.click/quizlet-media?url={0}".format(urllib.parse.quote(url))
-                    request_headers["x-api-key"] = self.config["license"]
+                    request_headers["x-api-key"] = self.config.get("license")
                     continue
                 if skip_errors:
                     return None
