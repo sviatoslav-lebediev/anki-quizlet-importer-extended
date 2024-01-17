@@ -67,3 +67,7 @@ Supports start and stop phrases. It allows you to download a part of the quizlet
 * FrontAudio - `[sound:"quizlet-CARD_ID-front.mp3"]`
 * BackAudio - `[sound:"quizlet-CARD_ID-back.mp3"]`
 * Image - `<img src="file_name">`
+
+## Repo Activity
+
+![Repo Activity](https://repobeats.axiom.co/api/embed/94e61d46859061470cdf238cbad04e80bcc57300.svg "Repobeats analytics image")
