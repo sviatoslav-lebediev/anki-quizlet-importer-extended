@@ -446,7 +446,7 @@ class QuizletWindow(QWidget):
                         note["BackAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('imageUrl'):
-                    file_name = self.fileDownloader(item["imageUrl"])
+                    file_name = self.fileDownloader(item["imageUrl"], fallback=True)
                     if file_name:
                         note["Image"] += '<div><img src="{0}"></div>'.format(
                             file_name)
