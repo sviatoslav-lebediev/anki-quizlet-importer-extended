@@ -33,6 +33,7 @@ import json
 import urllib.parse
 import requests
 import webbrowser
+import ssl
 from aqt.utils import showText
 from aqt.qt import *
 from aqt import mw
@@ -52,6 +53,13 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
 }
 
+# Create an SSL context with certificate verification disabled
+context = ssl.create_default_context()
+context.check_hostname = False
+context.verify_mode = ssl.CERT_NONE
+
+# Install the SSL context globally
+urllib2.install_opener(urllib2.build_opener(urllib2.HTTPSHandler(context=context)))
 
 public_api_key = '0b8aa35d-b521-4fe0-bf0e-2ae07d826acf'
 
