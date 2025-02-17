@@ -27,7 +27,6 @@
 
 # -------------------------------------------------------------------------------
 #!/usr/bin/env python
-
 import re
 import json
 import urllib.parse
@@ -43,6 +42,8 @@ try:
     import urllib2
 except Exception:
     import urllib.request as urllib2
+import subprocess
+from PyQt5.QtCore import pyqtSignal
 
 __window = None
 
@@ -68,7 +69,7 @@ def addCustomModel(name, col):
 
     # create custom model for imported deck
     mm = col.models
-    existing = mm.byName("Basic Quizlet Extended")
+    existing = mm.by_name("Basic Quizlet Extended")
     if existing:
         return existing
     m = mm.new("Basic Quizlet Extended")
@@ -100,10 +101,8 @@ def addCustomModel(name, col):
 
 # throw up a window with some info (used for testing)
 
-
 def debug(message):
     QMessageBox.information(QWidget(), "Message", message)
-
 
 def getText(d, text=''):
     if d is None:
@@ -125,14 +124,12 @@ def getText(d, text=''):
         text = '<div>{}</div>'.format(text)
     return text
 
-
 def ankify(text):
     text = text.replace('\n', '<br>')
     text = text.replace('class="bgY"', 'style="background-color:#fff4e5;"')
     text = text.replace('class="bgB"', 'style="background-color:#cde7fa;"')
     text = text.replace('class="bgP"', 'style="background-color:#fde8ff;"')
     return text
-
 
 class QuizletWindow(QWidget):
     # main window of Quizlet plugin
@@ -309,6 +306,7 @@ class QuizletWindow(QWidget):
         """
         webbrowser.open("https://github.com/sviatoslav-lebediev/anki-quizlet-importer-extended/discussions/156")
 
+
     def getQuizletDeckID(self):
         # grab url input
         url = self.text_url.text()
@@ -326,6 +324,7 @@ class QuizletWindow(QWidget):
         elif not "quizlet.com" in urlDomain:
             self.label_results.setText("Oops! That's not a Quizlet URL :(")
             return
+        
 
         # voodoo needed for some error handling
         if urllib.parse.urlparse(url).scheme:
@@ -334,10 +333,21 @@ class QuizletWindow(QWidget):
             urlPath = urllib.parse.urlparse("https://"+url).path
         # validate and set Quizlet deck ID
         quizletDeckID = urlPath.strip("/")
+        
+
 
         if quizletDeckID == "":
             self.label_results.setText("Oops! Please use the full deck URL :(")
             return
+        elif re.search(r'user/', quizletDeckID) and re.search(r'/folders', quizletDeckID):
+            match_full = re.match(r'user/[^/]+/folders/[^/]*', quizletDeckID)
+            if not match_full:
+                self.label_results.setText("Oops! Invalid URL to Folder")
+                return
+            else:
+                self.label_results.setText("It is a folder!")
+                quizletDeckID = 'folder'
+                return quizletDeckID
         elif not bool(re.search(r'\d', quizletDeckID)):
             self.label_results.setText(
                 "Oops! No deck ID found in path <i>{0}</i> :(".format(quizletDeckID))
@@ -345,58 +355,85 @@ class QuizletWindow(QWidget):
         else:  # get first set of digits from url path
             quizletDeckID = re.search(r"\d+", quizletDeckID).group(0)
 
+        
         return quizletDeckID
 
-    def onCode(self):
+    def FolderExtract(self, page_html):
+            # Extract studyMaterialId values from the page HTML
+            ids = re.findall(r'"studyMaterialId":"(\d+)"', page_html)
+            for id in ids:
+                #url = "https://quizlet.com/{}/flashcards".format(id)
+                self.label_results.setText(f'Downloading deck {ids.index(id)+1}/{len(ids)}')
+                quizletDeckID = id
+                self.onCode(quizletDeckID)
+                
+
+            
+
+    def onCode(self, quizletDeckID):
         html = self.value_incoming_html.toPlainText()
-        quizletDeckID = self.getQuizletDeckID()
-
-        if quizletDeckID == None:
-            return
-
+        if quizletDeckID == False:
+            self.label_results.setText("Connecting to Quizlet...")
+            quizletDeckID = self.getQuizletDeckID()
+        
+        
+        if type(quizletDeckID) != int:
+            if quizletDeckID == None:
+                return
+            elif quizletDeckID == 'folder':
+                deck_url = self.text_url.text()
+            else:
+                # build URL
+                deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
+        else: 
+            deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
+  
         # and aaawaaaay we go...
-        self.label_results.setText("Connecting to Quizlet...")
-
-        # build URL
-        deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
+    
 
         # download the data!
-        self.thread = QuizletDownloader(self, deck_url, quizletDeckID, html)
-        self.thread.start()
+        try:
+            thread = QuizletDownloader(self, deck_url, quizletDeckID, html)
+            # Connect the signal so that FolderExtract is called in the main thread:
+            thread.folderExtracted.connect(self.FolderExtract)
+            thread.start()
+        except Exception as e:
+            thread = None
 
-        while not self.thread.isFinished():
-            mw.app.processEvents()
-            self.thread.wait(50)
+        if thread is not None:
+            while not thread.isFinished():
+                mw.app.processEvents()
+                thread.wait(50)
+        else:
+            self.label_results.setText("Error: Thread not initialized.")
 
         # error fetching data
-        if self.thread.error:
-            if self.thread.errorCode == 403:
-                if self.thread.errorCaptcha:
+        if thread and thread.error:
+            if thread.errorCode == 403:
+                if thread.errorCaptcha:
                     self.label_results.setText(
                         "Sorry, it's behind a captcha. Try to disable VPN")
                 else:
                     self.label_results.setText(
                         "Sorry, this is a private deck :(")
-            elif self.thread.errorCode == 404:
+            elif thread.errorCode == 404:
                 self.label_results.setText(
                     "Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
             else:
                 self.label_results.setText("Unknown Error")
-                # errorMessage = json.loads(self.thread.errorMessage)
-                # showText(json.dumps(errorMessage, indent=4))
-                showText(self.thread.errorMessage)
+                showText(thread.errorMessage)
         else:  # everything went through, let's roll!
-            deck = self.thread.results
-            # self.label_results.setText(("Importing deck {0} by {1}...".format(deck["title"], deck["created_by"])))
-            self.label_results.setText(
-                ("Importing deck {0}...".format(deck["title"])))
-            self.createDeck(deck)
-            # self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards by <i>{2}</i>)".format(deck["title"], deck["term_count"], deck["created_by"])))
-            self.label_results.setText(
-                ("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
+            if quizletDeckID != 'folder':
+                deck = thread.results
+                self.label_results.setText(
+                    ("Importing deck {0}...".format(deck["title"])))
+                self.createDeck(deck)
+                self.label_results.setText(
+                    ("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
 
-        # self.thread.terminate()
-        self.thread = None
+        if thread and thread.isRunning():
+            thread.quit()
+            thread.wait()
 
     def createDeck(self, result):
         # create new deck and custom model
@@ -420,7 +457,7 @@ class QuizletWindow(QWidget):
         mw.col.decks.save(deck)
 
         # assign new deck to custom model
-        mw.col.models.setCurrent(model)
+        mw.col.models.set_current(model)
         model["did"] = deck["id"]
         mw.col.models.save(model)
 
@@ -572,12 +609,12 @@ def mapItems(studiableItems, setIdToDiagramImage=None):
 
 
 class QuizletDownloader(QThread):
-
     # thread that downloads results from the Quizlet API
+    folderExtracted = pyqtSignal(str)
+
     def __init__(self, window, url, quizletDeckID, html):
         super(QuizletDownloader, self).__init__()
         self.window = window
-
         self.url = url
         self.results = None
         self.html = html
@@ -588,6 +625,22 @@ class QuizletDownloader(QThread):
         self.errorCaptcha = False
         self.errorReason = None
         self.errorMessage = None
+
+    def run_node_scraper(self, url):
+        # Run the Node.js script with the URL as an argument
+        result = subprocess.run(
+            ['node', os.path.join(os.path.dirname(__file__), 'scraper.js'), url],  # Node.js command and script name
+            capture_output=True,  # Capture stdout and stderr
+            text=True  # Treat output as text
+        )
+
+        # Check for errors in the Node.js execution
+        if result.returncode == 0:
+            page_html = result.stdout
+            # Emit signal with the HTML instead of calling GUI directly:
+            self.folderExtracted.emit(page_html)
+        else:
+            pass 
 
     def getDataFromApi(self):
         try:
@@ -634,91 +687,103 @@ class QuizletDownloader(QThread):
                     cookies = {key: morsel.value for key, morsel in C.items()}
 
                 page_html = ''
-
-                if self.html:
-                    page_html = self.html
-                else:
-                    url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
-                        urllib.parse.quote(self.url, safe='()*!\'')
-                    r = requests.get(url, verify=False,
-                                     headers=headers, cookies=cookies)
-                    r.raise_for_status()
-                    page_html = r.text
-
-                regex = re.escape('window.Quizlet["setPasswordData"]')
-
-                if re.search(regex, page_html):
-                    if (proxyRetry):
-                        proxyRetry = False
-                        continue
+                
+                if self.quizletDeckID == 'folder': 
+                    if proxyRetry:
+                        url = self.url 
+                        r = requests.get(url, verify=False, headers=headers, cookies=cookies)
+                        r.raise_for_status()
+                        page_html = r.text
+                        # Emit signal so FolderExtract runs in main thread:
+                        self.folderExtracted.emit(page_html)
                     else:
-                        self.error = True
-                        self.errorCode = 403
-                        return
+                        self.run_node_scraper(url)
+                else:
+                    if self.html:
+                        page_html = self.html
+                    else:
+                        url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
+                            urllib.parse.quote(self.url, safe='()*!\'')
+                        r = requests.get(url, verify=False,
+                                        headers=headers, cookies=cookies)
+                        r.raise_for_status()
+                        page_html = r.text
 
-                regex = re.escape('window.Quizlet["setPageData"] = ')
-                regex += r'(.+?)'
-                regex += re.escape('; QLoad("Quizlet.setPageData");')
-                m = re.search(regex, page_html)
+                    regex = re.escape('window.Quizlet["setPasswordData"]')
 
-                studiableItems = None
-                setIdToDiagramImage = None
+                    if re.search(regex, page_html):
+                        if (proxyRetry):
+                            proxyRetry = False
+                            continue
+                        else:
+                            self.error = True
+                            self.errorCode = 403
+                            return
 
-                if not m:
-                    regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                    regex = re.escape('window.Quizlet["setPageData"] = ')
                     regex += r'(.+?)'
-                    regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                    regex += re.escape('; QLoad("Quizlet.setPageData");')
                     m = re.search(regex, page_html)
+
+                    studiableItems = None
+                    setIdToDiagramImage = None
+
+                    if not m:
+                        regex = re.escape('window.Quizlet["assistantModeData"] = ')
+                        regex += r'(.+?)'
+                        regex += re.escape('; QLoad("Quizlet.assistantModeData");')
+                        m = re.search(regex, page_html)
+                        if m:
+                            data = json.loads(m.group(1).strip())
+                            studiableDocumentData = data['studiableDocumentData']
+                            setIdToDiagramImage = studiableDocumentData.get(
+                                'setIdToDiagramImage', None)
+                            studiableItems = studiableDocumentData.get(
+                                'studiableItems', studiableDocumentData.get('studiableItem'))
+
+                    if not m:
+                        regex = re.escape('window.Quizlet["cardsModeData"] = ')
+                        regex += r'(.+?)'
+                        regex += re.escape('; QLoad("Quizlet.cardsModeData");')
+                        m = re.search(regex, page_html)
+                        if m:
+                            data = json.loads(m.group(1).strip())
+                            studiableDocumentData = data['studiableDocumentData']
+                            setIdToDiagramImage = studiableDocumentData.get(
+                                'setIdToDiagramImage', None)
+                            studiableItems = studiableDocumentData.get(
+                                'studiableItems', studiableDocumentData.get('studiableItem'))
+
+                    if not m:
+                        regex = re.escape('dehydratedReduxStateKey":')
+                        regex += r'(.+?)'
+                        regex += re.escape('},"__N_SSP')
+                        m = re.search(regex, page_html)
+                        if m:
+                            rawData = m.group(1).strip()
+                            data = json.loads(json.loads(rawData))
+                            studiableItems = data["studyModesCommon"]["studiableData"]["studiableItems"]
+                            setIdToDiagramImage = data["studyModesCommon"]["studiableData"]["setIdToDiagramImage"]
+                        else:
+                            raise Exception("Can't extract data")
+
+                    self.results = {}
+                    self.results['items'] = mapItems(
+                        studiableItems, setIdToDiagramImage)
+                    
+                    title = os.path.basename(
+                        self.url.strip()) or "Quizlet Flashcards"
+                    
+                    m = re.search(r'<title>(.+?)</title>', page_html)
+
                     if m:
-                        data = json.loads(m.group(1).strip())
-                        studiableDocumentData = data['studiableDocumentData']
-                        setIdToDiagramImage = studiableDocumentData.get(
-                            'setIdToDiagramImage', None)
-                        studiableItems = studiableDocumentData.get(
-                            'studiableItems', studiableDocumentData.get('studiableItem'))
+                        title = m.group(1)
+                        title = re.sub(r' \| Quizlet$', '', title)
+                        title = re.sub(r'^Flashcards ', '', title)
+                        title = re.sub(r'\s+', ' ', title)
+                        title = title.strip()
 
-                if not m:
-                    regex = re.escape('window.Quizlet["cardsModeData"] = ')
-                    regex += r'(.+?)'
-                    regex += re.escape('; QLoad("Quizlet.cardsModeData");')
-                    m = re.search(regex, page_html)
-                    if m:
-                        data = json.loads(m.group(1).strip())
-                        studiableDocumentData = data['studiableDocumentData']
-                        setIdToDiagramImage = studiableDocumentData.get(
-                            'setIdToDiagramImage', None)
-                        studiableItems = studiableDocumentData.get(
-                            'studiableItems', studiableDocumentData.get('studiableItem'))
-
-                if not m:
-                    regex = re.escape('dehydratedReduxStateKey":')
-                    regex += r'(.+?)'
-                    regex += re.escape('},"__N_SSP')
-                    m = re.search(regex, page_html)
-                    rawData = m.group(1).strip()
-                    data = json.loads(json.loads(rawData))
-                    studiableItems = data["studyModesCommon"]["studiableData"]["studiableItems"]
-                    setIdToDiagramImage = data["studyModesCommon"]["studiableData"]["setIdToDiagramImage"]
-
-                if not studiableItems:
-                    raise Exception("Can't extract data")
-
-                self.results = {}
-                self.results['items'] = mapItems(
-                    studiableItems, setIdToDiagramImage)
-
-                title = os.path.basename(
-                    self.url.strip()) or "Quizlet Flashcards"
-                m = re.search(r'<title>(.+?)</title>', page_html)
-
-                if m:
-                    title = m.group(1)
-                    title = re.sub(r' \| Quizlet$', '', title)
-                    title = re.sub(r'^Flashcards ', '', title)
-                    title = re.sub(r'\s+', ' ', title)
-                    title = title.strip()
-
-                self.results['title'] = title
+                    self.results['title'] = title
 
             except requests.HTTPError as e:
                 if proxyRetry == True:
@@ -732,7 +797,6 @@ class QuizletDownloader(QThread):
                         self.errorCaptcha = True
             except ValueError as e:
                 if proxyRetry == True:
-                    proxyRetry = False
                     continue
                 else:
                     self.error = True
