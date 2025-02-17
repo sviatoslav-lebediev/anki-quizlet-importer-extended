@@ -43,7 +43,7 @@ try:
 except Exception:
     import urllib.request as urllib2
 import subprocess
-from PyQt5.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal
 
 __window = None
 
