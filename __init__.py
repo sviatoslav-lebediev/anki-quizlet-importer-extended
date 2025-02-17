@@ -628,6 +628,7 @@ class QuizletDownloader(QThread):
 
     def run_node_scraper(self, url):
         # Run the Node.js script with the URL as an argument
+        # Need to install NodeJS on device for this to work. Used NodeJS temporarily to be able to bypass captcha using got-scraping. 
         result = subprocess.run(
             ['node', os.path.join(os.path.dirname(__file__), 'scraper.js'), url],  # Node.js command and script name
             capture_output=True,  # Capture stdout and stderr
