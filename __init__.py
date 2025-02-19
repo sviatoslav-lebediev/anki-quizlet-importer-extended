@@ -186,7 +186,7 @@ class QuizletWindow(QWidget):
 
         # quizlet url field
         self.box_name = QHBoxLayout()
-        self.label_url = QLabel("Quizlet URL:")
+        self.label_url = QLabel("Quizlet URL(s):")
         self.text_url = QLineEdit("", self)
         self.text_url.setMinimumWidth(300)
         self.text_url.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
@@ -220,6 +220,16 @@ class QuizletWindow(QWidget):
         self.box_skip_errors.addWidget(self.label_skip_errors)
         self.box_skip_errors.addWidget(self.value_skip_errors)
 
+        self.box_retry_amount = QHBoxLayout()
+        self.value_retry_amount = QLineEdit("", self)
+        self.value_retry_amount.setMinimumWidth(300)
+        self.value_retry_amount.setPlaceholderText(
+            'Retry up to x amount. Empty means no retries')
+        self.label_retry_amount = QLabel("Retry amount:")
+        self.label_retry_amount.setMinimumWidth(100)
+        self.box_retry_amount.addWidget(self.label_retry_amount)
+        self.box_retry_amount.addWidget(self.value_retry_amount)
+
         self.box_start_phrase = QHBoxLayout()
         self.value_start_phrase = QLineEdit("", self)
         self.value_start_phrase.setMinimumWidth(300)
@@ -250,6 +260,7 @@ class QuizletWindow(QWidget):
 
         self.box_left.addLayout(self.box_start_phrase)
         self.box_left.addLayout(self.box_stop_phrase)
+        self.box_left.addLayout(self.box_retry_amount)
         self.box_left.addLayout(self.box_incoming_html)
 
         # right side
@@ -295,13 +306,14 @@ class QuizletWindow(QWidget):
         """
         Opens the flascards html page in a browser
         """
-        quizletDeckID = self.getQuizletDeckID()
+        quizletDeckIDs = self.getQuizletDeckIDs()
 
-        if quizletDeckID == None:
+        if quizletDeckIDs == None:
             return
 
-        webbrowser.open(
-            "https://quizlet.com/{}/flashcards".format(quizletDeckID))
+        for quizletDeckID in quizletDeckIDs:
+            webbrowser.open(
+                "https://quizlet.com/{}/flashcards".format(quizletDeckID))
 
     def onDiscussion(self):
         """
@@ -309,96 +321,118 @@ class QuizletWindow(QWidget):
         """
         webbrowser.open("https://github.com/sviatoslav-lebediev/anki-quizlet-importer-extended/discussions/156")
 
-    def getQuizletDeckID(self):
+    def getQuizletDeckIDs(self):
         # grab url input
-        url = self.text_url.text()
+        urls = self.text_url.text()
 
-        # voodoo needed for some error handling
-        if urllib.parse.urlparse(url).scheme:
-            urlDomain = urllib.parse.urlparse(url).netloc
-        else:
-            urlDomain = urllib.parse.urlparse("https://"+url).netloc
+        quizletDeckIDs = []
 
-        # validate quizlet URL
-        if url == "":
-            self.label_results.setText("Oops! You forgot the deck URL :(")
-            return
-        elif not "quizlet.com" in urlDomain:
-            self.label_results.setText("Oops! That's not a Quizlet URL :(")
-            return
+        for url in urls.split(','):
 
-        # voodoo needed for some error handling
-        if urllib.parse.urlparse(url).scheme:
-            urlPath = urllib.parse.urlparse(url).path
-        else:
-            urlPath = urllib.parse.urlparse("https://"+url).path
-        # validate and set Quizlet deck ID
-        quizletDeckID = urlPath.strip("/")
+            # voodoo needed for some error handling
+            if urllib.parse.urlparse(url).scheme:
+                urlDomain = urllib.parse.urlparse(url).netloc
+            else:
+                urlDomain = urllib.parse.urlparse("https://"+url).netloc
 
-        if quizletDeckID == "":
-            self.label_results.setText("Oops! Please use the full deck URL :(")
-            return
-        elif not bool(re.search(r'\d', quizletDeckID)):
-            self.label_results.setText(
-                "Oops! No deck ID found in path <i>{0}</i> :(".format(quizletDeckID))
-            return
-        else:  # get first set of digits from url path
-            quizletDeckID = re.search(r"\d+", quizletDeckID).group(0)
+            # validate quizlet URL
+            if url == "":
+                self.label_results.setText("Oops! You forgot the deck URL :(")
+                return
+            elif not "quizlet.com" in urlDomain:
+                self.label_results.setText("Oops! That's not a Quizlet URL :(")
+                return
 
-        return quizletDeckID
+            # voodoo needed for some error handling
+            if urllib.parse.urlparse(url).scheme:
+                urlPath = urllib.parse.urlparse(url).path
+            else:
+                urlPath = urllib.parse.urlparse("https://"+url).path
+            # validate and set Quizlet deck ID
+            quizletDeckID = urlPath.strip("/")
+
+            if quizletDeckID == "":
+                self.label_results.setText("Oops! Please use the full deck URL :(")
+                return
+            elif not bool(re.search(r'\d', quizletDeckID)):
+                self.label_results.setText(
+                    "Oops! No deck ID found in path <i>{0}</i> :(".format(quizletDeckID))
+                return
+            else:  # get first set of digits from url path
+                quizletDeckID = re.search(r"\d+", quizletDeckID).group(0)
+
+            quizletDeckIDs.append(quizletDeckID)
+
+        return quizletDeckIDs
 
     def onCode(self):
         html = self.value_incoming_html.toPlainText()
-        quizletDeckID = self.getQuizletDeckID()
 
-        if quizletDeckID == None:
+        retryAmountStr = self.value_retry_amount.text().strip()
+        if retryAmountStr == "":
+            retryAmount = 0
+        else:
+            try:
+                retryAmount = int(retryAmountStr)
+            except ValueError:
+                self.label_results.setText(f"Invalid retry amount \"{retryAmountStr}\"")
+                return
+
+        if retryAmount < 0:
+            self.label_results.setText(f"Invalid retry amount \"{retryAmountStr}\"")
             return
 
-        # and aaawaaaay we go...
-        self.label_results.setText("Connecting to Quizlet...")
+        quizletDeckIDs = self.getQuizletDeckIDs()
 
-        # build URL
-        deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
+        if quizletDeckIDs is None:
+            return
 
-        # download the data!
-        self.thread = QuizletDownloader(self, deck_url, quizletDeckID, html)
-        self.thread.start()
+        for quizletDeckID in quizletDeckIDs:
+            self.label_results.setText("Connecting to Quizlet...")
+            deck_url = f"https://quizlet.com/{quizletDeckID}/flashcards"
+            
+            attempts = 0
+            errorMessages = []
+            success = False
 
-        while not self.thread.isFinished():
-            mw.app.processEvents()
-            self.thread.wait(50)
+            while attempts <= retryAmount and not success:
+                self.thread = QuizletDownloader(self, deck_url, quizletDeckID, html)
+                self.thread.start()
 
-        # error fetching data
-        if self.thread.error:
-            if self.thread.errorCode == 403:
-                if self.thread.errorCaptcha:
-                    self.label_results.setText(
-                        "Sorry, it's behind a captcha. Try to disable VPN")
+                while not self.thread.isFinished():
+                    mw.app.processEvents()
+                    self.thread.wait(50)
+
+                if self.thread.error:
+                    attempts += 1
+                    
+                    if self.thread.errorCode == 403:
+                        if self.thread.errorCaptcha:
+                            self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")
+                            break
+                        else:
+                            self.label_results.setText("Sorry, this is a private deck :(")
+                            break
+                    elif self.thread.errorCode == 404:
+                        self.label_results.setText(f"Can't find a deck with the ID <i>{quizletDeckID}</i>")
+                        break
+                    else:
+                        self.label_results.setText(f"Unknown Error in deck ID <i>{quizletDeckID}</i>, retrying ({attempts}/{retryAmount})...")
+                    errorMessages.append(self.thread.errorMessage)
+                    self.thread.wait(5000) # Wait before retrying
                 else:
-                    self.label_results.setText(
-                        "Sorry, this is a private deck :(")
-            elif self.thread.errorCode == 404:
-                self.label_results.setText(
-                    "Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
-            else:
-                self.label_results.setText("Unknown Error")
-                # errorMessage = json.loads(self.thread.errorMessage)
-                # showText(json.dumps(errorMessage, indent=4))
-                showText(self.thread.errorMessage)
-        else:  # everything went through, let's roll!
-            deck = self.thread.results
-            # self.label_results.setText(("Importing deck {0} by {1}...".format(deck["title"], deck["created_by"])))
-            self.label_results.setText(
-                ("Importing deck {0}...".format(deck["title"])))
-            self.createDeck(deck)
-            # self.label_results.setText(("Success! Imported <b>{0}</b> ({1} cards by <i>{2}</i>)".format(deck["title"], deck["term_count"], deck["created_by"])))
-            self.label_results.setText(
-                ("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
+                    success = True
+                    deck = self.thread.results
+                    self.label_results.setText(f"Importing deck {deck['title']}...")
+                    self.createDeck(deck, quizletDeckID, retryAmount)
+                    self.label_results.setText(f"Success! Imported <b>{deck['title']}</b> ({deck['term_count']} cards)")
+            
+            if not success:
+                showText(f"Error in {quizletDeckID} (Attempt {attempts}/{retryAmount})\n" + self.thread.errorMessage)
 
-        # self.thread.terminate()
-        self.thread = None
+            self.thread = None
 
-    def createDeck(self, result):
+    def createDeck(self, result, deckID, retryAmount):
         # create new deck and custom model
         if "set" in result:
             name = result['set']['title']
@@ -444,18 +478,18 @@ class QuizletWindow(QWidget):
 
                 if item.get('termAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
-                        item['termAudio']), str(item["id"]) + "-front.mp3", fallback=True)
+                        item['termAudio']), retryAmount, str(item["id"]) + "-front.mp3", fallback=True)
                     if file_name:
                         note["FrontAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('definitionAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
-                        item["definitionAudio"]), str(item["id"]) + "-back.mp3", fallback=True)
+                        item["definitionAudio"]), retryAmount,  str(item["id"]) + "-back.mp3", fallback=True)
                     if file_name:
                         note["BackAudio"] = "[sound:" + file_name + "]"
 
                 if item.get('imageUrl'):
-                    file_name = self.fileDownloader(item["imageUrl"], fallback=True)
+                    file_name = self.fileDownloader(item["imageUrl"], retryAmount, fallback=True)
                     if file_name:
                         note["Image"] += '<div><img src="{0}"></div>'.format(
                             file_name)
@@ -469,7 +503,7 @@ class QuizletWindow(QWidget):
 
                 progress += 1
                 self.label_results.setText(
-                    ("Imported {0}/{1}".format(progress, len(items))))
+                    ("Deck {0}. Imported {1}/{2}".format(deckID, progress, len(items))))
                 mw.app.processEvents()
 
             if not "".__eq__(stopPhrase) and (stopPhrase == item["term"] or stopPhrase == item["definition"]):
@@ -482,29 +516,39 @@ class QuizletWindow(QWidget):
         return word_audio if word_audio.startswith('http') else "https://quizlet.com/{0}".format(word_audio)
 
     # download the images
-    def fileDownloader(self, url, suffix='', fallback=False):
+    def fileDownloader(self, url, max_attempts, suffix='', fallback=False):
         skip_errors = self.value_skip_errors.isChecked()
         url = url.replace('_m', '')
-        file_name = "quizlet-" + \
-            suffix if suffix else "quizlet-" + url.split('/')[-1]
-        fallback_call = False;
+        fallback_url = url
+        file_name = "quizlet-" + suffix if suffix else "quizlet-" + url.split('/')[-1]
+        fallback_call = False
         request_headers = headers.copy()
+        fallback_request_headers = request_headers.copy()
+        attempts = 0
 
-        while True:
+        while attempts <= max_attempts:
             try:
-                return download_media(url, file_name, request_headers)
+                if fallback_call:
+                    return download_media(fallback_url, file_name, fallback_request_headers)
+                else:
+                    return download_media(url, file_name, request_headers)
             except urllib2.HTTPError as e:
+                attempts += 1
                 if fallback and not fallback_call:
                     fallback_call = True
-                    url = "https://quizlet-proxy.proto.click/quizlet-media?url={0}".format(urllib.parse.quote(url))
-                    request_headers["x-api-key"] = self.config.get("license", public_api_key)
+                    fallback_url = "https://quizlet-proxy.proto.click/quizlet-media?url={0}".format(urllib.parse.quote(url))
+                    fallback_request_headers["x-api-key"] = self.config.get("license", public_api_key)
                     continue
-                if skip_errors:
-                    return None
-                else:
-                    debug(f"throwing exception {e.code}")
-                    raise e
-
+                if fallback and fallback_call:
+                    fallback_call = False
+                    continue
+                if attempts >= max_attempts:
+                    if skip_errors:
+                        return None
+                    else:
+                        debug(f"throwing exception {e.code}")
+                        raise e
+                self.thread.wait(5000) # Wait before retrying
 
 def download_media (url, file_name, headers):
     r = urllib2.urlopen(urllib2.Request(url, headers=headers))
