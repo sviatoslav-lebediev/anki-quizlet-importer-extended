@@ -27,6 +27,7 @@
 
 # -------------------------------------------------------------------------------
 #!/usr/bin/env python
+
 import re
 import json
 import urllib.parse
@@ -42,7 +43,6 @@ try:
     import urllib2
 except Exception:
     import urllib.request as urllib2
-import subprocess
 from PyQt6.QtCore import pyqtSignal
 
 __window = None
@@ -626,23 +626,6 @@ class QuizletDownloader(QThread):
         self.errorReason = None
         self.errorMessage = None
 
-    def run_node_scraper(self, url):
-        # Run the Node.js script with the URL as an argument
-        # Need to install NodeJS on device for this to work. Used NodeJS temporarily to be able to bypass captcha using got-scraping. 
-        result = subprocess.run(
-            ['node', os.path.join(os.path.dirname(__file__), 'scraper.js'), url],  # Node.js command and script name
-            capture_output=True,  # Capture stdout and stderr
-            text=True  # Treat output as text
-        )
-
-        # Check for errors in the Node.js execution
-        if result.returncode == 0:
-            page_html = result.stdout
-            # Emit signal with the HTML instead of calling GUI directly:
-            self.folderExtracted.emit(page_html)
-        else:
-            pass 
-
     def getDataFromApi(self):
         try:
             deckUrl = 'https://quizlet.com/webapi/3.9/sets/{0}'.format(
@@ -690,21 +673,21 @@ class QuizletDownloader(QThread):
                 page_html = ''
                 
                 if self.quizletDeckID == 'folder': 
-                    if proxyRetry:
-                        url = self.url 
-                        r = requests.get(url, verify=False, headers=headers, cookies=cookies)
-                        r.raise_for_status()
-                        page_html = r.text
-                        # Emit signal so FolderExtract runs in main thread:
-                        self.folderExtracted.emit(page_html)
-                    else:
-                        self.run_node_scraper(url)
+                    url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-folders?url=' + \
+                        urllib.parse.quote(self.url, safe='()*!\'')
+                    print(url)
+                    r = requests.get(url, verify=False,
+                                    headers=headers, cookies=cookies)
+                    r.raise_for_status()
+                    page_html = r.text
+                    self.folderExtracted.emit(page_html)
                 else:
                     if self.html:
                         page_html = self.html
                     else:
                         url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
                             urllib.parse.quote(self.url, safe='()*!\'')
+                        print(url)
                         r = requests.get(url, verify=False,
                                         headers=headers, cookies=cookies)
                         r.raise_for_status()
