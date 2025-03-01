@@ -301,7 +301,7 @@ class QuizletWindow(QWidget):
             return
 
         webbrowser.open(
-            "https://quizlet.com/{}/flashcards".format(quizletDeckID))
+            "view-source:https://quizlet.com/{}/flashcards".format(quizletDeckID))
 
     def onDiscussion(self):
         """
