@@ -37,7 +37,6 @@ import ssl
 from aqt.utils import showText
 from aqt.qt import *
 from aqt import mw
-from operator import itemgetter
 import urllib
 try:
     import urllib2
@@ -65,7 +64,7 @@ urllib2.install_opener(urllib2.build_opener(urllib2.HTTPSHandler(context=context
 public_api_key = '0b8aa35d-b521-4fe0-bf0e-2ae07d826acf'
 
 # add custom model if needed
-def addCustomModel(name, col):
+def addCustomModel(col):
 
     # create custom model for imported deck
     mm = col.models
@@ -255,12 +254,8 @@ class QuizletWindow(QWidget):
         # code (import set) button
         self.box_code = QVBoxLayout()
         self.button_code = QPushButton("Import Deck", self)
-        self.discussion_button = QPushButton("Audio fix discussion")
-        self.discussion_button.clicked.connect(self.onDiscussion)
-        self.discussion_button.setStyleSheet("QPushButton { text-align: left; color: #087FFF; text-decoration: underline; border: none; }")
         # self.box_code.addStretch(1)
         self.box_code.addWidget(self.button_code)
-        self.box_code.addWidget(self.discussion_button)
         self.button_code.clicked.connect(self.onCode)
 
         # add layouts to right
@@ -300,12 +295,6 @@ class QuizletWindow(QWidget):
         webbrowser.open(
             "https://quizlet.com/{}/flashcards".format(quizletDeckID))
 
-    def onDiscussion(self):
-        """
-        Opens the audio fix discussion page in a browser
-        """
-        webbrowser.open("https://github.com/sviatoslav-lebediev/anki-quizlet-importer-extended/discussions/156")
-
 
     def getQuizletDeckID(self):
         # grab url input
@@ -324,7 +313,7 @@ class QuizletWindow(QWidget):
         elif not "quizlet.com" in urlDomain:
             self.label_results.setText("Oops! That's not a Quizlet URL :(")
             return
-        
+
 
         # voodoo needed for some error handling
         if urllib.parse.urlparse(url).scheme:
@@ -333,7 +322,7 @@ class QuizletWindow(QWidget):
             urlPath = urllib.parse.urlparse("https://"+url).path
         # validate and set Quizlet deck ID
         quizletDeckID = urlPath.strip("/")
-        
+
 
 
         if quizletDeckID == "":
@@ -342,10 +331,10 @@ class QuizletWindow(QWidget):
         elif re.search(r'user/', quizletDeckID) and re.search(r'/folders', quizletDeckID):
             match_full = re.match(r'user/[^/]+/folders/[^/]*', quizletDeckID)
             if not match_full:
-                self.label_results.setText("Oops! Invalid URL to Folder")
+                self.label_results.setText("Oops! Invalid Folder URL")
                 return
             else:
-                self.label_results.setText("It is a folder!")
+                self.label_results.setText("Going to import a folder !")
                 quizletDeckID = 'folder'
                 return quizletDeckID
         elif not bool(re.search(r'\d', quizletDeckID)):
@@ -355,7 +344,7 @@ class QuizletWindow(QWidget):
         else:  # get first set of digits from url path
             quizletDeckID = re.search(r"\d+", quizletDeckID).group(0)
 
-        
+
         return quizletDeckID
 
     def FolderExtract(self, page_html):
@@ -366,17 +355,17 @@ class QuizletWindow(QWidget):
                 self.label_results.setText(f'Downloading deck {ids.index(id)+1}/{len(ids)}')
                 quizletDeckID = id
                 self.onCode(quizletDeckID)
-                
 
-            
+
+
 
     def onCode(self, quizletDeckID):
         html = self.value_incoming_html.toPlainText()
         if quizletDeckID == False:
             self.label_results.setText("Connecting to Quizlet...")
             quizletDeckID = self.getQuizletDeckID()
-        
-        
+
+
         if type(quizletDeckID) != int:
             if quizletDeckID == None:
                 return
@@ -385,11 +374,11 @@ class QuizletWindow(QWidget):
             else:
                 # build URL
                 deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
-        else: 
+        else:
             deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
-  
+
         # and aaawaaaay we go...
-    
+
 
         # download the data!
         try:
@@ -450,7 +439,7 @@ class QuizletWindow(QWidget):
         result['term_count'] = len(items)
 
         deck = mw.col.decks.get(mw.col.decks.id(name))
-        model = addCustomModel(name, mw.col)
+        model = addCustomModel(mw.col)
 
         # assign custom model to new deck
         mw.col.decks.select(deck["id"])
@@ -560,7 +549,9 @@ def mapItems(studiableItems, setIdToDiagramImage=None):
 
     for studiableItem in studiableItems:
         image = None
+        term = None
         term_audio = None
+        definition = None
         definition_audio = None
 
         for side in studiableItem["cardSides"]:
@@ -671,11 +662,11 @@ class QuizletDownloader(QThread):
                     cookies = {key: morsel.value for key, morsel in C.items()}
 
                 page_html = ''
-                
-                if self.quizletDeckID == 'folder': 
+
+                if self.quizletDeckID == 'folder':
                     url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-folders?url=' + \
                         urllib.parse.quote(self.url, safe='()*!\'')
-                    print(url)
+
                     r = requests.get(url, verify=False,
                                     headers=headers, cookies=cookies)
                     r.raise_for_status()
@@ -699,10 +690,10 @@ class QuizletDownloader(QThread):
                         if (proxyRetry):
                             proxyRetry = False
                             continue
-                        else:
-                            self.error = True
-                            self.errorCode = 403
-                            return
+
+                        self.error = True
+                        self.errorCode = 403
+                        return
 
                     regex = re.escape('window.Quizlet["setPageData"] = ')
                     regex += r'(.+?)'
@@ -754,10 +745,10 @@ class QuizletDownloader(QThread):
                     self.results = {}
                     self.results['items'] = mapItems(
                         studiableItems, setIdToDiagramImage)
-                    
+
                     title = os.path.basename(
                         self.url.strip()) or "Quizlet Flashcards"
-                    
+
                     m = re.search(r'<title>(.+?)</title>', page_html)
 
                     if m:
