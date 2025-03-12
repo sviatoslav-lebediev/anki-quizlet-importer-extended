@@ -42,7 +42,11 @@ try:
     import urllib2
 except Exception:
     import urllib.request as urllib2
-from PyQt6.QtCore import pyqtSignal
+    
+try:
+    from PyQt6.QtCore import pyqtSignal
+except Exception:
+    from PyQt5.QtCore import pyqtSignal
 
 __window = None
 
