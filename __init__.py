@@ -753,7 +753,7 @@ class QuizletDownloader(QThread):
                     title = os.path.basename(
                         self.url.strip()) or "Quizlet Flashcards"
 
-                    m = re.search(r'<title>(.+?)</title>', page_html)
+                    m = re.search(r'<title[^>]*>(.+?)</title>', page_html, re.IGNORECASE | re.DOTALL)
 
                     if m:
                         title = m.group(1)
