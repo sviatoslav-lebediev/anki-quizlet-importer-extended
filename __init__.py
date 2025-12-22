@@ -416,14 +416,10 @@ class QuizletWindow(QWidget):
             if failures:
                 btn_retry = msg.addButton("Retry failed", QMessageBox.ButtonRole.ActionRole)
             btn_close = msg.addButton("Close", QMessageBox.ButtonRole.AcceptRole)
-            btn_cancel = msg.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
 
             msg.exec()
             clicked = msg.clickedButton()
 
-            if clicked == btn_cancel:
-                self.label_results.setText("Folder import cancelled.")
-                return
             if btn_retry is not None and clicked == btn_retry:
                 # Retry only failed ids
                 ids_to_try = [deck_id for deck_id, _ in failures]
