@@ -350,20 +350,108 @@ class QuizletWindow(QWidget):
 
 
         return quizletDeckID
+    
 
     def FolderExtract(self, page_html):
             # Extract studyMaterialId values from the page HTML
             ids = re.findall(r'"studyMaterialId":"(\d+)"', page_html)
-            for id in ids:
-                #url = "https://quizlet.com/{}/flashcards".format(id)
-                self.label_results.setText(f'Downloading deck {ids.index(id)+1}/{len(ids)}')
-                quizletDeckID = id
-                self.onCode(quizletDeckID)
+            # Normalize / dedupe while preserving order
+            seen = set()
+            norm_ids = []
+            for s in ids:
+                if s not in seen:
+                    seen.add(s)
+                    norm_ids.append(s)
+            if not norm_ids:
+                self.label_results.setText("No studyMaterialId found in folder page.")
+                return
+            self._import_folder_loop(norm_ids)
+
+
+    def _import_folder_loop(self, ids: list[str]) -> None:
+        """
+        Import all ids once, show a result dialog, retry failures only,
+        and repeat until the user presses Cancel.
+        """
+        ids_to_try = list(ids)
+
+        while True:
+            successes: list[tuple[str, str]] = []  # (id, title)
+            failures: list[tuple[str, str]] = []   # (id, reason)
+
+            total = len(ids_to_try)
+            for i, deck_id in enumerate(ids_to_try, start=1):
+                self.label_results.setText(f"Importing {i}/{total} (ID={deck_id}) ...")
+                mw.app.processEvents()
+
+                ok, title, err = self._import_single_set(deck_id)
+                if ok:
+                    successes.append((deck_id, title))
+                else:
+                    failures.append((deck_id, err or "Unknown Error"))
+
+            # ---- Result dialog ----
+            msg = QMessageBox(self)
+            msg.setIcon(QMessageBox.Icon.Information)
+            msg.setWindowTitle("Folder import results")
+
+            ok_count = len(successes)
+            ng_count = len(failures)
+            msg.setText(f"Done.\nSuccess: {ok_count}\nFailed: {ng_count}")
+
+            detail_lines = []
+            if successes:
+                detail_lines.append("[Success]")
+                for deck_id, title in successes:
+                    detail_lines.append(f"- {deck_id}: {title}")
+                detail_lines.append("")
+            if failures:
+                detail_lines.append("[Failed]")
+                for deck_id, reason in failures:
+                    detail_lines.append(f"- {deck_id}: {reason}")
+
+            msg.setDetailedText("\n".join(detail_lines))
+
+            btn_retry = None
+            if failures:
+                btn_retry = msg.addButton("Retry failed", QMessageBox.ButtonRole.ActionRole)
+            btn_close = msg.addButton("Close", QMessageBox.ButtonRole.AcceptRole)
+            btn_cancel = msg.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
+
+            msg.exec()
+            clicked = msg.clickedButton()
+
+            if clicked == btn_cancel:
+                self.label_results.setText("Folder import cancelled.")
+                return
+            if btn_retry is not None and clicked == btn_retry:
+                # Retry only failed ids
+                ids_to_try = [deck_id for deck_id, _ in failures]
+                continue
+
+            # Close (or no failures)
+            self.label_results.setText("Folder import finished.")
+            return
+
+
+    def _import_single_set(self, quizletDeckID: str) -> tuple[bool, str, str]:
+        """
+        Returns: (ok, title, error_message)
+        - ok=True: title is set name
+        - ok=False: error_message explains why
+        """
+        # and reuse the existing logic.
+        # We force non-folder path here.
+        try:
+            # IMPORTANT: onCode expects False to mean "read from textbox"
+            # We pass a deck id explicitly.
+            return self.onCode(quizletDeckID, _return_result=True)
+        except Exception as e:
+            return (False, "", str(e))
 
 
 
-
-    def onCode(self, quizletDeckID):
+    def onCode(self, quizletDeckID, _return_result: bool = False):
         html = self.value_incoming_html.toPlainText()
         if quizletDeckID == False:
             self.label_results.setText("Connecting to Quizlet...")
@@ -399,22 +487,32 @@ class QuizletWindow(QWidget):
                 thread.wait(50)
         else:
             self.label_results.setText("Error: Thread not initialized.")
+            if _return_result:
+                return (False, "", "Thread not initialized.")
+            return
 
         # error fetching data
         if thread and thread.error:
+            err_msg = "Unknown Error"
             if thread.errorCode == 403:
                 if thread.errorCaptcha:
-                    self.label_results.setText(
-                        "Sorry, it's behind a captcha. Try to disable VPN")
+                    err_msg = "Captcha (403). Try disabling VPN or using cookies."
+                    self.label_results.setText("Sorry, it's behind a captcha. Try to disable VPN")                    
                 else:
-                    self.label_results.setText(
-                        "Sorry, this is a private deck :(")
+                    err_msg = "Private deck (403)."
+                    self.label_results.setText("Sorry, this is a private deck :(")
             elif thread.errorCode == 404:
-                self.label_results.setText(
-                    "Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
+                err_msg = f"Not found (404): {quizletDeckID}"
+                self.label_results.setText("Can't find a deck with the ID <i>{0}</i>".format(quizletDeckID))
             else:
+                err_msg = f"HTTP error: {thread.errorCode or ''}"
                 self.label_results.setText("Unknown Error")
+            # Folder batch mode: don't block with a modal each time.
+            # Single import mode: keep the detailed modal.
+            if not _return_result:
                 showText(thread.errorMessage)
+            if _return_result:
+                return (False, "", err_msg)
         else:  # everything went through, let's roll!
             if quizletDeckID != 'folder':
                 deck = thread.results
@@ -423,10 +521,16 @@ class QuizletWindow(QWidget):
                 self.createDeck(deck)
                 self.label_results.setText(
                     ("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
+                if _return_result:
+                    return (True, deck.get("title", ""), "")
 
         if thread and thread.isRunning():
             thread.quit()
             thread.wait()
+
+        if _return_result:
+            # Folder case doesn't import here; return neutral.
+            return (True, "", "")
 
     def createDeck(self, result):
         # create new deck and custom model
