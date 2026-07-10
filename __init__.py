@@ -229,11 +229,13 @@ Note: 'Page html' does not support Quizlet folder import
 
         # quizlet url field
         self.box_name = QHBoxLayout()
-        self.label_url = QLabel("Quizlet URL:")
+        self.label_url = QLabel("Quizlet URL or multiple URLS (separated with semicolon)")
         self.text_url = QLineEdit("", self)
         self.text_url.setMinimumWidth(300)
         self.text_url.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.text_url.setFocus()
+        self.text_url.setToolTip(
+            "Separate multiple deck URLs with a semicolon (;) to import them all at once.")
 
         self.label_url.setMinimumWidth(100)
         self.box_name.addWidget(self.label_url)
@@ -301,10 +303,10 @@ Note: 'Page html' does not support Quizlet folder import
 
         # code (import set) button
         self.box_code = QVBoxLayout()
-        self.button_code = QPushButton("Import Deck", self)
+        self.button_code = QPushButton("Import multi Deck", self)
         # self.box_code.addStretch(1)
         self.box_code.addWidget(self.button_code)
-        self.button_code.clicked.connect(self.onCode)
+        self.button_code.clicked.connect(self.onImportClicked)
 
         # add layouts to right
         self.box_right.addLayout(self.box_code)
@@ -342,7 +344,13 @@ Note: 'Page html' does not support Quizlet folder import
         """
         Opens the flascards html page in a browser
         """
-        quizletDeckID = self.getQuizletDeckID()
+        urls = self.getQuizletUrls()
+
+        if not urls:
+            self.label_results.setText("Oops! You forgot the deck URL :(")
+            return
+
+        quizletDeckID = self.getQuizletDeckID(urls[0])
 
         if quizletDeckID == None:
             return
@@ -354,9 +362,14 @@ Note: 'Page html' does not support Quizlet folder import
         webbrowser.open(
             "https://github.com/sviatoslav-lebediev/anki-quizlet-importer-extended/wiki/FAQ")
 
-    def getQuizletDeckID(self):
+    def getQuizletUrls(self):
+        # multiple deck URLs can be entered separated by a semicolon
+        return [u.strip() for u in self.text_url.text().split(';') if u.strip()]
+
+    def getQuizletDeckID(self, url=None):
         # grab url input
-        url = self.text_url.text()
+        if url is None:
+            url = self.text_url.text()
 
         # voodoo needed for some error handling
         if urllib.parse.urlparse(url).scheme:
@@ -414,21 +427,47 @@ Note: 'Page html' does not support Quizlet folder import
                 quizletDeckID = id
                 self.onCode(quizletDeckID)
 
+    def onImportClicked(self):
+        urls = self.getQuizletUrls()
+        self.label_results.setText("[QuizletImporter] parsed {0} url(s): {1}".format(len(urls), urls))
 
+        if not urls:
+            self.label_results.setText("Oops! You forgot the deck URL :(")
+            return
 
+        imported = 0
 
-    def onCode(self, quizletDeckID):
+        for index, url in enumerate(urls):
+            if len(urls) > 1:
+                self.label_results.setText(
+                    "Connecting to Quizlet... (deck {0}/{1})".format(index + 1, len(urls)))
+                mw.app.processEvents()
+
+            try:
+                quizletDeckID = self.getQuizletDeckID(url)
+                if quizletDeckID == None:
+                    continue
+
+                if self.onCode(quizletDeckID, url):
+                    imported += 1
+            except Exception as e:
+                print("[QuizletImporter] Error importing {0}: {1!r}".format(url, e))
+                self.label_results.setText(
+                    "Error importing deck {0}/{1}: {2}".format(index + 1, len(urls), e))
+                mw.app.processEvents()
+
+        if len(urls) > 1:
+            self.label_results.setText(
+                "Finished importing {0}/{1} decks".format(imported, len(urls)))
+
+    def onCode(self, quizletDeckID, url=None):
         html = self.value_incoming_html.toPlainText()
-        if quizletDeckID == False:
-            self.label_results.setText("Connecting to Quizlet...")
-            quizletDeckID = self.getQuizletDeckID()
-
 
         if type(quizletDeckID) != int:
             if quizletDeckID == None:
-                return
+                return False
             elif quizletDeckID == 'folder':
-                deck_url = self.text_url.text()
+                deck_url = url if url is not None else self.text_url.text()
             else:
                 # build URL
                 deck_url = "https://quizlet.com/{}/flashcards".format(quizletDeckID)
@@ -455,6 +494,7 @@ Note: 'Page html' does not support Quizlet folder import
             self.label_results.setText("Error: Thread not initialized.")
 
         # error fetching data
+        success = False
         if thread and thread.error:
             if thread.errorCode == 403:
                 if thread.errorCaptcha:
@@ -477,10 +517,13 @@ Note: 'Page html' does not support Quizlet folder import
                 self.createDeck(deck)
                 self.label_results.setText(
                     ("Success! Imported <b>{0}</b> ({1} cards)".format(deck["title"], deck["term_count"])))
+            success = True
 
         if thread and thread.isRunning():
             thread.quit()
             thread.wait()
+
+        return success
 
     def createDeck(self, result):
         # create new deck and custom model
@@ -854,6 +897,6 @@ def runQuizletPlugin():
 
 
 # create menu item in Anki
-action = QAction("Import from Quizlet", mw)
+action = QAction("Import from Quizlet multi urls supported ", mw)
 action.triggered.connect(runQuizletPlugin)
 mw.form.menuTools.addAction(action)
