@@ -119,26 +119,26 @@ def addCustomModel(col):
     m = mm.new("Basic Quizlet Extended")
 
     # add fields
-    mm.addField(m, mm.newField("FrontText"))
-    mm.addField(m, mm.newField("FrontAudio"))
-    mm.addField(m, mm.newField("BackText"))
-    mm.addField(m, mm.newField("BackAudio"))
-    mm.addField(m, mm.newField("Image"))
-    mm.addField(m, mm.newField("Add Reverse"))
+    mm.add_field(m, mm.new_field("FrontText"))
+    mm.add_field(m, mm.new_field("FrontAudio"))
+    mm.add_field(m, mm.new_field("BackText"))
+    mm.add_field(m, mm.new_field("BackAudio"))
+    mm.add_field(m, mm.new_field("Image"))
+    mm.add_field(m, mm.new_field("Add Reverse"))
 
     # add cards
-    t = mm.newTemplate("Normal")
+    t = mm.new_template("Normal")
 
     # front
     t['qfmt'] = "{{FrontText}}\n<br><br>\n{{FrontAudio}}"
     t['afmt'] = "{{FrontText}}\n<hr id=answer>\n{{BackText}}\n<br><br>\n{{Image}}\n<br><br>\n{{BackAudio}}"
-    mm.addTemplate(m, t)
+    mm.add_template(m, t)
 
     # back
-    t = mm.newTemplate("Reverse")
+    t = mm.new_template("Reverse")
     t['qfmt'] = "{{#Add Reverse}}{{BackText}}\n<br><br>\n{{BackAudio}}{{/Add Reverse}}"
     t['afmt'] = "{{BackText}}\n<hr id=answer>\n{{FrontText}}\n<br><br>\n{{FrontAudio}}\n{{Image}}"
-    mm.addTemplate(m, t)
+    mm.add_template(m, t)
 
     mm.add(m)
     return m
@@ -501,12 +501,12 @@ Note: 'Page html' does not support Quizlet folder import
 
         # assign custom model to new deck
         mw.col.decks.select(deck["id"])
-        mw.col.decks.save(deck)
+        mw.col.decks.update_dict(deck)
 
         # assign new deck to custom model
         mw.col.models.set_current(model)
         model["did"] = deck["id"]
-        mw.col.models.save(model)
+        mw.col.models.update_dict(model)
 
         startProcess = False
         stopProcess = False
@@ -520,7 +520,7 @@ Note: 'Page html' does not support Quizlet folder import
                 startProcess = True
 
             if not stopProcess and startProcess:
-                note = mw.col.newNote()
+                note = mw.col.new_note(model)
                 # a side with only an image has no text
                 note["FrontText"] = ankify(item["term"] or "")
                 note["BackText"] = ankify(item["definition"] or "")
@@ -548,7 +548,7 @@ Note: 'Page html' does not support Quizlet folder import
                 if addReverse:
                     note["Add Reverse"] = "True"
 
-                mw.col.addNote(note)
+                mw.col.add_note(note, deck["id"])
 
                 progress += 1
                 self.label_results.setText(
@@ -558,7 +558,6 @@ Note: 'Page html' does not support Quizlet folder import
             if not "".__eq__(stopPhrase) and (stopPhrase == item["term"] or stopPhrase == item["definition"]):
                 stopProcess = True
 
-        mw.col.reset()
         mw.reset()
 
     def getAudioUrl(self, word_audio):
