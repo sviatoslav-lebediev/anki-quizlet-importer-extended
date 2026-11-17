@@ -521,10 +521,9 @@ Note: 'Page html' does not support Quizlet folder import
 
             if not stopProcess and startProcess:
                 note = mw.col.newNote()
-                note["FrontText"] = item["term"]
-                note["BackText"] = item["definition"]
-                note["FrontText"] = ankify(note["FrontText"])
-                note["BackText"] = ankify(note["BackText"])
+                # a side with only an image has no text
+                note["FrontText"] = ankify(item["term"] or "")
+                note["BackText"] = ankify(item["definition"] or "")
 
                 if item.get('termAudio') and downloadAudio:
                     file_name = self.fileDownloader(self.getAudioUrl(
@@ -568,7 +567,8 @@ Note: 'Page html' does not support Quizlet folder import
     # download the images
     def fileDownloader(self, url, suffix='', fallback=False):
         skip_errors = self.value_skip_errors.isChecked()
-        url = url.replace('_m', '')
+        # drop the "_m" (medium size) suffix before the extension to get the full-size image
+        url = re.sub(r'_m(\.\w+)$', r'\1', url)
         file_name = "quizlet-" + \
             suffix if suffix else "quizlet-" + url.split('/')[-1]
         fallback_call = False;
@@ -597,11 +597,12 @@ Note: 'Page html' does not support Quizlet folder import
 def download_media (url, file_name, headers):
     cookies = get_cookies()
     r = tls_get(url, tls_identifier=TLS_IDENTIFIER, headers=headers, cookies=cookies)
-    status_code = r.status_code if hasattr(r, "status_code") else r.getcode()
-    if status_code == 200:
-        body = r.content if hasattr(r, "content") else r.read()
-        with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
-            f.write(body)
+    r.raise_for_status()
+    # raise so the caller falls back to the proxy instead of saving an empty file
+    if r.status_code != 200 or not r.content:
+        raise URLError("empty or unexpected response: {0}".format(r.status_code))
+    with open(mw.col.media.dir() + "/" + file_name, 'wb') as f:
+        f.write(r.content)
     return file_name
 
 def parseTextItem(item):
@@ -629,6 +630,10 @@ def mapItems(studiableItems, setIdToDiagramImage=None):
 
                         if media["ttsUrl"] and term_audio == None:
                             term_audio = media["ttsUrl"]
+
+                    # the image can be attached to the word side, not only to the definition
+                    if (media["type"] == 2) and (image == None):
+                        image = media["url"]
 
             if (side["label"] == "definition"):
                 for media in side["media"]:
@@ -681,33 +686,6 @@ class QuizletDownloader(QThread):
         self.errorReason = None
         self.errorMessage = None
 
-    def getDataFromApi(self):
-        try:
-            deckUrl = 'https://quizlet.com/webapi/3.9/sets/{0}'.format(
-                self.quizletDeckID)
-            # TODO download more than 1000 items
-            itemsUrl = 'https://quizlet.com/webapi/3.9/studiable-item-documents?filters%5BstudiableContainerId%5D={0}&filters%5BstudiableContainerType%5D=1&perPage={1}&page=1'.format(
-                self.quizletDeckID, 1000)
-
-            deckResponse = requests.get(deckUrl, verify=False, headers=headers)
-            itemsResponse = requests.get(
-                itemsUrl, verify=False, headers=headers)
-
-            rawJson = {"studiableDocumentData": json.loads(
-                itemsResponse.text)["responses"][0]["models"]}
-
-            items = mapItems(rawJson)
-            title = json.loads(deckResponse.text)["responses"][
-                0]['models']['set'][0]['title']
-
-            self.results = {}
-            self.results['items'] = items
-            self.results['title'] = title
-        except Exception as e:
-            self.error = True
-            self.errorMessage = "{}\n-----------------\n{}".format(
-                e, itemsResponse.text)
-
     def getDataFromPage(self):
         proxyRetry = True
 
@@ -731,7 +709,6 @@ class QuizletDownloader(QThread):
                     else:
                         url = self.url if proxyRetry else 'https://quizlet-proxy.proto.click/quizlet-deck?url=' + \
                             urllib.parse.quote(self.url, safe='()*!\'')
-                        print(url)
                         r = tls_get(url, tls_identifier=TLS_IDENTIFIER, headers=headers, cookies=cookies)
                         r.raise_for_status()
                         page_html = r.text
@@ -824,6 +801,8 @@ class QuizletDownloader(QThread):
                         self.errorCaptcha = True
             except ValueError as e:
                 if proxyRetry == True:
+                    # False = the next attempt goes through the proxy
+                    proxyRetry = False
                     continue
                 else:
                     self.error = True
@@ -841,9 +820,6 @@ class QuizletDownloader(QThread):
 
     def run(self):
         self.getDataFromPage()
-
-        if (self.error):
-            self.getDataFromApi()
 
 # plugin was called from Anki
 
